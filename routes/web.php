@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 
 // Route::get('/tst','ReservationsController@index')->name('tst');
+// Route::get('/tst','ReservationsController@index')->name('tst');
 
 Auth::routes();
 
