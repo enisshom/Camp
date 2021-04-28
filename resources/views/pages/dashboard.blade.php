@@ -82,14 +82,11 @@
                 </div>
             </header>
             <main class="kanban-drag" style="text-align: center">
-                {{-- <div class="row"><span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Occupation 30%</span></div> --}}
                 <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">12</span>    
-                <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span>
+                <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Disponibilité</span>
             </main>
             <footer></footer>
-         </div>
-                 
-
+        </div>
     </div>
 
 @endsection
