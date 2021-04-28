@@ -49,7 +49,7 @@
                 {{-- {{ Menu::renderVerMenu(config('menu_aside.items')) }} --}}
 
                 <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                    <a href="{{route('roles.index')}}" class="menu-link menu-toggle">
+                    <a href="#" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:media/svg/icons/Design/Bucket.svg-->
                             <svg

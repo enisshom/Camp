@@ -31,12 +31,12 @@ Route::group(['middleware' => ['auth']], function() {
     })->name('logoutt');
 });
 
+
 Route::get('/create_product', function() {
     return view('products.create');
 })->name('create_product');
 
 Route::get('/insert', function() {
-    
     return 'role_has_permissions inserted ';
 })->name('insert');
 
