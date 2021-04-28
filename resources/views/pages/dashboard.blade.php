@@ -71,22 +71,26 @@
                </div>
             </div>
         </div> --}}
-
-        <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white" style="width: 250px; margin-left: 0px; margin-right: 0px;">
-            <header class="kanban-board-header light-dark" style="background-color: #00a1ff; text-align: center;">
-               <div class="kanban-title-board">
-                   <span class="navi-icon">
-                       <i class="la la-campground" style="color: black"></i>
-                    </span>
-                   <span class="navi-text" style="margin-left: 10px;">Marrakech</span>
-                </div>
-            </header>
-            <main class="kanban-drag" style="text-align: center">
-                <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">12</span>    
-                <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Disponibilité</span>
-            </main>
-            <footer></footer>
+        @for ($i = 0; $i < 12; $i++)
+        <div class="col-12 col-md-3">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 40px); width: calc(100% - 40px);">
+                <header class="kanban-board-header light-dark" style="background-color: #00a1ff; text-align: center;">
+                <div class="kanban-title-board">
+                    <span class="navi-icon">
+                        <i class="la la-campground" style="color: black"></i>
+                        </span>
+                    <span class="navi-text" style="margin-left: 10px;">Marrakech</span>
+                    </div>
+                </header>
+                <main class="kanban-drag" style="text-align: center">
+                    {{-- <div class="row"><span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Occupation 30%</span></div> --}}
+                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">12</span>    
+                    <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span>
+                </main>
+                <footer></footer>
+            </div>
         </div>
+        @endfor
     </div>
 
 @endsection
