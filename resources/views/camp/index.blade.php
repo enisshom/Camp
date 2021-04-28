@@ -19,7 +19,6 @@
               </span>
               <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">2,044</span>
               <span class="font-weight-bold text-white font-size-sm">Camp 1</span>
-              <span class="font-weight-bold text-white font-size-sm">Camp 1</span>
            </div>
            <!--end::Body-->
         </div>
