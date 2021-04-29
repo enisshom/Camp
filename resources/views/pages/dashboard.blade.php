@@ -117,8 +117,9 @@
     <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
     <script>
         $(".kanban-board").on('click',function() {
-            var v = $(this).find('.ville')[0].id;
-            $(location).attr('href','/camp');
+            var id = $(this).find('.ville')[0].id;
+            var ville = $(this).find('.ville').html();
+            $(location).attr('href','/camp/'+ville);
         });           
     </script>
 @endpush

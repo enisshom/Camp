@@ -13,6 +13,11 @@ class PagesController extends Controller
 
         return view('pages.dashboard', compact('page_title', 'page_description'));
     }
+    
+    public function camp($ville)
+    {
+        return view('camp',['ville'=>$ville]);
+    }
 
     /**
      * Demo methods below

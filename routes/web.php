@@ -32,9 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
     })->name('logoutt');
 });
 
-Route::get('/camp', function() {
-    return view('camp');
-})->name('camp');
+Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 
 Route::get('/create_product', function() {
     return view('products.create');
