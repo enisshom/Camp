@@ -123,7 +123,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-text">Products Management</span>
+                                <span class="menu-text">Products</span>
                             </a>
                         </li>
                         <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -141,7 +141,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-text">Users Management</span>
+                                <span class="menu-text">Users</span>
                             </a>
                         </li>
                         <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
@@ -159,7 +159,7 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span>
-                                <span class="menu-text">Role Management</span>
+                                <span class="menu-text">Role</span>
                             </a>
                         </li>
                        </ul>

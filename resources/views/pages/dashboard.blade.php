@@ -80,31 +80,45 @@
                </div>
             </div>
         </div> --}}
-        @for ($i = 0; $i < 12; $i++)
+        @php
+            // $sites = array('Marrakech','Zagoura','Marzouga','Dakhla','Chefchaouen','Agadir','Essaouira','Tetouan')
+            $sites =[ [ "id" => '1', "ville" => 'Marrakech' ], [ "id" => '2', "ville" => 'zagoura' ],
+                      [ "id" => '3', "ville" => 'Essaouira' ], [ "id" => '4', "ville" => 'Tanger' ] ,
+                      [ "id" => '5', "ville" => 'Marzouga' ], [ "id" => '6', "ville" => 'Tetouan' ] ,
+                      [ "id" => '7', "ville" => 'Agadir' ], [ "id" => '8', "ville" => 'Chefchaouen' ]];
+        @endphp
+        @foreach ($sites as $site)
+        
         <div class="col-6 col-md-3 col-sm-4 col-lg-3">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 80px); width: 100%;margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 80px); width: 100%;margin-top:10px; cursor:pointer;">
                 <header class="kanban-board-header light-dark" style="background-color: #00a1ff; text-align: center;">
                 <div class="kanban-title-board">
                     <span class="navi-icon">
                         <i class="la la-campground" style="color: black"></i>
                         </span>
-                    <span class="navi-text" style="margin-left: 10px;">Marrakech</span>
-                    </div>
+                    <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span>
+                </div>
                 </header>
                 <main class="kanban-drag" style="text-align: center">
                     {{-- <div class="row"><span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Occupation 30%</span></div> --}}
-                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">12</span>    
+                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block link">12</span>    
                     <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span>
                 </main>
                 {{-- <footer></footer> --}}
             </div>
         </div>
-        @endfor
+        @endforeach
     </div>
 
 @endsection
 
 {{-- Scripts Section --}}
-@section('scripts')
-    <script src="{{ asset('public/js/pages/widgets.js') }}" type="text/javascript"></script>
-@endsection
+@push('scripts')
+    <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
+    <script>
+        $(".kanban-board").on('click',function() {
+            var v = $(this).find('.ville')[0].id;
+            $(location).attr('href','/camp');
+        });           
+    </script>
+@endpush
