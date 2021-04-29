@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\DB;
 // Route::get('/tst','ReservationsController@index')->name('tst');
 // Route::get('/tst','ReservationsController@index')->name('tst');
 
-Auth::routes();
+// Auth::routes();
 
-Route::group(['middleware' => ['auth']], function() {
+// Route::group(['middleware' => ['auth']], function() {
     Route::get('/', 'PagesController@index');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth']], function() {
         Session()->flush(); 
         return Redirect::to('/'); 
     })->name('logoutt');
-});
+// });
 
 Route::get('/create_product', function() {
     return view('products.create');

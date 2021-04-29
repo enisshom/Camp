@@ -1,8 +1,17 @@
 {{-- Extends layout --}}
 @extends('layout.default')
 @section('styles')
-<link href="https://preview.keenthemes.com/metronic/theme/html/demo1/dist/assets/plugins/custom/kanban/kanban.bundle.css?v=7.2.7" rel="stylesheet" type="text/css" />
-
+    <link href="https://preview.keenthemes.com/metronic/theme/html/demo1/dist/assets/plugins/custom/kanban/kanban.bundle.css?v=7.2.7" rel="stylesheet" type="text/css" />
+    <style>
+        .kanban-board header {
+            font-size: 15px;
+            padding: 5px;
+        }
+        .kanban-board .kanban-drag {
+            min-height: 175px;
+            padding: 0px;
+        }
+    </style>
 @endsection
 {{-- Content --}}
 @section('content')
@@ -72,8 +81,8 @@
             </div>
         </div> --}}
         @for ($i = 0; $i < 12; $i++)
-        <div class="col-12 col-md-3">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 40px); width: calc(100% - 40px);">
+        <div class="col-6 col-md-3 col-sm-4 col-lg-3">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 80px); width: 100%;margin-top:10px">
                 <header class="kanban-board-header light-dark" style="background-color: #00a1ff; text-align: center;">
                 <div class="kanban-title-board">
                     <span class="navi-icon">
@@ -87,7 +96,7 @@
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">12</span>    
                     <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span>
                 </main>
-                <footer></footer>
+                {{-- <footer></footer> --}}
             </div>
         </div>
         @endfor
