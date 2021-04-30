@@ -15,8 +15,8 @@
         }
     </style> 
 @endsection
-
-    <div class="row">
+    <h1>{{$ville}}</h1>
+    <div class="row">  
         @for ($i = 0; $i < 6; $i++)
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">

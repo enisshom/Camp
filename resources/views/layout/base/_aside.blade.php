@@ -46,9 +46,9 @@
             {{ Metronic::printAttrs('aside_menu') }}>
 
             <ul class="menu-nav">
-                {{-- {{ Menu::renderVerMenu(config('menu_aside.items')) }} --}}
+                {{ Menu::renderVerMenu(config('menu_aside.items')) }}
 
-                <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                {{-- <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
                     <a href="#" class="menu-link menu-toggle">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:media/svg/icons/Design/Bucket.svg-->
@@ -164,7 +164,7 @@
                         </li>
                        </ul>
                     </div>
-                 </li>                 
+                 </li>                  --}}
             </ul>
         </div>
     </div>

@@ -5,13 +5,13 @@ return [
     'items' => [
         [],
         [
-            'title' => 'Dashboard',
+            'title' => 'Accueil',
             'root' => true,
             'page' => '/',
             'new-tab' => false,
         ],
         [
-            'title' => 'Features',
+            'title' => 'Références',
             'root' => true,
             'toggle' => 'click',
             'submenu' => [
@@ -374,7 +374,7 @@ return [
             ]
         ],
         [
-            'title' => 'Crud',
+            'title' => 'Produits',
             'root' => true,
             'toggle' => 'click',
             'submenu' => [
@@ -946,7 +946,7 @@ return [
             ]
         ],
         [
-            'title' => 'Apps',
+            'title' => 'Contact',
             'root' => true,
             'toggle' => 'click',
             'submenu' => [
@@ -1185,7 +1185,7 @@ return [
             ]
         ],
         [
-            'title' => 'Pages',
+            'title' => 'A propos de nous',
             'root' => true,
             'toggle' => 'click',
             'submenu' => [
