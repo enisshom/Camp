@@ -11,11 +11,16 @@ class PagesController extends Controller
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
 
-        return view('pages.dashboard', compact('page_title', 'page_description'));
+        $url = 'http://192.168.1.18/api/sites'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);         
+        return view('pages.dashboard', compact(['sites','page_title','page_description']));
+        // return dd($sites);
     }
     
     public function camp($ville)
     {
+        $url = 'http://192.168.1.18/api/sites/'.$ville; 
         return view('camp',['ville'=>$ville]);
     }
 

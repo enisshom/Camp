@@ -80,12 +80,14 @@
                </div>
             </div>
         </div> --}}
-        @php
-            // $sites = array('Marrakech','Zagoura','Marzouga','Dakhla','Chefchaouen','Agadir','Essaouira','Tetouan')
+        {{-- @php
             $sites =[ [ "id" => '1', "ville" => 'Marrakech' ], [ "id" => '2', "ville" => 'zagoura' ],
                       [ "id" => '3', "ville" => 'Essaouira' ], [ "id" => '4', "ville" => 'Tanger' ] ,
                       [ "id" => '5', "ville" => 'Marzouga' ], [ "id" => '6', "ville" => 'Tetouan' ] ,
                       [ "id" => '7', "ville" => 'Agadir' ], [ "id" => '8', "ville" => 'Chefchaouen' ]];
+        @endphp --}}
+        @php
+            // dd($sites);
         @endphp
         @foreach ($sites as $site)
         
@@ -96,7 +98,8 @@
                     <span class="navi-icon">
                         <i class="la la-campground" ></i>
                         </span>
-                    <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span>
+                    {{-- <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span> --}}
+                    <span class="navi-text ville" id="{{$site->CD_CLASS}}" style="margin-left: 10px;">{{$site->lib_class}}</span>
                 </div>
                 </header>
                 <main class="kanban-drag" style="text-align: center">
