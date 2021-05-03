@@ -91,10 +91,10 @@
         
         <div class="col-6 col-md-3 col-sm-4 col-lg-3">
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 80px); width: 100%;margin-top:10px; cursor:pointer;">
-                <header class="kanban-board-header light-dark" style="background-color: #00a1ff; text-align: center;">
+                <header class="kanban-board-header bg-dark" style="color:white ;text-align: center;">
                 <div class="kanban-title-board">
                     <span class="navi-icon">
-                        <i class="la la-campground" style="color: black"></i>
+                        <i class="la la-campground" ></i>
                         </span>
                     <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span>
                 </div>

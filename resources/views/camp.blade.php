@@ -2,10 +2,10 @@
 @section('content')
 
 @section('styles')
-    <link href="https://preview.keenthemes.com/metronic/theme/html/demo1/dist/assets/plugins/custom/kanban/kanban.bundle.css?v=7.2.7" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/Kanban.bundle.css')}}" rel="stylesheet" type="text/css" />
     <style>
         .kanban-board .kanban-drag {
-            min-height: 180px;
+            height: 135px !important;
             padding: 0px;
         }
         .divider {
@@ -23,8 +23,8 @@
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block" style="color: red !important">4</span>    
                     <span class="card-title font-weight text-dark font-size-h5 mb-0 mt-6 d-block">Arrivals</span>
-                    <hr class="divider">
-                    <span>Arrived : 3</span>
+                    {{-- <hr class="divider"> --}}
+                    <div class="bg-dark"><span style="color: #fff">Arrived : 3</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
             </div>
