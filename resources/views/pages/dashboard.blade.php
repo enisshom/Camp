@@ -99,7 +99,7 @@
                         <i class="la la-campground" ></i>
                         </span>
                     {{-- <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span> --}}
-                    <span class="navi-text ville" id="{{$site->CD_CLASS}}" style="margin-left: 10px;">{{$site->lib_class}}</span>
+                    <span class="navi-text ville" id="{{$site->id}}" style="margin-left: 10px;">{{$site->lib_class}}</span>
                 </div>
                 </header>
                 <main class="kanban-drag" style="text-align: center">
