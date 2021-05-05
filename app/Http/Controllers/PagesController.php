@@ -18,10 +18,19 @@ class PagesController extends Controller
         // return dd($sites);
     }
     
-    public function camp($ville)
+    // public function camp($ville)
+    // {
+    //     $url = 'http://192.168.1.18/api/sites/'.$ville; 
+    //     return view('camp',['ville'=>$ville]);
+    // }
+
+    public function camp($id)
     {
-        $url = 'http://192.168.1.18/api/sites/'.$ville; 
-        return view('camp',['ville'=>$ville]);
+        $url = 'http://192.168.1.18/api/sites/'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);   
+        $site = $sites[$id-1];
+        return view('camp',['site'=>$site]);
     }
 
     /**

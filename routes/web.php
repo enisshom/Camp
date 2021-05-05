@@ -33,6 +33,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 
+Route::get('/resa', function() {
+    return view('datatable');
+})->name('resa');
+
 Route::get('/create_product', function() {
     return view('products.create');
 })->name('create_product');
@@ -56,8 +60,6 @@ Route::get('/delete/{id}','ProductController@destroy')->name('delete');
 
 // Route::get('/index_product','ProductController@index')->name('index_product');
 // Route::get('/show_product','ProductController@index')->name('index_product');
-
-
 
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');

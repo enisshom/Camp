@@ -11,6 +11,10 @@
             min-height: 175px;
             padding: 0px;
         }
+        .divider{
+            margin-top: 15px !important;
+            margin-bottom: 5px !important;
+        }
     </style>
 @endsection
 {{-- Content --}}
@@ -96,16 +100,22 @@
                 <header class="kanban-board-header bg-dark" style="color:white ;text-align: center;">
                 <div class="kanban-title-board">
                     <span class="navi-icon">
-                        <i class="la la-campground" ></i>
+                        <i class="la la-campground"></i>
                         </span>
                     {{-- <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span> --}}
-                    <span class="navi-text ville" id="{{$site->CD_CLASS}}" style="margin-left: 10px;">{{$site->lib_class}}</span>
+                    <span class="navi-text ville" id="{{$site->id}}" style="margin-left: 10px;">{{$site->lib_class}}</span>
                 </div>
                 </header>
-                <main class="kanban-drag" style="text-align: center">
-                    {{-- <div class="row"><span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Occupation 30%</span></div> --}}
-                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block link">12</span>    
-                    <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span>
+                <main class="kanban-drag" style="text-align: center;">
+                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block link">{{$site->site_occuped}}/{{$site->site_cap}}</span>    
+                    <h5>Rooms</h5>
+                    <hr class="divider">
+                    <span class="font-size-h3" style="color: black;">{{$site->site_pax}}
+                        <i class="fas fa-male icon-lg" style="color: black"></i>
+                    </span>
+                    {{-- <div class="bg-dark"><span style="color: #fff">Total Pax:</span></div> --}}
+                    {{-- <span class="card-title font-weight text-dark font-size-h5 mb-0 mt-6 d-block link">Rooms</span>     --}}
+                    {{-- <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span> --}}
                 </main>
                 {{-- <footer></footer> --}}
             </div>
@@ -122,7 +132,7 @@
         $(".kanban-board").on('click',function() {
             var id = $(this).find('.ville')[0].id;
             var ville = $(this).find('.ville').html();
-            $(location).attr('href','/camp/'+ville);
+            $(location).attr('href','/camp/'+id);
         });           
     </script>
 @endpush

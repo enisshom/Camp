@@ -14,12 +14,13 @@ return [
 
         // Custom
         [
-            'section' => 'Réservation',
+            'section' => 'Réception',
         ],
         [
-            'title' => 'Réception',
+            'title' => 'Réservation',
             'icon' => 'media/svg/icons/Layout/Layout-4-blocks.svg',
             'bullet' => 'line',
+            'page' => 'resa',
             'root' => true,
             // 'submenu' => [
             //     [
