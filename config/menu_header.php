@@ -4,12 +4,12 @@ return [
 
     'items' => [
         [],
-        // [
-        //     'title' => 'Accueil',
-        //     'root' => true,
-        //     'page' => '/',
-        //     'new-tab' => false,
-        // ],
+        [
+            'title' => 'Accueil',
+            'root' => true,
+            'page' => '/',
+            'new-tab' => false,
+        ],
         // [
         //     'title' => 'Références',
         //     'root' => true,

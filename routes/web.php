@@ -33,25 +33,26 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 
-Route::get('/resa', function() {
-    return view('datatable');
-})->name('resa');
+Route::get('/cards','PagesController@index')->name('cards');
+
+Route::get('/resa','PagesController@resa')->name('resa');
+Route::get('/site','SiteController@index')->name('site');
 
 Route::get('/create_product', function() {
     return view('products.create');
 })->name('create_product');
 
-Route::get('/insert', function() {
-    return 'role_has_permissions inserted ';
-})->name('insert');
+// Route::get('/insert', function() {
+//     return 'role_has_permissions inserted ';
+// })->name('insert');
 
 Route::get('/edit_product', function() {
     return view('edit');
 })->name('edit_product');
 
-Route::get('/perm', function() {
-    return Auth::user()->has_role;
-})->name('perm');
+// Route::get('/perm', function() {
+//     return Auth::user()->has_role;
+// })->name('perm');
 
 //Route::resource('product',ProductController::class);
 
@@ -60,7 +61,7 @@ Route::get('/delete/{id}','ProductController@destroy')->name('delete');
 
 // Route::get('/index_product','ProductController@index')->name('index_product');
 // Route::get('/show_product','ProductController@index')->name('index_product');
-
+// Route::resource('reservations',ReservationsController::class);
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');

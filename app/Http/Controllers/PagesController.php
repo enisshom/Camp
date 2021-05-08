@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
@@ -14,7 +15,7 @@ class PagesController extends Controller
         $url = 'http://192.168.1.18/api/sites'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);         
-        return view('pages.dashboard', compact(['sites','page_title','page_description']));
+        return view('cards', compact(['sites','page_title','page_description']));
         // return dd($sites);
     }
     
@@ -30,6 +31,19 @@ class PagesController extends Controller
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
         $site = $sites[$id-1];
+        session()->put('camp_id',$id);
+        session()->save();
+        dd(session()->get('camp_id'));
+        return view('camp',['site'=>$site]);
+    }
+    public function resa()
+    {
+        $url = 'http://192.168.1.18/api/sites/'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);   
+        // $site = $sites[$id-1];
+        
+        dd(session()->get('camp_id'));
         return view('camp',['site'=>$site]);
     }
 
@@ -42,7 +56,6 @@ class PagesController extends Controller
     {
         $page_title = 'Datatables';
         $page_description = 'This is datatables test page';
-
         return view('pages.datatables', compact('page_title', 'page_description'));
     }
 
@@ -51,7 +64,6 @@ class PagesController extends Controller
     {
         $page_title = 'KTDatatables';
         $page_description = 'This is KTdatatables test page';
-
         return view('pages.ktdatatables', compact('page_title', 'page_description'));
     }
 
@@ -60,6 +72,7 @@ class PagesController extends Controller
     {
         $page_title = 'Select 2';
         $page_description = 'This is Select2 test page';
+        dd(session()->all());
 
         return view('pages.select2', compact('page_title', 'page_description'));
     }

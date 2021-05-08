@@ -149,7 +149,7 @@ class Init
         // Menu
         // Dropdown Submenu
         if (config('layout.aside.menu.dropdown') == true) {
-            Metronic::addClass('aside_menu', 'aside-menu-dropdown');
+            Metronic::addClass('aside_menu', '-dropdown');
             Metronic::addAttr('aside_menu', 'data-menu-dropdown', '1');
         }
 

@@ -69,7 +69,6 @@
                     <h5 style="padding-bottom:35px">DISPONIBLES</h5>
                     <div class="bg-dark"><span style="color: #fff">Capacité : {{$site->site_cap}}</span></div>
                 </main>
-                {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
@@ -79,7 +78,6 @@
                     <h5 style="padding-bottom:35px">BLOQUEES</h5>
                     <div class="bg-dark"><span style="color: #fff">Bloqués : 3</span></div>
                 </main>
-                {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
@@ -89,7 +87,6 @@
                     <h5 style="padding-bottom:35px">DELOGEMENT</h5>
                     <div class="bg-dark"><span style="color: #fff">Déplacés : 3</span></div>
                 </main>
-                {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
         {{-- @can($ville)
