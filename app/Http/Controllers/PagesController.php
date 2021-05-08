@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\Theme\Menu;
+use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
@@ -11,25 +13,30 @@ class PagesController extends Controller
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
 
+        // Menu::renderVerMenu($items);
+
         $url = 'http://192.168.1.18/api/sites'; 
         $response = file_get_contents($url); 
-        $sites = json_decode($response);         
+        $sites = json_decode($response);
         return view('pages.dashboard', compact(['sites','page_title','page_description']));
         // return dd($sites);
     }
-    
+
     // public function camp($ville)
     // {
     //     $url = 'http://192.168.1.18/api/sites/'.$ville; 
     //     return view('camp',['ville'=>$ville]);
     // }
 
-    public function camp($id)
+    public function camp(Request $request, $id)
     {
         $url = 'http://192.168.1.18/api/sites/'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
         $site = $sites[$id-1];
+        $request->session()->put('camp', $id);
+        $request->session()->save();
+        // dd($request->session()->all());
         return view('camp',['site'=>$site]);
     }
 
@@ -38,11 +45,11 @@ class PagesController extends Controller
      */
 
     // Datatables
-    public function datatables()
+    public function datatables(Request $request)
     {
         $page_title = 'Datatables';
         $page_description = 'This is datatables test page';
-
+        // dd($request->session()->all());
         return view('pages.datatables', compact('page_title', 'page_description'));
     }
 
@@ -60,7 +67,7 @@ class PagesController extends Controller
     {
         $page_title = 'Select 2';
         $page_description = 'This is Select2 test page';
-
+        // return session('camp_id');
         return view('pages.select2', compact('page_title', 'page_description'));
     }
 

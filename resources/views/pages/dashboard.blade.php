@@ -1,95 +1,127 @@
-{{-- Extends layout --}}
-@extends('layout.default')
-@section('styles')
-    <link href="https://preview.keenthemes.com/metronic/theme/html/demo1/dist/assets/plugins/custom/kanban/kanban.bundle.css?v=7.2.7" rel="stylesheet" type="text/css" />
-    <style>
-        .kanban-board header {
-            font-size: 15px;
-            padding: 5px;
-        }
-        .kanban-board .kanban-drag {
-            min-height: 175px;
-            padding: 0px;
-        }
-        .divider{
-            margin-top: 15px !important;
-            margin-bottom: 5px !important;
-        }
-    </style>
-@endsection
-{{-- Content --}}
-@section('content')
 
-    {{-- Dashboard 1 --}}
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" {{ Metronic::printAttrs('html') }} {{ Metronic::printClasses('html') }}>
+    <head>
+        <meta charset="utf-8"/>
 
-    <div class="row">
-        {{-- <div class="col-lg-6 col-xxl-4">
-            @include('pages.widgets._widget-1', ['class' => 'card-stretch gutter-b'])
+        {{-- Title Section --}}
+        <title>{{ config('app.name') }} | @yield('title', $page_title ?? '')</title>
+
+        {{-- Meta Data --}}
+        <meta name="description" content="@yield('page_description', $page_description ?? '')"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        {{-- Favicon --}}
+        <link rel="shortcut icon" href="{{ asset('media/logos/favicon.ico') }}" />
+
+        {{-- Fonts --}}
+        {{ Metronic::getGoogleFontsInclude() }}
+
+        {{-- Global Theme Styles (used by all pages) --}}
+        @foreach(config('layout.resources.css') as $style)
+            <link href="{{ config('layout.self.rtl') ? asset(Metronic::rtlCssPath($style)) : asset($style) }}" rel="stylesheet" type="text/css"/>
+        @endforeach
+
+        {{-- Layout Themes (used by all pages) --}}
+        @foreach (Metronic::initThemes() as $theme)
+            <link href="{{ config('layout.self.rtl') ? asset(Metronic::rtlCssPath($theme)) : asset($theme) }}" rel="stylesheet" type="text/css"/>
+        @endforeach
+
+        {{-- Includable CSS --}}
+
+        @yield('styles')
+        <style>
+            .kanban-board header {
+                font-size: 15px;
+                padding: 5px;
+            }
+            .kanban-board .kanban-drag {
+                min-height: 175px;
+                padding: 0px;
+            }
+            .divider{
+                margin-top: 15px !important;
+                margin-bottom: 5px !important;
+            }
+        </style>
+    </head>
+
+    <body {{ Metronic::printAttrs('body') }} {{ Metronic::printClasses('body') }}>
+
+      
+        {{-- @if(config('layout.self.layout') == 'blank') --}}
+        @if(config('layout.self.layout') == 'blank')
+            
+        @else
+
+            @include('layout.base._header-mobile')
+
+            <div class="d-flex flex-column flex-root">
+                <div class="d-flex flex-row flex-column-fluid page">
+
+                    <div class="aside aside-left {{ Metronic::printClasses('aside', false) }} d-flex flex-column flex-row-auto" id="kt_aside">
+
+    {{-- Brand --}}
+    <div class="brand flex-column-auto {{ Metronic::printClasses('brand', false) }}" id="kt_brand">
+        <div class="brand-logo">
+            <a href="{{ url('/') }}">
+                {{-- <img alt="{{ config('app.name') }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/> --}}
+            </a>
         </div>
 
-        <div class="col-lg-6 col-xxl-4">
-            @include('pages.widgets._widget-2', ['class' => 'card-stretch gutter-b'])
-        </div>
+        @if (config('layout.aside.self.minimize.toggle'))
+            <button class="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+                {{ Metronic::getSVG("media/svg/icons/Navigation/Angle-double-left.svg", "svg-icon-xl") }}
+            </button>
+        @endif
 
-        <div class="col-lg-6 col-xxl-4">
-            @include('pages.widgets._widget-3', ['class' => 'card-stretch card-stretch-half gutter-b'])
-            @include('pages.widgets._widget-4', ['class' => 'card-stretch card-stretch-half gutter-b'])
-        </div>
+    </div>
 
-        <div class="col-lg-6 col-xxl-4 order-1 order-xxl-1">
-            @include('pages.widgets._widget-5', ['class' => 'card-stretch gutter-b'])
-        </div>
+    {{-- Aside menu --}}
+    <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 
-        <div class="col-xxl-8 order-2 order-xxl-1">
-            @include('pages.widgets._widget-6', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-6 col-xxl-4 order-1 order-xxl-2">
-            @include('pages.widgets._widget-7', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-6 col-xxl-4 order-1 order-xxl-2">
-            @include('pages.widgets._widget-8', ['class' => 'card-stretch gutter-b'])
-        </div>
-
-        <div class="col-lg-12 col-xxl-4 order-1 order-xxl-2">
-            @include('pages.widgets._widget-9', ['class' => 'card-stretch gutter-b'])
-        </div> --}}
-        {{-- <h1>USER, ROLES, PERMISSIONS</h1> --}}
-                                             {{-- First --}}
-        {{-- <div class="col-xl-3">
-            <!--begin::Stats Widget 30-->
-            <div class="card card-custom bg-info card-stretch gutter-b"  style="border-radius: 0px; 
-                                                                        height: calc(100% - 40px);
-                                                                        width: calc(100% - 40px);" >
-               <!--begin::Body-->
-               <div class="card-body">
-                   <div class="col-6 row">
-                    <span class="svg-icon svg-icon-2x svg-icon-white">
-                        <!--begin::Svg Icon | path:/metronic/theme/html/demo1/dist/assets/media/svg/icons/Communication/Group.svg-->
-                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                              <polygon points="0 0 24 0 24 24 0 24"></polygon>
-                              <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                              <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"></path>
-                           </g>
-                        </svg>
-                        <!--end::Svg Icon-->
-                     </span>
-                     <div class="col-6 row"><span class="font-weight-bold text-white font-size-sm">Marrakech</span></div>
-                   </div>
-                    <div class="row"><span class="card-title font-weight text-white font-size-h4 mb-0 mt-6 d-block">75%</span></div>
-                    <div class="row"><span class="card-title font-weight text-white font-size-h4 mb-0 mt-6 d-block">15%</span></div>    
-                    <div class="row"><span class="card-title font-weight text-white font-size-h4 mb-0 mt-6 d-block">10%</span></div>
-               </div>
+        @if (config('layout.aside.self.display') === false)
+            <div class="header-logo">
+                <a href="{{ url('/') }}">
+                    <img alt="{{ config('app.name') }}" src="{{ asset('media/logos/'.$kt_logo_image) }}"/>
+                </a>
             </div>
-        </div> --}}
-        {{-- @php
-            $sites =[ [ "id" => '1', "ville" => 'Marrakech' ], [ "id" => '2', "ville" => 'zagoura' ],
-                      [ "id" => '3', "ville" => 'Essaouira' ], [ "id" => '4', "ville" => 'Tanger' ] ,
-                      [ "id" => '5', "ville" => 'Marzouga' ], [ "id" => '6', "ville" => 'Tetouan' ] ,
-                      [ "id" => '7', "ville" => 'Agadir' ], [ "id" => '8', "ville" => 'Chefchaouen' ]];
-        @endphp --}}
+        @endif
+
+        <div
+            id="kt_aside_menu"
+            class="aside-menu my-4 {{ Metronic::printClasses('aside_menu', false) }}"
+            data-menu-vertical="1"
+            {{ Metronic::printAttrs('aside_menu') }}>
+
+            <ul class="menu-nav">
+                {{-- {{ Menu::renderVerMenu(config('menu_aside.items')) }} --}}
+
+         
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+                    <div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
+
+                        @include('layout.base._header')
+                        
+                        <div class="content {{ Metronic::printClasses('content', false) }} d-flex flex-column flex-column-fluid" id="kt_content">
+
+                            {{-- @if(config('layout.subheader.display'))
+                                @if(array_key_exists(config('layout.subheader.layout'), config('layout.subheader.layouts')))
+                                    @include('layout.partials.subheader._'.config('layout.subheader.layout'))
+                                @else
+                                    @include('layout.partials.subheader._'.array_key_first(config('layout.subheader.layouts')))
+                                @endif
+                            @endif --}}
+
+                            {{-- @include('layout.base._content') --}}
+                            <div class="d-flex flex-column flex-root">
+                                {{-- @yield('content') --}}
+                                <div class="row">
         @php
             // dd($sites);
         @endphp
@@ -122,17 +154,74 @@
         </div>
         @endforeach
     </div>
+                            </div>
+                        </div>
 
-@endsection
+                        @include('layout.base._footer')
+                    </div>
+                </div>
+            </div>
 
-{{-- Scripts Section --}}
-@push('scripts')
-    <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
-    <script>
-        $(".kanban-board").on('click',function() {
-            var id = $(this).find('.ville')[0].id;
-            var ville = $(this).find('.ville').html();
-            $(location).attr('href','/camp/'+id);
-        });           
-    </script>
-@endpush
+        @endif
+
+        @if (config('layout.self.layout') != 'blank')
+
+            @if (config('layout.extras.search.layout') == 'offcanvas')
+                @include('layout.partials.extras.offcanvas._quick-search')
+            @endif
+
+            @if (config('layout.extras.notifications.layout') == 'offcanvas')
+                @include('layout.partials.extras.offcanvas._quick-notifications')
+            @endif
+
+            @if (config('layout.extras.quick-actions.layout') == 'offcanvas')
+                @include('layout.partials.extras.offcanvas._quick-actions')
+            @endif
+
+            @if (config('layout.extras.user.layout') == 'offcanvas')
+                @include('layout.partials.extras.offcanvas._quick-user')
+            @endif
+
+            @if (config('layout.extras.quick-panel.display'))
+                @include('layout.partials.extras.offcanvas._quick-panel')
+            @endif
+
+            @if (config('layout.extras.toolbar.display'))
+                {{-- @include('layout.partials.extras._toolbar') --}}
+            @endif
+
+            @if (config('layout.extras.chat.display'))
+                @include('layout.partials.extras._chat')
+            @endif
+
+            @include('layout.partials.extras._scrolltop')
+
+        @endif
+
+
+        <script>var HOST_URL = "{{ route('quick-search') }}";</script>
+
+        {{-- Global Config (global config for global JS scripts) --}}
+        <script>
+            var KTAppSettings = {!! json_encode(config('layout.js'), JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES) !!};
+        </script>
+
+        {{-- Global Theme JS Bundle (used by all pages)  --}}
+        @foreach(config('layout.resources.js') as $script)
+            <script src="{{ asset($script) }}" type="text/javascript"></script>
+        @endforeach
+
+        {{-- Includable JS --}}
+        @stack('scripts')
+        <script>
+            $(".kanban-board").on('click',function() {
+                var id = $(this).find('.ville')[0].id;
+                var ville = $(this).find('.ville').html();
+                $(location).attr('href','/camp/'+id);
+            });           
+        </script>
+
+        
+    </body>
+</html>
+
