@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/', 'PagesController@index');
+    Route::get('/', 'PagesController@index'); 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('product', ProductController::class);
