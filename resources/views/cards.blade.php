@@ -48,7 +48,7 @@
             -moz-transition: all 0.3s ease-in;
         }
         #camp .card:hover{
-            background: #312f99;
+            background: #7371cc;
             color: #fff;
             border-radius: 5px;
             border: none;
@@ -73,7 +73,7 @@
                 @endphp --}}
                 @foreach ($sites as $site)
                 <div class="col-lg-3 col-md-6" style="margin-bottom: 50px">
-                    <div class="card">
+                    <div class="card" style="cursor:pointer;">
                         <div class="card-body">
                             <img src="https://www.bivouacsouslesetoiles.org/fichiers_site/a5833has/produits/20170102_173729.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
                             {{-- <h3>Marrakech</h3> --}}
@@ -84,35 +84,26 @@
                             <div class="d-flex flex-row justify-content-center">
                                 <div class="p-4">
                                     <a href="#">
-                                        <i class="fas fa-male icon-lg" style="color: black">{{$site->site_pax}}</i>
+                                        <span style="color: black; font-size: 22px">{{$site->site_pax}}
+                                        <i class="fas fa-male icon-lg" style="color: black"></i>
+                                        </span>
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="col-lg-3 col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="https://www.bivouacsouslesetoiles.org/fichiers_site/a5833has/produits/20170102_173729.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
-                            <h3>Zagoura</h3>
-                            <p>Rooms
-                                9/11
-                            </p>
-                            <div class="d-flex flex-row justify-content-center">
-                                <div class="p-4">
-                                    <a href="#">
-                                        <i class="fas fa-male icon-lg" style="color: black"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 @endforeach
             </div>
             
         </div>
     </section>
 </body>
+    <script>
+        $(".card").on('click',function() {
+            var id = $(this).find('.ville')[0].id;
+            var ville = $(this).find('.ville').html();
+            $(location).attr('href','/camp/'+id);
+        });           
+    </script>
 </html>
