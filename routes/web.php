@@ -31,12 +31,9 @@ Route::group(['middleware' => ['auth']], function() {
     })->name('logoutt');
 });
 
+Route::get('/camps','PagesController@index')->name('camps');
 Route::get('/camp/{ville}','PagesController@camp')->name('camp');
-
-Route::get('/cards','PagesController@index')->name('cards');
-
-Route::get('/resa','PagesController@resa')->name('resa');
-Route::get('/site','SiteController@index')->name('site');
+Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
 
 Route::get('/create_product', function() {
     return view('products.create');

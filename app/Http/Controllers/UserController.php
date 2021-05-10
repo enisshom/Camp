@@ -35,14 +35,16 @@ class UserController extends Controller
         // $data =  json_decode($data);
         // return view('users.index',['data'=> $data]);
         $data = User::orderBy('id','DESC')->paginate(5);
-        return view('users.index',compact('data'))
+        $id = session()->get('camp_id');
+        return view('users.index',compact('data','id'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        $id = session()->get('camp_id');
+        return view('users.create',compact('roles','id'));
     }
 
     public function store(Request $request)
@@ -75,8 +77,8 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-    
-        return view('users.edit',compact('user','roles','userRole'));
+        $id = session()->get('camp_id');
+        return view('users.edit',compact('user','roles','userRole','id'));
     }
 
     public function update(Request $request, $id)

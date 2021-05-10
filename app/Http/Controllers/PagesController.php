@@ -15,7 +15,7 @@ class PagesController extends Controller
         $url = 'http://192.168.1.18/api/sites'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);         
-        return view('cards', compact(['sites','page_title','page_description']));
+        return view('camps', compact(['sites','page_title','page_description']));
         // return dd($sites);
     }
     
@@ -33,18 +33,22 @@ class PagesController extends Controller
         $site = $sites[$id-1];
         session()->put('camp_id',$id);
         session()->save();
+        $id = session()->get('camp_id');
         // dd(session()->get('camp_id'));
-        return view('camp',['site'=>$site]);
+        return view('camp',['site'=>$site,'id'=>$id]);
     }
-    public function resa()
+
+    public function reservations()
     {
         $url = 'http://192.168.1.18/api/sites/'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
-        // $site = $sites[$id-1];
-        
-        dd(session()->get('camp_id'));
-        return view('camp',['site'=>$site]);
+        $id = session()->get('camp_id');
+        session()->put('camp_id',$id);
+        session()->save();
+        // dd($site);
+        // dd(session()->get('camp_id'));
+        return view('reservation_camp',['id'=>$id]);
     }
 
     /**
@@ -72,8 +76,6 @@ class PagesController extends Controller
     {
         $page_title = 'Select 2';
         $page_description = 'This is Select2 test page';
-        dd(session()->all());
-
         return view('pages.select2', compact('page_title', 'page_description'));
     }
 

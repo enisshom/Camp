@@ -1,5 +1,4 @@
 <?php
-
 // Aside menu
 return [
 
