@@ -18,7 +18,7 @@ class PagesController extends Controller
         $url = 'http://192.168.1.18/api/sites'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);
-        return view('pages.dashboard', compact(['sites','page_title','page_description']));
+        return view('cards', compact(['sites', 'page_title', 'page_description']));
         // return dd($sites);
     }
 
