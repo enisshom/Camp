@@ -51,7 +51,7 @@
 	<div class="my_datatable" id="kt_datatable">
         
     </div>
-</div>
+</div>   
 @endsection
 
 {{-- Scripts Section --}}
