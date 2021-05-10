@@ -33,7 +33,7 @@ class PagesController extends Controller
         $site = $sites[$id-1];
         session()->put('camp_id',$id);
         session()->save();
-        dd(session()->get('camp_id'));
+        // dd(session()->get('camp_id'));
         return view('camp',['site'=>$site]);
     }
     public function resa()
