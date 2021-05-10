@@ -99,6 +99,8 @@
         </div>
     </section>
 </body>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
     <script>
         $(".card").on('click',function() {
             var id = $(this).find('.ville')[0].id;
