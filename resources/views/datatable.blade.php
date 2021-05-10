@@ -58,11 +58,11 @@
 @push('scripts')
     <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
     
-<script>
-    //  var datatable = $('#kt_datatable').KTDatatable(options);
-    "use strict";
-    var KTDatatableJsonRemoteDemo = {
-    init: function() {
+    <script>
+        //  var datatable = $('#kt_datatable').KTDatatable(options);
+        "use strict";
+        var KTDatatableJsonRemoteDemo = {
+        init: function() {
         var t;
         t = $("#kt_datatable").KTDatatable({
             data: {
@@ -111,9 +111,9 @@
             t.search($(this).val().toLowerCase(), "Type")
         })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
     }
-};
-jQuery(document).ready((function() {
-    KTDatatableJsonRemoteDemo.init()
-}));
-</script>
+        };
+        jQuery(document).ready((function() {
+            KTDatatableJsonRemoteDemo.init()
+        }));
+    </script>
 @endpush
