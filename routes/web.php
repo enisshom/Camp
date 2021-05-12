@@ -33,14 +33,6 @@ Route::group(['middleware' => ['auth']], function() {
     /**Logout */
     Route::get('logoutt', function () { auth()->logout(); Session()->flush(); return Redirect::to('/'); })->name('logoutt');
 });
-<<<<<<< HEAD
-
-Route::get('/camp/{ville}','PagesController@camp')->name('camp');
-
-Route::get('/resa', function() {
-    return view('datatable');
-})->name('resa');
-=======
 /**Dashboard */
 Route::get('/camps','PagesController@index')->name('camps');
 /** */
@@ -49,7 +41,6 @@ Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
 Route::post('/resa_attribute','PagesController@resa_attribute')->name('resa_attribute');
 /** */
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
 
 /**Product Route */
 Route::get('/create_product', function() {
