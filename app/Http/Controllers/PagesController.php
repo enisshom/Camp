@@ -32,14 +32,8 @@ class PagesController extends Controller
     {
         $url = 'http://192.168.1.18/api/sites/'; 
         $response = file_get_contents($url); 
-        $sites = json_decode($response);   
-        $site = $sites[$id-1];
-<<<<<<< HEAD
-        $request->session()->put('camp', $id);
-        $request->session()->save();
-        // dd($request->session()->all());
-        return view('camp',['site'=>$site]);
-=======
+        $sites = json_decode($response);
+        $site = $sites[$id - 1];
         session()->put('camp_id',$id);
         session()->save();
         $id = session()->get('camp_id');
@@ -67,9 +61,8 @@ class PagesController extends Controller
         // dd($request->all());
         $url = 'http://192.168.1.18/api/sites/'; 
         $response = file_get_contents($url); 
-        $sites = json_decode($response);   
+        $sites = json_decode($response);
         return view('reservations.resa_attribute');
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     /**

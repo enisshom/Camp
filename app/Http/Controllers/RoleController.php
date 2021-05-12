@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -24,23 +24,15 @@ class RoleController extends Controller
         $roles = DB::table('roles')->get();
         $roles =  $roles->toJson();
         $roles =  json_decode($roles);
-<<<<<<< HEAD
-        return view('roles.index',['roles'=> $roles]);
-=======
         $id = session()->get('camp_id');
-        return view('parametrage.roles.index',['roles'=> $roles,'id'=>$id]);
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+        return view('parametrage.roles.index', ['roles' => $roles, 'id' => $id]);
     }
 
     public function create()
     {
         $permission = Permission::get();
-<<<<<<< HEAD
-        return view('roles.create',compact('permission'));
-=======
         $id = session()->get('camp_id');
-        return view('parametrage.roles.create',compact('permission','id'));
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+        return view('parametrage.roles.create', compact('permission', 'id'));
     }
 
     public function store(Request $request)
@@ -62,14 +54,9 @@ class RoleController extends Controller
         $role = Role::find($id);
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
             ->where("role_has_permissions.role_id",$id)
-            ->get();
-<<<<<<< HEAD
-    
-        return view('roles.show',compact('role','rolePermissions'));
-=======
+        ->get();
         $id = session()->get('camp_id');
-        return view('parametrage.roles.show',compact('role','rolePermissions','id'));
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+        return view('parametrage.roles.show', compact('role', 'rolePermissions', 'id'));
     }
 
     public function edit($id)
@@ -78,14 +65,9 @@ class RoleController extends Controller
         $permission = Permission::get();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
-<<<<<<< HEAD
-    
-        return view('roles.edit',compact('role','permission','rolePermissions'));
-=======
+        ->all();
         $id = session()->get('camp_id');
-        return view('parametrage.roles.edit',compact('role','permission','rolePermissions','id'));
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+        return view('parametrage.roles.edit', compact('role', 'permission', 'rolePermissions', 'id'));
     }
 
     public function update(Request $request, $id)

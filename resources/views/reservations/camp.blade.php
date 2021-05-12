@@ -46,13 +46,8 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
-<<<<<<< HEAD:resources/views/camp.blade.php
-                    <h5 style="padding-bottom:30px">ARRIVEES</h5>
-                    <div class="bg-dark"><span style="color: #fff">Arrivée prévue : 3</span></div>
-=======
                     <h5 style="padding-bottom:35px">ARRIVEES</h5>
                     <div class="bg-dark"><span style="color: #fff">Arrivées prévues : 3</span></div>
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51:resources/views/reservations/camp.blade.php
                 </main>
             </div>
         </div>
@@ -60,13 +55,8 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
-<<<<<<< HEAD:resources/views/camp.blade.php
-                    <h5 style="padding-bottom:30px">DEPARTS</h5>
-                    <div class="bg-dark"><span style="color: #fff">Départ prévu : 3</span></div>
-=======
                     <h5 style="padding-bottom:35px">DEPARTS</h5>
                     <div class="bg-dark"><span style="color: #fff">Départs prévus : 3</span></div>
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51:resources/views/reservations/camp.blade.php
                 </main>
             </div>
         </div>
@@ -117,11 +107,7 @@
         @endcan --}}
     </div>
     
-<<<<<<< HEAD:resources/views/camp.blade.php
-@endsection
-=======
     @else
     <h1>U don't have permission</h1>
 @endcan
 @endsection 
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51:resources/views/reservations/camp.blade.php
