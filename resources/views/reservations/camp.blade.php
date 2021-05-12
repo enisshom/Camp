@@ -18,6 +18,16 @@
 @php
     // dd($site);
 @endphp
+    <br>
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+            </div>
+            <div class="pull-right">
+                <a class="btn btn-primary btn-lg" href="{{ route('camps') }}"> Back</a><br><br>
+            </div>
+        </div>
+    </div>    
     <h1>{{$site->lib_class}}</h1>
     <div class="row">  
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
@@ -25,7 +35,7 @@
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
                     <h5 style="padding-bottom:35px">ARRIVEES</h5>
-                    <div class="bg-dark"><span style="color: #fff">Arrivée prévue : 3</span></div>
+                    <div class="bg-dark"><span style="color: #fff">Arrivées prévues : 3</span></div>
                 </main>
             </div>
         </div>
@@ -34,7 +44,7 @@
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
                     <h5 style="padding-bottom:35px">DEPARTS</h5>
-                    <div class="bg-dark"><span style="color: #fff">Départ prévu : 3</span></div>
+                    <div class="bg-dark"><span style="color: #fff">Départs prévus : 3</span></div>
                 </main>
             </div>
         </div>
@@ -82,13 +92,4 @@
     @else
     <h1>U don't have permission</h1>
 @endcan
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary btn-lg badge-pill" href="{{ route('camps') }}"> Back</a><br><br>
-        </div>
-    </div>
-</div>
 @endsection 

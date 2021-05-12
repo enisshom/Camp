@@ -25,14 +25,14 @@ class RoleController extends Controller
         $roles =  $roles->toJson();
         $roles =  json_decode($roles);
         $id = session()->get('camp_id');
-        return view('roles.index',['roles'=> $roles,'id'=>$id]);
+        return view('parametrage.roles.index',['roles'=> $roles,'id'=>$id]);
     }
 
     public function create()
     {
         $permission = Permission::get();
         $id = session()->get('camp_id');
-        return view('roles.create',compact('permission','id'));
+        return view('parametrage.roles.create',compact('permission','id'));
     }
 
     public function store(Request $request)
@@ -56,7 +56,7 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id",$id)
             ->get();
         $id = session()->get('camp_id');
-        return view('roles.show',compact('role','rolePermissions','id'));
+        return view('parametrage.roles.show',compact('role','rolePermissions','id'));
     }
 
     public function edit($id)
@@ -67,7 +67,7 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
         $id = session()->get('camp_id');
-        return view('roles.edit',compact('role','permission','rolePermissions','id'));
+        return view('parametrage.roles.edit',compact('role','permission','rolePermissions','id'));
     }
 
     public function update(Request $request, $id)

@@ -36,7 +36,7 @@ class UserController extends Controller
         // return view('users.index',['data'=> $data]);
         $data = User::orderBy('id','DESC')->paginate(5);
         $id = session()->get('camp_id');
-        return view('users.index',compact('data','id'))
+        return view('parametrage.users.index',compact('data','id'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         $roles = Role::pluck('name','name')->all();
         $id = session()->get('camp_id');
-        return view('users.create',compact('roles','id'));
+        return view('parametrage.users.create',compact('roles','id'));
     }
 
     public function store(Request $request)
@@ -69,7 +69,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        $id = session()->get('camp_id');
+        return view('parametrage.users.show',compact('user','id'));
     }
 
     public function edit($id)
@@ -78,7 +79,7 @@ class UserController extends Controller
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
         $id = session()->get('camp_id');
-        return view('users.edit',compact('user','roles','userRole','id'));
+        return view('parametrage.users.edit',compact('user','roles','userRole','id'));
     }
 
     public function update(Request $request, $id)

@@ -21,7 +21,8 @@ class ProductController extends Controller
         $products = DB::table('products')->get();
         $products =  $products->toJson();
         $products =  json_decode($products);
-        return view('products.index',['products'=> $products]);
+        $id = session()->get('camp_id');
+        return view('parametrage.products.index',['products'=> $products,'id'=>$id]);
         // return dd($resa);
     }
 
@@ -50,15 +51,16 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         // return $resa->toJson();
         // return response()->json($resa);
-
-        return view('products.show',['product'=>$product]);
+        $id = session()->get('camp_id');
+        return view('parametrage.products.show',['product'=>$product,'id'=>$id]);
 
     }
 
     public function edit($id)
     {
         $product=Product::findOrFail($id);
-        return view('products.edit',['product'=>$product]);
+        $id = session()->get('camp_id');
+        return view('parametrage.products.edit',['product'=>$product,'id'=>$id]);
     }
 
     public function update(Request $request,$id)

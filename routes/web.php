@@ -14,51 +14,46 @@ use Illuminate\Support\Facades\DB;
 |
 */
 
-
+// Route::get('/update/{id}','ProductController@update')->name('update');
+// Route::get('/index_product','ProductController@index')->name('index_product');
+// Route::get('/show_product','ProductController@index')->name('index_product');
+// Route::resource('reservations',ReservationsController::class);
 // Route::get('/tst','ReservationsController@index')->name('tst');
 
+/**Authentification */
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
+    /**Accueil */
     Route::get('/', 'PagesController@index'); 
+    /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('product', ProductController::class);
-    Route::get('logoutt', function () { 
-        auth()->logout(); 
-        Session()->flush(); 
-        return Redirect::to('/'); 
-    })->name('logoutt');
+    /**Logout */
+    Route::get('logoutt', function () { auth()->logout(); Session()->flush(); return Redirect::to('/'); })->name('logoutt');
 });
-
+/**Dashboard */
 Route::get('/camps','PagesController@index')->name('camps');
+/** */
 Route::get('/camp/{ville}','PagesController@camp')->name('camp');
+/**Réservations*/
 Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
+Route::post('/resa_attribute','PagesController@resa_attribute')->name('resa_attribute');
+/** */
 
+/**Product Route */
 Route::get('/create_product', function() {
-    return view('products.create');
+    $id = session()->get('camp_id');
+    return view('parametrage.products.create',['id'=>$id]);
 })->name('create_product');
-
-// Route::get('/insert', function() {
-//     return 'role_has_permissions inserted ';
-// })->name('insert');
 
 Route::get('/edit_product', function() {
     return view('edit');
 })->name('edit_product');
 
-// Route::get('/perm', function() {
-//     return Auth::user()->has_role;
-// })->name('perm');
-
-//Route::resource('product',ProductController::class);
-
 Route::get('/delete/{id}','ProductController@destroy')->name('delete');
-// Route::get('/update/{id}','ProductController@update')->name('update');
 
-// Route::get('/index_product','ProductController@index')->name('index_product');
-// Route::get('/show_product','ProductController@index')->name('index_product');
-// Route::resource('reservations',ReservationsController::class);
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
