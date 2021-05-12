@@ -34,10 +34,42 @@ class PagesController extends Controller
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
         $site = $sites[$id-1];
+<<<<<<< HEAD
         $request->session()->put('camp', $id);
         $request->session()->save();
         // dd($request->session()->all());
         return view('camp',['site'=>$site]);
+=======
+        session()->put('camp_id',$id);
+        session()->save();
+        $id = session()->get('camp_id');
+        // dd(session()->get('camp_id'));
+        return view('reservations.camp',['site'=>$site,'id'=>$id]);
+    }
+
+    public function reservations($id)
+    {
+        // dd($id);
+        $url = 'http://192.168.1.18/api/sites/'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);   
+        // $id = session()->get('camp_id');
+        session()->put('camp_id',$id);
+        
+        // session()->save();
+        // dd($site);
+        // dd(session()->get('camp_id'));
+        return view('reservations.reservation_camp',['id'=>$id]);
+    }
+
+    public function resa_attribute(Request $request)
+    {
+        // dd($request->all());
+        $url = 'http://192.168.1.18/api/sites/'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);   
+        return view('reservations.resa_attribute');
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     /**

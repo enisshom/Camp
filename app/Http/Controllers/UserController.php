@@ -35,14 +35,24 @@ class UserController extends Controller
         // $data =  json_decode($data);
         // return view('users.index',['data'=> $data]);
         $data = User::orderBy('id','DESC')->paginate(5);
+<<<<<<< HEAD
         return view('users.index',compact('data'))
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.users.index',compact('data','id'))
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
                 ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
+<<<<<<< HEAD
         return view('users.create',compact('roles'));
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.users.create',compact('roles','id'));
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     public function store(Request $request)
@@ -67,7 +77,8 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show',compact('user'));
+        $id = session()->get('camp_id');
+        return view('parametrage.users.show',compact('user','id'));
     }
 
     public function edit($id)
@@ -75,8 +86,13 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
+<<<<<<< HEAD
     
         return view('users.edit',compact('user','roles','userRole'));
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.users.edit',compact('user','roles','userRole','id'));
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     public function update(Request $request, $id)
