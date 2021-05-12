@@ -24,13 +24,23 @@ class RoleController extends Controller
         $roles = DB::table('roles')->get();
         $roles =  $roles->toJson();
         $roles =  json_decode($roles);
+<<<<<<< HEAD
         return view('roles.index',['roles'=> $roles]);
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.roles.index',['roles'=> $roles,'id'=>$id]);
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     public function create()
     {
         $permission = Permission::get();
+<<<<<<< HEAD
         return view('roles.create',compact('permission'));
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.roles.create',compact('permission','id'));
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     public function store(Request $request)
@@ -53,8 +63,13 @@ class RoleController extends Controller
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
             ->where("role_has_permissions.role_id",$id)
             ->get();
+<<<<<<< HEAD
     
         return view('roles.show',compact('role','rolePermissions'));
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.roles.show',compact('role','rolePermissions','id'));
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     public function edit($id)
@@ -64,8 +79,13 @@ class RoleController extends Controller
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
+<<<<<<< HEAD
     
         return view('roles.edit',compact('role','permission','rolePermissions'));
+=======
+        $id = session()->get('camp_id');
+        return view('parametrage.roles.edit',compact('role','permission','rolePermissions','id'));
+>>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
     }
 
     public function update(Request $request, $id)

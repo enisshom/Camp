@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api','throttle:rate_limit,1')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 // Route::resource('reservations',ReservationsController::class);
 // Route::resource('reservations','ReservationsController');
 // Route::post('agence',ReservationsController::class,'index');
