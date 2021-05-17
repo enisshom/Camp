@@ -18,6 +18,7 @@
 @php
     // dd($site);
 @endphp
+@can($site->lib_class)
     <br>
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -107,7 +108,7 @@
         @endcan --}}
     </div>
     
-    @else
+@else
     <h1>U don't have permission</h1>
 @endcan
 @endsection 

@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
+
+    protected $url;
+
+    public function __construct()
+    {
+        $this->url = config('app.url');
+    }
+    
+
     public function index()
     {
         $page_title = 'Dashboard';
@@ -15,7 +24,7 @@ class PagesController extends Controller
 
         // Menu::renderVerMenu($items);
 
-        $url = 'http://192.168.1.18/api/sites'; 
+        $url = $this->url . '/api/sites'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);
         return view('cards', compact(['sites', 'page_title', 'page_description']));
@@ -24,13 +33,13 @@ class PagesController extends Controller
 
     // public function camp($ville)
     // {
-    //     $url = 'http://192.168.1.18/api/sites/'.$ville; 
+    //     $url = $this->url.'/api/sites/'.$ville; 
     //     return view('camp',['ville'=>$ville]);
     // }
 
     public function camp(Request $request, $id)
     {
-        $url = 'http://192.168.1.18/api/sites/'; 
+        $url = $this->url . '/api/sites/'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);
         $site = $sites[$id - 1];
@@ -44,7 +53,7 @@ class PagesController extends Controller
     public function reservations($id)
     {
         // dd($id);
-        $url = 'http://192.168.1.18/api/sites/'; 
+        $url = $this->url . '/api/sites/'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
         // $id = session()->get('camp_id');
@@ -58,11 +67,11 @@ class PagesController extends Controller
 
     public function resa_attribute(Request $request)
     {
-        // dd($request->all());
-        $url = 'http://192.168.1.18/api/sites/'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);
-        return view('reservations.resa_attribute');
+        $numresa = ($request['numresa']);
+        $url = $this->url . '/api/resa_attribution/' . $numresa;
+        $response = file_get_contents($url);
+        $reservation = json_decode($response);
+        return view('reservations.resa_attribute', compact('reservation'));
     }
 
     /**

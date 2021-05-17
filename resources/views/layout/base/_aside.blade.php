@@ -46,11 +46,6 @@
             {{ Metronic::printAttrs('aside_menu') }}>
 
             <ul class="menu-nav">
-<<<<<<< HEAD
-                {{ Menu::renderVerMenu(config('menu_aside.items')) }}
-
-         
-=======
                 {{-- {{ Menu::renderVerMenu(config('menu_aside.items')) }} --}}
                 <li class="menu-item " aria-haspopup="true"><a href="{{route('camps')}}" class="menu-link "><span class="svg-icon menu-icon"><!--begin::Svg Icon | path:media/svg/icons/Layout/Layout-4-blocks.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -132,7 +127,6 @@
                         </ul>
                     </div>
                 </li>
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
             </ul>
         </div>
     </div>

@@ -26,8 +26,9 @@ class PermissionTableSeeder extends Seeder
             'product-delete',
             'check-in',
             'check-out',
-            'Marrakech',
-            'Marzouga',
+            'MARRAKECH',
+            'MERZOUGA',
+            'ZAGOURA',
         ];
 
         foreach($permissions as $permission) {
