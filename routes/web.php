@@ -39,7 +39,7 @@ Route::get('/camps','PagesController@index')->name('camps');
 Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 /**Réservations*/
 Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
-Route::post('/resa_attribute','PagesController@resa_attribute')->name('resa_attribute');
+Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_attribute');
 /** */
 
 /**Product Route */

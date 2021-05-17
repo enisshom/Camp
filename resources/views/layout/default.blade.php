@@ -35,10 +35,9 @@
         @if (config('layout.page-loader.type') != '')
             @include('layout.partials._page-loader')
         @endif
-       
-        {{-- here --}}
+
         @include('layout.base._layout')
-        
+
         <script>var HOST_URL = "{{ route('quick-search') }}";</script>
 
         {{-- Global Config (global config for global JS scripts) --}}

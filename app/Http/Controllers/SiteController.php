@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class SiteController extends Controller
 {
@@ -14,7 +13,7 @@ class SiteController extends Controller
      */
     public function index()
     {
-        dd(session()->all());
+        //
     }
 
     /**

@@ -3,34 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Classes\Theme\Menu;
 use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
+
+    protected $url;
+
+    public function __construct()
+    {
+        $this->url = config('app.url');
+    }
+    
+
     public function index()
     {
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
 
-        $url = 'http://192.168.1.18/api/sites'; 
+        // Menu::renderVerMenu($items);
+
+        $url = $this->url . '/api/sites'; 
         $response = file_get_contents($url); 
-        $sites = json_decode($response);         
-        return view('camps', compact(['sites','page_title','page_description']));
+        $sites = json_decode($response);
+        return view('cards', compact(['sites', 'page_title', 'page_description']));
         // return dd($sites);
     }
-    
+
     // public function camp($ville)
     // {
-    //     $url = 'http://192.168.1.18/api/sites/'.$ville; 
+    //     $url = $this->url.'/api/sites/'.$ville; 
     //     return view('camp',['ville'=>$ville]);
     // }
 
-    public function camp($id)
+    public function camp(Request $request, $id)
     {
-        $url = 'http://192.168.1.18/api/sites/'; 
+        $url = $this->url . '/api/sites/'; 
         $response = file_get_contents($url); 
-        $sites = json_decode($response);   
-        $site = $sites[$id-1];
+        $sites = json_decode($response);
+        $site = $sites[$id - 1];
         session()->put('camp_id',$id);
         session()->save();
         $id = session()->get('camp_id');
@@ -41,7 +53,7 @@ class PagesController extends Controller
     public function reservations($id)
     {
         // dd($id);
-        $url = 'http://192.168.1.18/api/sites/'; 
+        $url = $this->url . '/api/sites/'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
         // $id = session()->get('camp_id');
@@ -55,11 +67,11 @@ class PagesController extends Controller
 
     public function resa_attribute(Request $request)
     {
-        // dd($request->all());
-        $url = 'http://192.168.1.18/api/sites/'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);   
-        return view('reservations.resa_attribute');
+        $numresa = ($request['numresa']);
+        $url = $this->url . '/api/resa_attribution/' . $numresa;
+        $response = file_get_contents($url);
+        $reservation = json_decode($response);
+        return view('reservations.resa_attribute', compact('reservation'));
     }
 
     /**
@@ -67,10 +79,11 @@ class PagesController extends Controller
      */
 
     // Datatables
-    public function datatables()
+    public function datatables(Request $request)
     {
         $page_title = 'Datatables';
         $page_description = 'This is datatables test page';
+        // dd($request->session()->all());
         return view('pages.datatables', compact('page_title', 'page_description'));
     }
 
@@ -79,6 +92,7 @@ class PagesController extends Controller
     {
         $page_title = 'KTDatatables';
         $page_description = 'This is KTdatatables test page';
+
         return view('pages.ktdatatables', compact('page_title', 'page_description'));
     }
 
@@ -87,6 +101,7 @@ class PagesController extends Controller
     {
         $page_title = 'Select 2';
         $page_description = 'This is Select2 test page';
+        // return session('camp_id');
         return view('pages.select2', compact('page_title', 'page_description'));
     }
 

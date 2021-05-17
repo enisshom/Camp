@@ -1,4 +1,5 @@
 {{-- Aside --}}
+
 @php
     $kt_logo_image = 'logo-light.png';
 @endphp
@@ -27,6 +28,7 @@
 
     </div>
 
+    {{-- Aside menu --}}
     <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
 
         @if (config('layout.aside.self.display') === false)
@@ -130,4 +132,5 @@
             </ul>
         </div>
     </div>
+
 </div>

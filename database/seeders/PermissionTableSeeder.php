@@ -27,6 +27,7 @@ class PermissionTableSeeder extends Seeder
             'check-in',
             'check-out',
             'MARRAKECH',
+            'MERZOUGA',
             'ZAGOURA',
         ];
 

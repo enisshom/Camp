@@ -101,7 +101,7 @@
         t = $("#kt_datatable").KTDatatable({
             data: {
                 type: "remote",
-                source: "http://192.168.1.18/api/resa_list/"+id,
+                source: "http://192.168.1.106/api/resa_list/"+id,
                 pageSize: 10
             },
             layout: {

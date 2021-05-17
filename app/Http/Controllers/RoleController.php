@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -25,14 +25,14 @@ class RoleController extends Controller
         $roles =  $roles->toJson();
         $roles =  json_decode($roles);
         $id = session()->get('camp_id');
-        return view('parametrage.roles.index',['roles'=> $roles,'id'=>$id]);
+        return view('parametrage.roles.index', ['roles' => $roles, 'id' => $id]);
     }
 
     public function create()
     {
         $permission = Permission::get();
         $id = session()->get('camp_id');
-        return view('parametrage.roles.create',compact('permission','id'));
+        return view('parametrage.roles.create', compact('permission', 'id'));
     }
 
     public function store(Request $request)
@@ -54,9 +54,9 @@ class RoleController extends Controller
         $role = Role::find($id);
         $rolePermissions = Permission::join("role_has_permissions","role_has_permissions.permission_id","=","permissions.id")
             ->where("role_has_permissions.role_id",$id)
-            ->get();
+        ->get();
         $id = session()->get('camp_id');
-        return view('parametrage.roles.show',compact('role','rolePermissions','id'));
+        return view('parametrage.roles.show', compact('role', 'rolePermissions', 'id'));
     }
 
     public function edit($id)
@@ -65,9 +65,9 @@ class RoleController extends Controller
         $permission = Permission::get();
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
+        ->all();
         $id = session()->get('camp_id');
-        return view('parametrage.roles.edit',compact('role','permission','rolePermissions','id'));
+        return view('parametrage.roles.edit', compact('role', 'permission', 'rolePermissions', 'id'));
     }
 
     public function update(Request $request, $id)
