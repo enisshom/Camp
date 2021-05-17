@@ -1,6 +1,13 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-<div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
     <div class="card">
      <div class="card-header" id="headingOne6">
       <div class="card-title" data-toggle="collapse" data-target="#collapseOne6">
@@ -13,7 +20,7 @@
           <div class="col-3">
             <div class="form-group">
               <select class="form-control myselect" name="" id="select">
-                <option>Room</option>
+                <option value="">Room</option>
                 <option value="100">100</option>
                 <option value="101">101</option>
                 <option value="102">102</option>
@@ -37,7 +44,6 @@
               <select class="form-control" name="" id="">
                 <option>Maroc</option>
                 <option>USA</option>
-                <option>102</option>
               </select>
             </div>
           </div>
@@ -63,7 +69,6 @@
               <select class="form-control" name="" id="">
                 <option>Maroc</option>
                 <option>USA</option>
-                <option>102</option>
               </select>
             </div>
           </div>
@@ -97,7 +102,6 @@
               <select class="form-control" name="" id="">
                 <option>Maroc</option>
                 <option>USA</option>
-                <option>102</option>
               </select>
             </div>
           </div>
@@ -130,7 +134,6 @@
               <select class="form-control" name="" id="">
                 <option>Maroc</option>
                 <option>USA</option>
-                <option>102</option>
               </select>
             </div>
           </div>
@@ -163,7 +166,6 @@
               <select class="form-control" name="" id="">
                 <option>Maroc</option>
                 <option>USA</option>
-                <option>102</option>
               </select>
             </div>
           </div>
@@ -196,39 +198,97 @@
      </div>
     </div>
    </div>
-   
+   </body>
    <script>
-        $(document).ready(function() {
+    var options=document.getElementById('select').options;
+    function mise_a_jour(index)
+    {
+    for(j=0;j<=3;j++)
+    {
+      switch(j)
+      {
+        case 0: element="#select"; break;
+        default: element="#select"+j; break;
+      }
+
+    for(i=1;i<options.length;i++)
+    {
+    
+      console.log(element);
+      chaine='option:contains('+options[i].value+')';
+      $(element).find(chaine).show();
+    }
+    }
+      for(i=1;i<=3;i++)
+        {
+        element="#select"+i;
+        chaine='option:contains('+$("#select").val()+')';
+        $(element).find(chaine).hide();
+        }
+      for(i=0;i<=3;i++)
+        {
+        switch(i)
+        {
+        case 0:
+        element="#select";
+        break;
+        case 1:continue;
+        default:
+        element="#select"+i;
+        break;
+        }
+        console.log($("#select1").val());
+        chaine='option:contains('+$("#select1").val()+')';
+        $(element).find(chaine).hide();
+        
+        
+        }
+      for(i=0;i<=3;i++)
+        {
+        switch(i)
+        {
+        case 0:
+        element="#select";
+        break;
+        case 2:continue;
+        default:
+        element="#select"+i;
+        break;
+        }
+        console.log($("#select2").val());
+        chaine='option:contains('+$("#select2").val()+')';
+        $(element).find(chaine).hide();
           
-        $(".myselect").change(function() {
-            // Get the selected value
-            var selected =[];
-            // Get the ID of this element
-            var thisID = $(this).attr("id");
-            // Reset so all values are showing:
-            $(".myselect option:selected").each(function() {
-              if($(this).val() != ""){
-                selected.push($(this).val());
-                // $(this).show();
-              }
-            });
-            $(".myselect").each(function() {
-              // console.log($(this).val());
-                selected.forEach(sl => {
-                  if ($(this).val() != sl) {
-                    $("option[value='" + sl + "']", $(this)).hide();
-                }
-                if ($(this).val() != sl) {
-                    // $(this).show();
-                    console.log( $(this));
-                }
-                });
-                
-                
-               
-            });
-            console.log(selected);
-        });
+        }
+      for(i=0;i<=2;i++)
+        {
+        if(i!=0)
+        element="#select"+i;
+        else
+        element="#select";
+        console.log($("#select3").val());
+        chaine='option:contains('+$("#select3").val()+')';
+        $(element).find(chaine).hide();
+        } 
+    }
+
+    $(document).ready(function(){
+    $("#select").change(function()
+    {
+      mise_a_jour(0);
     });
-   </script>
-   
+    $("#select1").change(function()
+    {
+        mise_a_jour(1);
+    });
+    $("#select2").change(function()
+    {
+        mise_a_jour(2);
+    });
+    $("#select3").change(function()
+    {
+       mise_a_jour(3);
+    });
+    });
+  </script>
+</html>
