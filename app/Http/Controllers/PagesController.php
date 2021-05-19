@@ -25,9 +25,10 @@ class PagesController extends Controller
         // Menu::renderVerMenu($items);
 
         $url = $this->url . '/api/sites'; 
+        // dd($url);
         $response = file_get_contents($url); 
         $sites = json_decode($response);
-        return view('cards', compact(['sites', 'page_title', 'page_description']));
+        return view('camps', compact(['sites', 'page_title', 'page_description']));
         // return dd($sites);
     }
 
@@ -68,10 +69,25 @@ class PagesController extends Controller
     public function resa_attribute(Request $request)
     {
         $numresa = ($request['numresa']);
+        $datedep = ($request['datedep']);
+        $datearr = ($request['datearr']);
         $url = $this->url . '/api/resa_attribution/' . $numresa;
         $response = file_get_contents($url);
         $reservation = json_decode($response);
-        return view('reservations.resa_attribute', compact('reservation'));
+        return view('reservations.resa_attribute', compact('reservation','numresa','datedep','datearr'));
+    }
+
+    public function available_rooms(Request $request)
+    {
+        $type = ($request['type']);
+        $numresa = ($request['numresa']);
+        $datedep = ($request['datedep']);
+        $datearr = ($request['datearr']);
+        $url = $this->url . '/api/available_rooms/' . $type . '/' .$datedep . '/' .$datearr;
+        print($url);
+        $response = file_get_contents($url);
+        $reservation = json_decode($response);
+        return $reservation;
     }
 
     /**

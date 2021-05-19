@@ -1,12 +1,15 @@
 @php
 // $resa=;
+// dd($datedep);
 @endphp
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
     @foreach ($reservation->data as $resa)
-
+    @php
+    
+  @endphp
     <div class="card">
       <div class="card-header" id="headingOne6">
-       <div class="card-title collapsed" data-toggle="collapse" data-target="#{{$resa->type}}">
+       <div class="card-title collapsed type" data-toggle="collapse" type={{$resa->type}} datedep="{{$datedep}}" datearr="{{$datearr}}" data-target="#{{$resa->type}}">
         <i class="fas fa-chess-king"></i> {{$resa->type}}
        </div>
       </div>
@@ -22,16 +25,16 @@
             <div class="row">
             <div class="col-3">
               @if($pax->nbrper==$pax->nper)
-              <div class="form-group">
-                <select class="form-control myselect" name="" id="select">
-                  <option>{{$room->number}}</option>
-                  <option value="100">100</option>
-                  <option value="101">101</option>
-                  <option value="102">102</option>
-                  <option value="103">103</option>
-                  <option value="104">104</option>
-                </select>
-              </div>
+                <div class="form-group">
+                  <select class="form-control myselect" name="" id="select" type="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
+                    <option>{{$room->number}}</option>
+                    <option value="100">100</option>
+                    <option value="101">101</option>
+                    <option value="102">102</option>
+                    <option value="103">103</option>
+                    <option value="104">104</option>
+                  </select>
+                </div>
               @endif
             </div>
             <div class="col-3">
@@ -221,65 +224,29 @@
    @endpush
    
    <script>
-    var options=document.getElementById('select').options;
-    // function mise_a_jour(index)
-    // {
-    // for(j=0;j<=3;j++)
-    // {
-    //   switch(j)
-    //   {
-    //     case 0: element="#select"; break;
-    //     default: element="#select"+j; break;
-    //   }
-
-    // for(i=1;i<options.length;i++)
-    // {
+    // var options=document.getElementById('select').options;
     
-    //   console.log(element);
-    //   chaine='option:contains('+options[i].value+')';
-    //   $(element).find(chaine).show();
-    // }
-    // }
-    //   for(i=1;i<=3;i++)
-    //     {
-    //     element="#select"+i;
-    //     chaine='option:contains('+$("#select").val()+')';
-    //     $(element).find(chaine).hide();
-    //     }
-    //   for(i=0;i<=3;i++)
-    //     {
-    //     switch(i)
-    //     {
-    //     case 0:
-    //     element="#select";
-    //     break;
-    //     case 1:continue;
-    //     default:
-    //     element="#select"+i;
-    //     break;
-    //     }
-    //     console.log($("#select1").val());
-    //     chaine='option:contains('+$("#select1").val()+')';
-    //     $(element).find(chaine).hide();
-        
-        
-    //     }
-    //   for(i=0;i<=3;i++)
-    //     {
-    //     switch(i)
-    //     {
-    //     case 0:
-    //     element="#select";
-    //     break;
-    //     case 2:continue;
-    //     default:
-    //     element="#select"+i;
-    //     break;
-    //     }
-    //     console.log($("#select2").val());
-    //     chaine='option:contains('+$("#select2").val()+')';
-    //     $(element).find(chaine).hide();
-          
+    $(".type").on('click',function() {
+        // alert($(this).attr('type')); 
+        var type = $(this).attr('type');
+        var numresa = $(this).attr('numresa');
+        var datedep = $(this).attr('datedep');
+        var datearr = $(this).attr('datearr');
+        $.ajax({ 
+            type:'POST', 
+            url:"{{route('available_rooms')}}", 
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+            data : { type,numresa,datedep,datearr},
+            success:function(data){ 
+              console.log(data);
+                // $('.myselect').empty();
+
+                // $('.myselect').append("<option value='a'>a</option>");
+                // $('.myselect').append("<option value='b'>b</option>");
+                // $('.myselect').append("<option value='c'>c</option>");
+            } 
+        });
+    });
         $(".myselect").change(function() {
             // Get the selected value
             var selected =[];
@@ -304,11 +271,9 @@
                      console.log('kayna')
                     }
                 });
-         
-               
             });
             console.log(selected);
         });
-    });
+    
   </script>
 </html>

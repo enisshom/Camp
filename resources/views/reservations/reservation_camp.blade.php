@@ -77,7 +77,7 @@
                       </button>
                     </div>
                     <div class="modal-body attribution">
-    
+                       
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -101,7 +101,7 @@
         t = $("#kt_datatable").KTDatatable({
             data: {
                 type: "remote",
-                source: "http://192.168.1.106/api/resa_list/"+id,
+                source: "{{config('app.url')}}/api/resa_list/"+id,
                 pageSize: 10
             },
             layout: {
@@ -162,7 +162,7 @@
                 width: 50,
                 overflow: "visible",
                 template: function(e) {
-                    return '<button type="button" id="'+e.numresa+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button>'
+                    return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button>'
                 }
             }]     
         }), $("#kt_datatable_search_status").on("change", (function() {
@@ -171,6 +171,9 @@
         t.on("click",".afficher", (function() {
             // console.log($(this).attr('id'));
             var numresa = $(this).attr('id');
+            var datedep = $(this).attr('datedep');
+            var datearr = $(this).attr('datearr');
+            // console.log(datedep);
             // $.post( "{{route('resa_attribute')}}", { numresa: numresa})
             //     .done(function( data ) {
             //     $(".attribution").html(data);
@@ -180,7 +183,7 @@
             type:'POST', 
             url:"{{route('resa_attribute')}}", 
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-            data : { numresa: numresa},
+            data : { numresa,datedep,datearr},
             success:function(data){ 
                 $(".attribution").html(data);
                 $("#affichage").modal('toggle');
