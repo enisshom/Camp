@@ -66,7 +66,7 @@
         </div>
     </div>
 </div>   
-            <!--Modal-->
+            <!--Modal attribution-->
             <div class="modal fade" id="affichage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centred modal-lg" role="document">
                   <div class="modal-content">
@@ -85,118 +85,257 @@
                     </div>
                   </div>
                 </div>
-              </div>
+            </div>
+            <!--Modal check-in-->
+            <div class="modal fade" id="checkin" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centred modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Check-in</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body checkin">
+                        <div class="checkin_dt" id="checkin_dt"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
 @endsection
 
 {{-- Scripts Section --}}
 @push('scripts')
-    <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
     <script>
         var id = {!!$id!!};
+        // console.log(id);
         //  var datatable = $('#kt_datatable').KTDatatable(options);
         "use strict";
-        var KTDatatableJsonRemoteDemo = {
-        init: function() {
-        var t;
-        t = $("#kt_datatable").KTDatatable({
-            data: {
-                type: "remote",
-                source: "{{config('app.url')}}/api/resa_list/"+id,
-                pageSize: 10
-            },
-            layout: {
-                scroll: !1,
-                footer: !1
-            },
-            sortable: !0,
-            pagination: !0,
-            search: {
-                input: $("#kt_datatable_search_query"),
-                key: "generalSearch"
-            },
-            columns: [{
-                field: "numresa",
-                title: "#",
-                sortable: !1,
-                width: 45,
-                type: "number",
-                // selector: {
-                //     class: ""
-                // },
-                textAlign: "center"
-            }, 
-            {
-                field: "nom",
-                title: "Nom",
-                width: 80
-            },  
-            {
-                field: "prenom",
-                title: "Prénom",
-                width: 80
-            },  
-            {
-                field: "datearr",
-                title: "Arrivée",
-                width: 75
-            }, 
-            {
-                field: "datedep",
-                title: "Départ",
-                width: 75
-            },
-            {
-                field: "nuite",
-                title: "Nuité",
-                autoHide : true,
-                width: 35
-            },
-            {
-                field: "nbrtotpax",
-                title: "Pax",
-                width: 30
-            }, 
-            {
-                field: "Actions",
-                title: "Actions",
-                width: 50,
-                overflow: "visible",
-                template: function(e) {
-                    return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button>'
-                }
-            }]     
-        }), $("#kt_datatable_search_status").on("change", (function() {
-            t.search($(this).val().toLowerCase(), "Status")
-        })), 
-        t.on("click",".afficher", (function() {
-            // console.log($(this).attr('id'));
-            var numresa = $(this).attr('id');
-            var datedep = $(this).attr('datedep');
-            var datearr = $(this).attr('datearr');
-            // console.log(datedep);
-            // $.post( "{{route('resa_attribute')}}", { numresa: numresa})
-            //     .done(function( data ) {
-            //     $(".attribution").html(data);
-            //     $("#affichage").modal('toggle');
+        var KTDatatables = function() {
+
+        var KTDatatableJsonRemoteDemo = function() {
+            // init: function() {
+            var t;
+            t = $("#kt_datatable").KTDatatable({
+                data: {
+                    type: "remote",
+                    source: "{{config('app.url')}}/api/resa_list/"+id,
+                    pageSize: 10
+                },
+                layout: {
+                    scroll: !1,
+                    footer: !1
+                },
+                sortable: !0,
+                pagination: !0,
+                search: {
+                    input: $("#kt_datatable_search_query"),
+                    key: "generalSearch"
+                },
+                columns: [{
+                    field: "numresa",
+                    title: "#",
+                    sortable: !1,
+                    width: 45,
+                    type: "number",
+                    // selector: {
+                    //     class: ""
+                    // },
+                    textAlign: "center"
+                }, 
+                {
+                    field: "nom",
+                    title: "Nom",
+                    width: 80
+                },  
+                {
+                    field: "prenom",
+                    title: "Prénom",
+                    width: 80
+                },  
+                {
+                    field: "datearr",
+                    title: "Arrivée",
+                    width: 75
+                }, 
+                {
+                    field: "datedep",
+                    title: "Départ",
+                    width: 75
+                },
+                {
+                    field: "nuite",
+                    title: "Nuité",
+                    autoHide : true,
+                    width: 35
+                },
+                {
+                    field: "nbrtotpax",
+                    title: "Pax",
+                    width: 30
+                }, 
+                {
+                    field: "Actions",
+                    title: "Actions",
+                    width: 50,
+                    overflow: "visible",
+                    template: function(e) {
+                        return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button> '
+                    }
+                }]     
+            }), $("#kt_datatable_search_status").on("change", (function() {
+                t.search($(this).val().toLowerCase(), "Status")
+            })), 
+            t.on("click",".afficher", (function() {
+                // console.log($(this).attr('id'));
+                var numresa = $(this).attr('id');
+                var datedep = $(this).attr('datedep');
+                var datearr = $(this).attr('datearr');
+                // console.log(datedep);
+            $.ajax({ 
+                type:'POST', 
+                url:"{{route('resa_attribute')}}", 
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+                data : { numresa,datedep,datearr},
+                success:function(data){ 
+                    $(".attribution").html(data);
+                    $("#affichage").modal('toggle');
+                } 
+            });
+            })), 
+            t.on("click",".checkbtn", (function() {
+                var numresa = $(this).attr('numresa');
+            //     $.ajax({ 
+            //     type:'POST', 
+            //     url:"{{route('check_in')}}", 
+            //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+            //     data : { numresa },
+            //     success:function(data){ 
+            //         $(".checkin").html(data);
+            //         $("#checkin").modal('toggle');
+            //     } 
             // });
-        $.ajax({ 
-            type:'POST', 
-            url:"{{route('resa_attribute')}}", 
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-            data : { numresa,datedep,datearr},
-            success:function(data){ 
-                $(".attribution").html(data);
-                $("#affichage").modal('toggle');
-            } 
-        });
-        })), 
-        $("#kt_datatable_search_type").on("change", (function() {
-            t.search($(this).val().toLowerCase(), "Type")
-        })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
-    }
+            $("#checkin").modal('toggle');
+
+            })), 
+            $("#kt_datatable_search_type").on("change", (function() {
+                t.search($(this).val().toLowerCase(), "Type")
+            })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
+            // }
         };
+        var KTDatatableJsonRemoteDemo2 = function() {
+            // init: function() {
+            var t;
+            t = $("#checkin_dt").KTDatatable({
+                data: {
+                    type: "remote",
+                    source: "{{config('app.url')}}/api/check_in/"+68592,
+                    pageSize: 10
+                },
+                layout: {
+                    scroll: !1,
+                    footer: !1
+                },
+                sortable: !0,
+                pagination: !0,
+                search: {
+                    input: $("#kt_datatable_search_query"),
+                    key: "generalSearch"
+                },
+                columns: [{
+                    field: "xref",
+                    title: "#",
+                    sortable: !1,
+                    width: 45,
+                    selector: true,
+                    type: "number",
+                    textAlign: "center"
+                }, 
+                {
+                    field: "nchambre",
+                    title: "Numéro",
+                    width: 80
+                },  
+                {
+                    field: "nom",
+                    title: "Nom",
+                    width: 80
+                },  
+                {
+                    field: "nationalit",
+                    title: "Nationalité",
+                    width: 75
+                },
+                {
+                    field: "prix",
+                    title: "Prix",
+                    width: 30
+                }, 
+                {
+                    field: "chin",
+                    title: "Etat",
+                    width: 75,
+                    template : function(e){
+                        var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline">OUT</span>';
+                        if(e.chin==0) {
+                            span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>'
+                        }
+                        return span
+                    }
+                }, 
+                // {
+                //     field: "nbrper",
+                //     title: "NombreP",
+                //     width: 75
+                // },
+                // {
+                //     field: "enf1",
+                //     title: "E1",
+                //     width: 35
+                // },
+                // {
+                //     field: "enf2",
+                //     title: "E2",
+                //     width: 30
+                // },
+                // {
+                //     field: "enf3",
+                //     title: "E3",
+                //     width: 30
+                // },
+                // {
+                //     field: "chin",
+                //     title: "Check-in",
+                //     width: 30
+                // },
+                // {
+                //     field: "nper",
+                //     title: "Check-in",
+                //     width: 30
+                // }
+                ]     
+            }), $("#kt_datatable_search_status").on("change", (function() {
+                t.search($(this).val().toLowerCase(), "Status")
+            })),  
+            $("#kt_datatable_search_type").on("change", (function() {
+                t.search($(this).val().toLowerCase(), "Type")
+            })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
+            // }
+        };
+            return {
+                init : function(){
+                    KTDatatableJsonRemoteDemo();
+                    KTDatatableJsonRemoteDemo2();
+                }
+            };
+        }();
+        
         jQuery(document).ready((function() {
-            KTDatatableJsonRemoteDemo.init()
+            KTDatatables.init()
         }));
     </script>
 @endpush

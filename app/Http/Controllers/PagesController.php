@@ -83,13 +83,22 @@ class PagesController extends Controller
         $numresa = ($request['numresa']);
         $datedep = ($request['datedep']);
         $datearr = ($request['datearr']);
-        $url = $this->url . '/api/available_rooms/' . $type . '/' .$datedep . '/' .$datearr;
+        $url = $this->url . '/api/available_rooms/' . $type . '/' .$numresa;
         print($url);
         $response = file_get_contents($url);
         $reservation = json_decode($response);
         return $reservation;
     }
 
+    public function check_in(Request $request)
+    {
+        // $numresa = ($request['numresa']);
+        // $url = $this->url . '/api/check_in/' .$numresa;
+        // $response = file_get_contents($url); 
+        // $checkin = json_decode($response);
+        return view('reservations.check_in');
+        // return $checkin;
+    }
     /**
      * Demo methods below
      */

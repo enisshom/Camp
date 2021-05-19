@@ -54,6 +54,7 @@ Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
 Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_attribute');
 Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
+Route::post('/check_in', 'PagesController@check_in')->name('check_in');
 
 /**Planning*/
 Route::get('/planning', function(){
