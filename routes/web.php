@@ -28,6 +28,19 @@ use Illuminate\Support\Facades\Artisa;
 
 Auth::routes();
 
+/**Optimize route */
+Route::get('/optimize',function(){
+    Artisan::call('optimize');
+    return 'optimized';
+});
+
+/**Migrate route */
+Route::get('/migrate',function(){
+    Artisan::call('migrate:fresh --seed');
+    return 'migration done';
+});
+
+/**Middleware */
 Route::group(['middleware' => ['auth']], function() {
     /**Accueil */
     Route::get('/', 'PagesController@index'); 
@@ -45,7 +58,14 @@ Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 /**Réservations*/
 Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
 Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_attribute');
-/** */
+Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
+Route::post('/check_in', 'PagesController@check_in')->name('check_in');
+
+/**Planning*/
+Route::get('/planning', function(){
+    $id = session()->get('camp_id');
+    return view('planning.planning',['id'=>$id]);
+})->name('planning');
 
 /**Product Route */
 Route::get('/create_product', function() {

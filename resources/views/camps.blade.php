@@ -103,9 +103,10 @@
     <script src="{{ asset('js/pages/widgets.js') }}" type="text/javascript"></script>
     <script>
         $(".card").on('click',function() {
+            
             var id = $(this).find('.ville')[0].id;
             var ville = $(this).find('.ville').html();
-            $(location).attr('href','/camp/'+id);
+            window.location.href = "{{route('camp', '')}}"+"/"+id;
         });           
     </script>
 </html>
