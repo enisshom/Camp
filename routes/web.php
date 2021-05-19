@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisa;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +21,11 @@ use Illuminate\Support\Facades\DB;
 // Route::resource('reservations',ReservationsController::class);
 // Route::get('/tst','ReservationsController@index')->name('tst');
 
+// cach optiizer
+
 /**Authentification */
+
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
