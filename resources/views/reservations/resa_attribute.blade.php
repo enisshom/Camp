@@ -22,7 +22,7 @@
         
         @foreach ($resa->rooms as $room)
           @foreach ($room->paxs as $pax)
-            <div class="row">
+            <div class="row room">
             <div class="col-3">
               @if($pax->nbrper==$pax->nper)
                 <div class="form-group">
@@ -225,7 +225,7 @@
    
    <script>
     // var options=document.getElementById('select').options;
-    
+    var types = ['']
     $(".type").on('click',function() {
         // alert($(this).attr('type')); 
         var type = $(this).attr('type');

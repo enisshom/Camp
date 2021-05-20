@@ -10,7 +10,21 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">LISTE DES RESERVATIONS </h3>
+                <h2 class="card-label">LISTE DES RESERVATIONS </h2>
+            </div>
+            <!--Month-Week-Day-->
+            <div class="card-toolbar">
+                <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                    <li class="nav-item">
+                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Month</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Week</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Day</a>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -26,8 +40,12 @@
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
-
-                            <div class="col-md-4 my-2 my-md-0">
+                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
+                                    Search
+                                </a>
+                            </div>
+                            {{-- <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                     <select class="form-control" id="kt_datatable_search_status">
@@ -40,8 +58,8 @@
                                         <option value="6">Danger</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-4 my-2 my-md-0">
+                            </div> --}}
+                            {{-- <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
                                     <select class="form-control" id="kt_datatable_search_type">
@@ -51,13 +69,8 @@
                                         <option value="3">Direct</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                            Search
-                        </a>
                     </div>
                 </div>
             </div>
@@ -112,11 +125,13 @@
 @push('scripts')
     <script>
         var id = {!!$id!!};
+        numresa = 0;
         // console.log(id);
         //  var datatable = $('#kt_datatable').KTDatatable(options);
         "use strict";
+        
         var KTDatatables = function() {
-
+            
         var KTDatatableJsonRemoteDemo = function() {
             // init: function() {
             var t;
@@ -219,41 +234,50 @@
             //         $("#checkin").modal('toggle');
             //     } 
             // });
+            KTDatatableJsonRemoteDemo2(numresa);
             $("#checkin").modal('toggle');
-
+            // $("#checkin_dt").KTDatatable().reload();
             })), 
             $("#kt_datatable_search_type").on("change", (function() {
                 t.search($(this).val().toLowerCase(), "Type")
             })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
             // }
         };
-        var KTDatatableJsonRemoteDemo2 = function() {
+        var KTDatatableJsonRemoteDemo2 = function(numresa) {
             // init: function() {
+            console.log(numresa)
             var t;
             t = $("#checkin_dt").KTDatatable({
                 data: {
                     type: "remote",
-                    source: "{{config('app.url')}}/api/check_in/"+68592,
+                    source: "{{config('app.url')}}/api/check_in/"+numresa,
                     pageSize: 10
                 },
                 layout: {
                     scroll: !1,
                     footer: !1
                 },
-                sortable: !0,
-                pagination: !0,
-                search: {
-                    input: $("#kt_datatable_search_query"),
-                    key: "generalSearch"
+                    sortable: !0,
+                    pagination: !0,
+                    search: {
+                        input: $("#kt_datatable_search_query"),
+                        key: "generalSearch"
                 },
-                columns: [{
+                    columns: [{
                     field: "xref",
                     title: "#",
                     sortable: !1,
-                    width: 45,
-                    selector: true,
+                    width: 15,
+                    // selector: true,
                     type: "number",
-                    textAlign: "center"
+                    textAlign: "center",
+                    template: function(e) {
+                        var checkbox = '<label class="checkbox checkbox-single"><input type="checkbox"><span></span></label>'
+                        if(e.chin=='O') {
+                            checkbox = '<label class="checkbox checkbox-single"><input type="checkbox" checked disabled><span></span></label>';
+                        }
+                        return checkbox;
+                    }
                 }, 
                 {
                     field: "nchambre",
@@ -281,8 +305,9 @@
                     width: 75,
                     template : function(e){
                         var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline">OUT</span>';
-                        if(e.chin==0) {
-                            span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>'
+                        // console.log(e.chin)
+                        if(e.chin=='O') {
+                            span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>';
                         }
                         return span
                     }
@@ -329,11 +354,11 @@
             return {
                 init : function(){
                     KTDatatableJsonRemoteDemo();
-                    KTDatatableJsonRemoteDemo2();
+                    KTDatatableJsonRemoteDemo2(numresa);
                 }
             };
         }();
-        
+
         jQuery(document).ready((function() {
             KTDatatables.init()
         }));
