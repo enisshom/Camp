@@ -84,7 +84,7 @@
 		</div>		
 	</div>
     <script src="https://docs.dhtmlx.com/scheduler/codebase/dhtmlxscheduler.js"></script>
-    <script src="https://docs.dhtmlx.com/scheduler/codebase/ext/dhtmlxscheduler_timeline.js"></script>
+    {{-- <script src="https://docs.dhtmlx.com/scheduler/codebase/ext/dhtmlxscheduler_timeline.js"></script> --}}
     <script>
         window.showRooms = function showRooms(type) {
         var allRooms = scheduler.serverList("rooms");
