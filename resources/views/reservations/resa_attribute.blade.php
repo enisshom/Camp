@@ -22,11 +22,11 @@
         
         @foreach ($resa->rooms as $room)
           @foreach ($room->paxs as $pax)
-            <div class="row room">
-            <div class="col-3">
-              @if($pax->nbrper==$pax->nper)
-                <div class="form-group">
-                  <select class="form-control myselect" name="" id="select" type="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
+
+            @if($pax->nper==1)
+               <div class="row room">
+                 <div class="form-group">
+                  <select class="form-control myselect" name="nchambre" id="select" type="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
                     <option>{{$room->number}}</option>
                     <option value="100">100</option>
                     <option value="101">101</option>
@@ -35,187 +35,41 @@
                     <option value="104">104</option>
                   </select>
                 </div>
-              @endif
-            </div>
-            <div class="col-3">
+               </div>
+            @endif
+            <div class="row pax">
+           
+               
+           
               <div class="form-group">
-                <input type="text" class="form-control" name="" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}" aria-describedby="helpId" placeholder="Nom">
+                <input type="text" class="form-control" name="nchambre" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$room->number}}" aria-describedby="helpId" placeholder="Nom">
+                <input type="text" class="form-control" name="nom" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}" aria-describedby="helpId" placeholder="Nom">
               </div>
-            </div>
-            <div class="col-3">
+        
               <div class="form-group">
-                <input type="text" class="form-control" name=""  aria-describedby="helpId" placeholder="Prénom">
+                <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
               </div>
-            </div>
-            <div class="col-3">
+      
               <div class="form-group">
-                <select class="form-control" name="" >
+                <select class="form-control" name="nationalit" >
                   <option>Maroc</option>
                   <option>USA</option>
-                  <option>102</option>
+                  <option>Allmand</option>
+                  <option>Espane</option>
+                  <option>UK</option>
+                  <option>Canada</option>
                 </select>
               </div>
-            </div>
          </div>
           @endforeach
         @endforeach
-        
-        {{-- @endforeach --}}
-         {{-- <div class="row">
-           <div class="col-3">
-             <div class="form-group">
-               
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Nom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Prénom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control" name="" id="">
-                 <option>Maroc</option>
-                 <option>USA</option>
-                 <option>102</option>
-               </select>
-             </div>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control myselect" name="" id="select1">
-                 <option value="">Room</option>
-                 <option value="100">100</option>
-                 <option value="101">101</option>
-                 <option value="102">102</option>
-                 <option value="103">103</option>
-                 <option value="104">104</option>
- 
-               </select>
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Nom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Prénom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control" name="" id="">
-                 <option>Maroc</option>
-                 <option>USA</option>
-                 <option>102</option>
-               </select>
-             </div>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control myselect" name="" id="select2">
-                 <option value="">Room</option>
-                 <option value="100">100</option>
-                 <option value="101">101</option>
-                 <option value="102">102</option>
-                 <option value="103">103</option>
-                 <option value="104">104</option>
-               </select>
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Nom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Prénom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control" name="" id="">
-                 <option>Maroc</option>
-                 <option>USA</option>
-                 <option>102</option>
-               </select>
-             </div>
-           </div>
-         </div>
-         <div class="row">
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control myselect" name="" id="select3">
-                 <option value="">Room</option>
-                 <option value="100">100</option>
-                 <option value="101">101</option>
-                 <option value="102">102</option>
-                 <option value="103">103</option>
-                 <option value="104">104</option>
-               </select>
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Nom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <input type="text" class="form-control" name="" id="" aria-describedby="helpId" placeholder="Prénom">
-             </div>
-           </div>
-           <div class="col-3">
-             <div class="form-group">
-               <select class="form-control" name="" id="">
-                 <option>Maroc</option>
-                 <option>USA</option>
-                 <option>102</option>
-               </select>
-             </div>
-           </div>
-         </div> --}}
+
        </div>
       </div>
      </div>
         
     @endforeach
-    {{-- <div class="card">
-     <div class="card-header" id="headingTwo6">
-      <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseTwo6">
-       <i class="far fa-gem"></i> Luxe
-      </div>
-     </div>
-     <div id="collapseTwo6" class="collapse" data-parent="#accordionExample6">
-      <div class="card-body">
-       ...
-      </div>
-     </div>
-    </div>
-    <div class="card">
-     <div class="card-header" id="headingThree6">
-      <div class="card-title collapsed" data-toggle="collapse" data-target="#collapseThree6">
-       <i class="flaticon2-chart"></i> Standard
-      </div>
-     </div>
-     <div id="collapseThree6" class="collapse" data-parent="#accordionExample6">
-      <div class="card-body">
-       ...
-      </div>
-     </div>
-    </div> --}}
+
   </div>
 
    @push('scripts')
