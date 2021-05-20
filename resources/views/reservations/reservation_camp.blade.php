@@ -125,9 +125,8 @@
 @push('scripts')
     <script>
         var id = {!!$id!!};
-        numresa = 0;
         // console.log(id);
-        var numresa = 88;
+        var numresa = 0;
         //  var datatable = $('#kt_datatable').KTDatatable(options);
         "use strict";
         
@@ -220,7 +219,7 @@
                     success:function(data){ 
                         $(".attribution").html(data);
                         $("#affichage").modal('toggle');
-                        KTDatatableJsonRemoteDemo2(numresa);
+                        // KTDatatableJsonRemoteDemo2(numresa);
                     } 
                 });
                 })), 
@@ -236,7 +235,7 @@
                 //         $("#checkin").modal('toggle');
                 //     } 
                 // });
-
+                KTDatatableJsonRemoteDemo2(numresa);
                 $("#checkin").modal('toggle');
 
 
@@ -253,12 +252,12 @@
                 t = $("#checkin_dt").KTDatatable({
                     data: {
                         type: "remote",
-                        source: "{{config('app.url')}}/api/check_in/"+68597,
+                        source: "{{config('app.url')}}/api/check_in/"+68594,
                         pageSize: 30
                     },
                     layout: {
                         scroll: !0,
-                        footer: !0
+                        // footer: !0
                     },
                     sortable: !0,
                     pagination: !0,
@@ -363,9 +362,7 @@
         }();
 
         jQuery(document).ready((function() {
-            
-
-            KTDatatables.init(numresa);
+            KTDatatables.init();
         }));
     </script>
 @endpush

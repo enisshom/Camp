@@ -21,6 +21,9 @@
         {{-- @foreach ($resa->rooms as $room) --}}
         
         @foreach ($resa->rooms as $room)
+        @php
+          // dd($room->nbchambre);
+        @endphp
           @foreach ($room->paxs as $pax)
 
             @if($pax->nper==1)
@@ -39,28 +42,32 @@
             @endif
             <div class="row pax">
            
-               
-           
-              <div class="form-group">
-                <input type="text" class="form-control" name="nchambre" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$room->number}}" aria-describedby="helpId" placeholder="Nom">
-                <input type="text" class="form-control" name="nom" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}" aria-describedby="helpId" placeholder="Nom">
+              <div class="form-group row">
+
+                <div class="col-3">
+                  <input type="text" class="form-control nchbre" name="nchambre" id="{{$room->nchambre}}" value="{{$room->number}}" aria-describedby="helpId" placeholder="Nom">
+                </div>
+
+                <div class="col-3">
+                  <input type="text" class="form-control" name="nom" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}" aria-describedby="helpId" placeholder="Nom">
+                </div>
+
+                <div class="col-3">
+                  <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
+                </div>
+
+                <div class="col-3">
+                  <select class="form-control" name="nationalit" >
+                    <option>Maroc</option>
+                    <option>USA</option>
+                    <option>Allmand</option>
+                    <option>Espane</option>
+                    <option>UK</option>
+                    <option>Canada</option>
+                  </select>
+                </div>
               </div>
-        
-              <div class="form-group">
-                <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
-              </div>
-      
-              <div class="form-group">
-                <select class="form-control" name="nationalit" >
-                  <option>Maroc</option>
-                  <option>USA</option>
-                  <option>Allmand</option>
-                  <option>Espane</option>
-                  <option>UK</option>
-                  <option>Canada</option>
-                </select>
-              </div>
-         </div>
+            </div>
           @endforeach
         @endforeach
 
@@ -79,7 +86,7 @@
    
    <script>
     // var options=document.getElementById('select').options;
-    var types = ['']
+  
     $(".type").on('click',function() {
         // alert($(this).attr('type')); 
         var type = $(this).attr('type');
@@ -121,13 +128,17 @@
                     $("option[value='" + sl + "']", $(this)).hide();
                 }
                  if(selected.includes("100"))
-                    {
-                     console.log('kayna')
-                    }
+                  {
+                    console.log('kayna')
+                  }
                 });
             });
             console.log(selected);
         });
     
+        $(".myselect").on('click',function(){
+          ($(this).id).val('hjk');
+
+        })
   </script>
 </html>
