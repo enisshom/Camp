@@ -33,14 +33,6 @@ Route::group(['middleware' => ['auth']], function() {
     /**Logout */
     Route::get('logoutt', function () { auth()->logout(); Session()->flush(); return Redirect::to('/'); })->name('logoutt');
 });
-<<<<<<< HEAD
-
-Route::get('/camp/{ville}','PagesController@camp')->name('camp');
-
-Route::get('/resa', function() {
-    return view('datatable');
-})->name('resa');
-=======
 /**Dashboard */
 Route::get('/camps','PagesController@index')->name('camps');
 /** */
@@ -49,7 +41,6 @@ Route::get('/camp/{ville}','PagesController@camp')->name('camp');
 Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
 Route::post('/resa_attribute','PagesController@resa_attribute')->name('resa_attribute');
 /** */
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
 
 /**Product Route */
 Route::get('/create_product', function() {
@@ -57,34 +48,12 @@ Route::get('/create_product', function() {
     return view('parametrage.products.create',['id'=>$id]);
 })->name('create_product');
 
-<<<<<<< HEAD
-Route::get('/insert', function() {
-    return 'role_has_permissions inserted ';
-})->name('insert');
-
-=======
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
 Route::get('/edit_product', function() {
     return view('edit');
 })->name('edit_product');
 
-<<<<<<< HEAD
-Route::get('/perm', function() {
-    return Auth::user()->has_role;
-})->name('perm');
-
-//Route::resource('product',ProductController::class);
-
-=======
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
 Route::get('/delete/{id}','ProductController@destroy')->name('delete');
 
-<<<<<<< HEAD
-// Route::get('/index_product','ProductController@index')->name('index_product');
-// Route::get('/show_product','ProductController@index')->name('index_product');
-
-=======
->>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');
 Route::get('/ktdatatables', 'PagesController@ktDatatables');
