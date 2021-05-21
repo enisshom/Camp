@@ -136,7 +136,7 @@
             console.log(selected);
         });
     
-        $(".myselect").on('change',function(){
+        $(".myselect").on('click',function(){
           // $(".nchbre").on('click',function(){
             
             var idt = $(this).val();
