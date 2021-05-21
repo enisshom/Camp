@@ -18,6 +18,7 @@
 @php
     // dd($site);
 @endphp
+@can($site->lib_class)
     <br>
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -28,7 +29,7 @@
             </div>
         </div>
     </div>    
-    <h1>{{$site->lib_class}}</h1>
+    <h1 style="text-align:center">{{$site->lib_class}}</h1>
     <div class="row">  
         {{-- @for ($i = 0; $i < 6; $i++)
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
@@ -46,6 +47,7 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/views/camp.blade.php
                     <h5 style="padding-bottom:30px">ARRIVEES</h5>
                     <div class="bg-dark"><span style="color: #fff">Arrivée prévue : 3</span></div>
@@ -53,6 +55,10 @@
                     <h5 style="padding-bottom:35px">ARRIVEES</h5>
                     <div class="bg-dark"><span style="color: #fff">Arrivées prévues : 3</span></div>
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51:resources/views/reservations/camp.blade.php
+=======
+                    <h5 style="padding-bottom:35px">ARRIVEES</h5>
+                    <div class="bg-dark"><span style="color: #fff">Arrivées prévues : 3</span></div>
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                 </main>
             </div>
         </div>
@@ -60,6 +66,7 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/views/camp.blade.php
                     <h5 style="padding-bottom:30px">DEPARTS</h5>
                     <div class="bg-dark"><span style="color: #fff">Départ prévu : 3</span></div>
@@ -67,6 +74,10 @@
                     <h5 style="padding-bottom:35px">DEPARTS</h5>
                     <div class="bg-dark"><span style="color: #fff">Départs prévus : 3</span></div>
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51:resources/views/reservations/camp.blade.php
+=======
+                    <h5 style="padding-bottom:35px">DEPARTS</h5>
+                    <div class="bg-dark"><span style="color: #fff">Départs prévus : 3</span></div>
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                 </main>
             </div>
         </div>
@@ -77,7 +88,11 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">{{$site->site_occuped}}</span>    
+<<<<<<< HEAD
                     <h5 style="padding-bottom:30px">IN HOUSE</h5>
+=======
+                    <h5 style="padding-bottom:35px">IN HOUSE</h5>
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                     <div class="bg-dark"><span style="color: #fff">-</span></div>
                 </main>
             </div>
@@ -86,7 +101,11 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">{{$site->site_available}}</span>    
+<<<<<<< HEAD
                     <h5 style="padding-bottom:30px">DISPONIBLES</h5>
+=======
+                    <h5 style="padding-bottom:35px">DISPONIBLES</h5>
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                     <div class="bg-dark"><span style="color: #fff">Capacité : {{$site->site_cap}}</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
@@ -96,7 +115,11 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">{{$site->site_blocked}}</span>    
+<<<<<<< HEAD
                     <h5 style="padding-bottom:30px">BLOQUEES</h5>
+=======
+                    <h5 style="padding-bottom:35px">BLOQUEES</h5>
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                     <div class="bg-dark"><span style="color: #fff">Bloqués : 3</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
@@ -106,7 +129,11 @@
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
+<<<<<<< HEAD
                     <h5 style="padding-bottom:30px">DELOGEMENT</h5>
+=======
+                    <h5 style="padding-bottom:35px">DELOGEMENT</h5>
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                     <div class="bg-dark"><span style="color: #fff">Déplacés : 3</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
@@ -117,6 +144,7 @@
         @endcan --}}
     </div>
     
+<<<<<<< HEAD
 <<<<<<< HEAD:resources/views/camp.blade.php
 @endsection
 =======
@@ -125,3 +153,9 @@
 @endcan
 @endsection 
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51:resources/views/reservations/camp.blade.php
+=======
+@else
+    <h1>U don't have permission</h1>
+@endcan
+@endsection 
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6

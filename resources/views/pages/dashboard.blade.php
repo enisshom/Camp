@@ -134,20 +134,12 @@
                     <span class="navi-icon">
                         <i class="la la-campground"></i>
                         </span>
-                    {{-- <span class="navi-text ville" id="{{$site['id']}}" style="margin-left: 10px;">{{$site['ville']}}</span> --}}
-                    <span class="navi-text ville" id="{{$site->id}}" style="margin-left: 10px;">{{$site->lib_class}}</span>
-                </div>
+                    <span class="navi-text" style="margin-left: 20px;">Marrakech</span>
+                    </div>
                 </header>
-                <main class="kanban-drag" style="text-align: center;">
-                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block link">{{$site->site_occuped}}/{{$site->site_cap}}</span>    
-                    <h5>Rooms</h5>
-                    <hr class="divider">
-                    <span class="font-size-h3" style="color: black;">{{$site->site_pax}}
-                        <i class="fas fa-male icon-lg" style="color: black"></i>
-                    </span>
-                    {{-- <div class="bg-dark"><span style="color: #fff">Total Pax:</span></div> --}}
-                    {{-- <span class="card-title font-weight text-dark font-size-h5 mb-0 mt-6 d-block link">Rooms</span>     --}}
-                    {{-- <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span> --}}
+                <main class="kanban-drag" style="text-align: center">
+                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">12</span>    
+                    <span class="card-title font-weight text-dark font-size-h4 mb-0 mt-6 d-block">Capacité</span>
                 </main>
                 {{-- <footer></footer> --}}
             </div>

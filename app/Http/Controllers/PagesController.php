@@ -8,6 +8,15 @@ use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
+
+    protected $url;
+
+    public function __construct()
+    {
+        $this->url = config('app.url');
+    }
+    
+
     public function index()
     {
         $page_title = 'Dashboard';
@@ -15,6 +24,7 @@ class PagesController extends Controller
 
         // Menu::renderVerMenu($items);
 
+<<<<<<< HEAD
         $url = 'http://192.168.1.18/api/sites'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);
@@ -70,8 +80,83 @@ class PagesController extends Controller
         $sites = json_decode($response);   
         return view('reservations.resa_attribute');
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+=======
+        $url = $this->url . '/api/sites'; 
+        // dd($url);
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);
+        return view('camps', compact(['sites', 'page_title', 'page_description']));
+        // return dd($sites);
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
     }
 
+    // public function camp($ville)
+    // {
+    //     $url = $this->url.'/api/sites/'.$ville; 
+    //     return view('camp',['ville'=>$ville]);
+    // }
+
+    public function camp(Request $request, $id)
+    {
+        $url = $this->url . '/api/sites/'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);
+        $site = $sites[$id - 1];
+        session()->put('camp_id',$id);
+        session()->save();
+        $id = session()->get('camp_id');
+        // dd(session()->get('camp_id'));
+        return view('reservations.camp',['site'=>$site,'id'=>$id]);
+    }
+
+    public function reservations($id)
+    {
+        // dd($id);
+        $url = $this->url . '/api/sites/'; 
+        $response = file_get_contents($url); 
+        $sites = json_decode($response);   
+        // $id = session()->get('camp_id');
+        session()->put('camp_id',$id);
+        
+        // session()->save();
+        // dd($site);
+        // dd(session()->get('camp_id'));
+        return view('reservations.reservation_camp',['id'=>$id]);
+    }
+
+    public function resa_attribute(Request $request)
+    {
+        $numresa = ($request['numresa']);
+        $datedep = ($request['datedep']);
+        $datearr = ($request['datearr']);
+        $url = $this->url . '/api/resa_attribution/' . $numresa;
+        $response = file_get_contents($url);
+        $reservation = json_decode($response);
+        return view('reservations.resa_attribute', compact('reservation','numresa','datedep','datearr'));
+    }
+
+    public function available_rooms(Request $request)
+    {
+        $type = ($request['type']);
+        $numresa = ($request['numresa']);
+        $datedep = ($request['datedep']);
+        $datearr = ($request['datearr']);
+        $url = $this->url . '/api/available_rooms/' . $type . '/' .$numresa;
+        print($url);
+        $response = file_get_contents($url);
+        $reservation = json_decode($response);
+        return $reservation;
+    }
+
+    public function check_in(Request $request)
+    {
+        // $numresa = ($request['numresa']);
+        // $url = $this->url . '/api/check_in/' .$numresa;
+        // $response = file_get_contents($url); 
+        // $checkin = json_decode($response);
+        return view('reservations.check_in');
+        // return $checkin;
+    }
     /**
      * Demo methods below
      */

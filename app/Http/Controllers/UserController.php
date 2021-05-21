@@ -34,6 +34,7 @@ class UserController extends Controller
         // $data =  $data->toJson();
         // $data =  json_decode($data);
         // return view('users.index',['data'=> $data]);
+<<<<<<< HEAD
         $data = User::orderBy('id','DESC')->paginate(5);
 <<<<<<< HEAD
         return view('users.index',compact('data'))
@@ -41,11 +42,17 @@ class UserController extends Controller
         $id = session()->get('camp_id');
         return view('parametrage.users.index',compact('data','id'))
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+=======
+        $data = User::orderBy('id', 'DESC')->paginate(5);
+        $id = session()->get('camp_id');
+        return view('parametrage.users.index', compact('data', 'id'))
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
                 ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create()
     {
+<<<<<<< HEAD
         $roles = Role::pluck('name','name')->all();
 <<<<<<< HEAD
         return view('users.create',compact('roles'));
@@ -53,6 +60,11 @@ class UserController extends Controller
         $id = session()->get('camp_id');
         return view('parametrage.users.create',compact('roles','id'));
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+=======
+        $roles = Role::pluck('name', 'name')->all();
+        $id = session()->get('camp_id');
+        return view('parametrage.users.create', compact('roles', 'id'));
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
     }
 
     public function store(Request $request)
@@ -85,6 +97,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
+<<<<<<< HEAD
         $userRole = $user->roles->pluck('name','name')->all();
 <<<<<<< HEAD
     
@@ -93,6 +106,11 @@ class UserController extends Controller
         $id = session()->get('camp_id');
         return view('parametrage.users.edit',compact('user','roles','userRole','id'));
 >>>>>>> 90f06c8cf2d1746bbebf55cc0a6733229e0aed51
+=======
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        $id = session()->get('camp_id');
+        return view('parametrage.users.edit', compact('user', 'roles', 'userRole', 'id'));
+>>>>>>> 72a0d59239f68dadce94be7242936e84d68b8df6
     }
 
     public function update(Request $request, $id)
