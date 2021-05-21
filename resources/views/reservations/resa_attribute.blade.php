@@ -5,7 +5,7 @@
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
     @foreach ($reservation->data as $resa)
     @php
-    
+    // dd($reservation->data);
   @endphp
     <div class="card">
       <div class="card-header" id="headingOne6">
@@ -45,7 +45,7 @@
               <div class="form-group row">
 
                 <div class="col-3">
-                  <input type="text" class="form-control nchbre" name="nchambre" id="{{$room->nchambre}}" value="{{$room->number}}" aria-describedby="helpId" placeholder="Nom">
+                  <input type="text" class="form-control nchbre" name="nchambre" id="{{$room->number}}" value="{{$room->number}}" aria-describedby="helpId" placeholder="Nom">
                 </div>
 
                 <div class="col-3">
@@ -136,8 +136,16 @@
             console.log(selected);
         });
     
-        $(".myselect").on('click',function(){
-          ($(this).id).val('hjk');
+        $(".myselect").on('change',function(){
+          // $(".nchbre").on('click',function(){
+            
+            var idt = $(this).val();
+            console.log(idt);
+            $('#'+idt).val($(this).val());
+            // console.log($(this).val());
+          // });
+          
+        
 
         })
   </script>

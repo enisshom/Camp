@@ -3,7 +3,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="https://docs.dhtmlx.com/scheduler/codebase/dhtmlxscheduler.css">
-    <link rel="stylesheet" href="style.css">
+    {{-- <link rel="stylesheet" href="style.css"> --}}
     <style>
         html, body{
             margin:0;
@@ -84,7 +84,7 @@
 		</div>		
 	</div>
     <script src="https://docs.dhtmlx.com/scheduler/codebase/dhtmlxscheduler.js"></script>
-    {{-- <script src="https://docs.dhtmlx.com/scheduler/codebase/ext/dhtmlxscheduler_timeline.js"></script> --}}
+    <script src="https://docs.dhtmlx.com/scheduler/codebase/ext/dhtmlxscheduler_timeline.js"></script>
     <script>
         window.showRooms = function showRooms(type) {
         var allRooms = scheduler.serverList("rooms");
