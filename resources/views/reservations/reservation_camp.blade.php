@@ -10,7 +10,21 @@
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h3 class="card-label">LISTE DES RESERVATIONS </h3>
+                <h2 class="card-label">LISTE DES RESERVATIONS </h2>
+            </div>
+            <!--Month-Week-Day-->
+            <div class="card-toolbar">
+                <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                    <li class="nav-item">
+                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Month</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Week</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Day</a>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -22,12 +36,16 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query"/>
+                                    <input type="text" class="form-control" placeholder="Chercher..." id="kt_datatable_search_query"/>
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
-
-                            <div class="col-md-4 my-2 my-md-0">
+                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
+                                    Chercher
+                                </a>
+                            </div>
+                            {{-- <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
                                     <select class="form-control" id="kt_datatable_search_status">
@@ -40,8 +58,8 @@
                                         <option value="6">Danger</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="col-md-4 my-2 my-md-0">
+                            </div> --}}
+                            {{-- <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
                                     <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
                                     <select class="form-control" id="kt_datatable_search_type">
@@ -51,13 +69,8 @@
                                         <option value="3">Direct</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                            Search
-                        </a>
                     </div>
                 </div>
             </div>
@@ -80,8 +93,8 @@
                        
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <button type="button" class="btn btn-primary save">Enregistrer</button>
                     </div>
                   </div>
                 </div>
@@ -100,8 +113,8 @@
                         <div class="checkin_dt" id="checkin_dt"></div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <button type="button" class="btn btn-primary">Enregistrer</button>
                     </div>
                   </div>
                 </div>
@@ -113,9 +126,10 @@
     <script>
         var id = {!!$id!!};
         // console.log(id);
-        var numresa = 88;
+        var numresa = 0;
         //  var datatable = $('#kt_datatable').KTDatatable(options);
         "use strict";
+        
         var KTDatatables = function() {
            
             var KTDatatableJsonRemoteDemo = function() {
@@ -205,7 +219,7 @@
                     success:function(data){ 
                         $(".attribution").html(data);
                         $("#affichage").modal('toggle');
-                        KTDatatableJsonRemoteDemo2(numresa);
+                        // KTDatatableJsonRemoteDemo2(numresa);
                     } 
                 });
                 })), 
@@ -221,7 +235,7 @@
                 //         $("#checkin").modal('toggle');
                 //     } 
                 // });
-
+                KTDatatableJsonRemoteDemo2(numresa);
                 $("#checkin").modal('toggle');
 
 
@@ -238,12 +252,12 @@
                 t = $("#checkin_dt").KTDatatable({
                     data: {
                         type: "remote",
-                        source: "{{config('app.url')}}/api/check_in/"+68597,
+                        source: "{{config('app.url')}}/api/check_in/"+68594,
                         pageSize: 30
                     },
                     layout: {
                         scroll: !0,
-                        footer: !0
+                        // footer: !0
                     },
                     sortable: !0,
                     pagination: !0,
@@ -346,11 +360,9 @@
                 }
             };
         }();
-        
-        jQuery(document).ready((function() {
-            
 
-            KTDatatables.init(numresa);
+        jQuery(document).ready((function() {
+            KTDatatables.init();
         }));
     </script>
 @endpush

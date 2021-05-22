@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Classes\Theme\Menu;
 use Illuminate\Support\Facades\Session;
+use GuzzleHttp\Client;
 
 class PagesController extends Controller
 {
@@ -90,6 +91,24 @@ class PagesController extends Controller
         return $reservation;
     }
 
+    public function saveAttribution(Request $request)
+    {
+        dd(($request->all()));
+       $client = new Client();
+       $res = $client->request('POST', $this->url.'/api/saveAttrib', [
+           'form_params' => [
+               'client_id' => 'test_id',
+               'secret' => 'test_secret',
+           ]
+       ]);
+       echo $res->getStatusCode();
+       // 200
+       echo $res->getHeader('contentType');
+       // 'application/json; charset=utf8'
+       echo $res->getBody();
+       // {"type":"User"...'
+    }
+
     public function check_in(Request $request)
     {
         // $numresa = ($request['numresa']);
@@ -99,6 +118,7 @@ class PagesController extends Controller
         return view('reservations.check_in');
         // return $checkin;
     }
+    
     /**
      * Demo methods below
      */
