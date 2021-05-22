@@ -102,14 +102,14 @@
                                     <span class="menu-text">Paramétrage</span>
                                 </span>
                             </li>
-                            <li class="menu-item" aria-haspopup="true">
+                            {{-- <li class="menu-item" aria-haspopup="true">
                                 <a href="{{route('product.index')}}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
                                         <span></span>
                                     </i>
                                     <span class="menu-text">Product</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li class="menu-item" aria-haspopup="true">
                                 <a href="{{route('users.index')}}" class="menu-link">
                                     <i class="menu-bullet menu-bullet-dot">
