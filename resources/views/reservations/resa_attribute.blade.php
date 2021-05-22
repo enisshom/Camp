@@ -9,40 +9,28 @@
         <div id="{{$resa->type}}" class="collapse" data-parent="#accordionExample6">
         <div class="card-body">
           {{-- @foreach ($resa->rooms as $room) --}}
-          
           @foreach ($resa->rooms as $room)
-          @php
-            // dd($room->nbchambre);
-          @endphp
             @foreach ($room->paxs as $pax)
-
               @if($pax->nper==1)
                 <div class="row room">
                   <div class="form-group">
-                    <select class="form-control myselect" name="nchambre" id="select" roomId="{{$room->room_id}}" type="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
+                    <select class="form-control roomSelect" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
                       <option>{{$room->number}}</option>
-                      <option value="100">100</option>
-                      <option value="101">101</option>
-                      <option value="102">102</option>
-                      <option value="103">103</option>
-                      <option value="104">104</option>
                     </select>
                   </div>
                 </div>
               @endif
               <div class="row pax">
                 <div class="form-group row pers">
-                  {{-- <div class="col-3"> --}}
+                  <div class="col-4">
                     <input type="hidden" class="form-control {{$room->room_id}}" name="nchambre"  value="{{$room->number}}"  aria-describedby="helpId">
                     <input type="hidden" class="form-control {{$pax->xref}}" name="xref" value="{{$pax->xref}}"  aria-describedby="helpId">
                     <input type="text" class="form-control" name="nom" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}"  aria-describedby="helpId" placeholder="Nom">
-                  {{-- </div> --}}
-
-                  {{-- <div class="col-3"> --}}
+                  </div>
+                  <div class="col-4">
                     <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
-                  {{-- </div> --}}
-
-                  {{-- <div class="col-3"> --}}
+                  </div>
+                  <div class="col-4">
                     <select class="form-control" name="nationalit" >
                       <option>Maroc</option>
                       <option>USA</option>
@@ -51,7 +39,7 @@
                       <option>UK</option>
                       <option>Canada</option>
                     </select>
-                  {{-- </div> --}}
+                  </div>
                 </div>
               </div>
             @endforeach
@@ -69,84 +57,105 @@
   @endpush
    
   <script>
-  
+    
+    /*Click on the room type*/
     $(".type").on('click',function() {
 
       var type = $(this).attr('type');
       var numresa = $(this).attr('numresa');
       var datedep = $(this).attr('datedep');
       var datearr = $(this).attr('datearr');
+      
+      var params = {type,numresa,datedep,datearr};
+      params = JSON.stringify(params);
       $.ajax({ 
           type:'POST', 
           url:"{{route('available_rooms')}}", 
           headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-          data : { type,numresa,datedep,datearr},
-          success:function(data){ 
+          data : params,
+          contentType: "application/json",
+          dataType: 'json',
+          success:function(data){
+            $("[roomType|= '"+type+"']").find('option').remove();
+            data.forEach(room => {
+              
+              $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
+              // console.log($(this));
+            });
             console.log(data);
           } 
       });
     });
-        $(".myselect").change(function() {
-            // Get the selected value
-            var selected =[];
-            var notSelected =[];
-            // Get the ID of this element
-            var thisID = $(this).attr("id");
-            // Reset so all values are showing:
-            $(".myselect option:selected").each(function() {
-              if($(this).val() != ""){
-                selected.push($(this).val());
-                // $(this).show();
-              }
-            });
-            $(".myselect").each(function() {
-              // console.log($(this).val());
-                selected.forEach(sl => {
-                if ($(this).val() != sl) {
-                    $("option[value='" + sl + "']", $(this)).hide();
-                }
-                 if(selected.includes("100"))
-                  {
-                    console.log('kayna')
-                  }
-                });
-            });
-            console.log(selected);
+
+    /*Change room number*/
+    $(".roomSelect").change(function() {
+        // Get the selected value
+        var selected =[];
+        var notSelected =[];
+        // Get the ID of this element
+        var thisID = $(this).attr("id");
+        // Reset so all values are showing:
+        $(".roomSelect option:selected").each(function() {
+          if($(this).val() != ""){
+            selected.push($(this).val());
+            // $(this).show();
+          }
         });
+        $(".roomSelect").each(function() {
+          // console.log($(this).val());
+            selected.forEach(sl => {
+            if ($(this).val() != sl) {
+                $("option[value='" + sl + "']", $(this)).hide();
+            }
+            if(selected.includes("100"))
+            {
+              console.log('kayna')
+            }
+          });
+        });
+        console.log(selected);
+    });
     
-        $(".myselect").bind('change',function(){
-          var room = ($(this).attr('roomid'));
-          $("."+room).val($(this).val());
-        });  
+    /*Option values*/
+    $(".roomSelect").bind('change',function(){
+      var room = ($(this).attr('roomid'));
+      $("."+room).val($(this).val());
+    }); 
 
-        $(".save").on('click',function(){
-          var paxs = $(".pax :input").serializeArray();
-          
-          var paxs = JSON.stringify(paxs);
+    /*Save attribution*/
+    $(".save").on('click',function(){
+      var paxs = $(".pax :input").serializeArray();
+      
+      var paxs = JSON.stringify(paxs);
 
-          // console.log(data)
-          $.ajax({ 
-            type:'POST', 
-            url:"{{route('saveAttribution')}}", 
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-            data : paxs,
-            contentType: "application/json",
-            dataType: 'json',
-            success:function(data){ 
-              console.log(data);
-            } 
-          });
-        });        
+      // console.log(data)
+      $.ajax({ 
+        type:'POST', 
+        url:"{{route('saveAttribution')}}", 
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+        data : paxs,
+        contentType: "application/json",
+        dataType: 'json',
+        success:function(data){ 
+          console.log(data);
+        } 
+      });
+    });        
 
-        var pax = [];
-        var paxs = [];
-        document.querySelectorAll(".pax").forEach(f => {
-          f.querySelectorAll(".pers input").forEach(t => {
-            // console.log(t.value)
-            pax.push(t.value);
-            console.log(pax);
-          });
-          console.log('------')
-        });
+    var pax = [];
+    var paxs = [];
+    document.querySelectorAll(".pax").forEach(f => {
+      f.querySelectorAll(".pers input ,select").forEach(t => {
+        /*all informations*/
+        // console.log(t.value)
+        if(t.value == "") {
+
+        }
+        pax.push(t.value);
+        // console.log(pax)
+      });
+      // paxs.push(pax);
+      // console.log('------')
+    });
   </script>
 </html>

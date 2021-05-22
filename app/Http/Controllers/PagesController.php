@@ -78,22 +78,43 @@ class PagesController extends Controller
         return view('reservations.resa_attribute', compact('reservation','numresa','datedep','datearr'));
     }
 
+    // public function available_rooms(Request $request)
+    // {
+    //     $type = ($request['type']);
+    //     $numresa = ($request['numresa']);
+    //     $datedep = ($request['datedep']);
+    //     $datearr = ($request['datearr']);
+    //     $url = $this->url . '/api/available_rooms/';
+    //     print($url);
+    //     $response = file_get_contents($url);
+    //     $reservation = json_decode($response);
+    //     return $reservation;
+    // }
+
     public function available_rooms(Request $request)
     {
+        $client = new Client();
         $type = ($request['type']);
         $numresa = ($request['numresa']);
         $datedep = ($request['datedep']);
         $datearr = ($request['datearr']);
-        $url = $this->url . '/api/available_rooms/' . $type . '/' .$numresa;
-        print($url);
-        $response = file_get_contents($url);
-        $reservation = json_decode($response);
-        return $reservation;
+        $res = $client->request('POST', $this->url.'/api/available_rooms', [
+           'form_params' => [
+               'type' => $type,
+               'numresa' => $numresa,
+               'datedep' => $datedep,
+               'datearr' => $datearr
+           ]
+       ]);
+    //    dd(($res));
+    //    echo $res->getStatusCode();
+    //    echo $res->getHeader('content-type');
+       echo $res->getBody();
     }
 
     public function saveAttribution(Request $request)
     {
-        dd(($request->all()));
+        // dd(($request->all()));
        $client = new Client();
        $res = $client->request('POST', $this->url.'/api/saveAttrib', [
            'form_params' => [
