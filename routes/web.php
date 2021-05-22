@@ -60,6 +60,7 @@ Route::get('/reservations/{id}','PagesController@reservations')->name('reservati
 Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_attribute');
 Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
 Route::post('/check_in', 'PagesController@check_in')->name('check_in');
+Route::post('/saveAttribution', 'PagesController@saveAttribution')->name('saveAttribution');
 
 /**Planning*/
 Route::get('/planning', function(){

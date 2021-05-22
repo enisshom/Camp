@@ -36,13 +36,13 @@
                         <div class="row align-items-center">
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query"/>
+                                    <input type="text" class="form-control" placeholder="Chercher..." id="kt_datatable_search_query"/>
                                     <span><i class="flaticon2-search-1 text-muted"></i></span>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
                                 <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                                    Search
+                                    Chercher
                                 </a>
                             </div>
                             {{-- <div class="col-md-4 my-2 my-md-0">
@@ -93,8 +93,8 @@
                        
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <button type="button" class="btn btn-primary save">Enregistrer</button>
                     </div>
                   </div>
                 </div>
@@ -113,8 +113,8 @@
                         <div class="checkin_dt" id="checkin_dt"></div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                      <button type="button" class="btn btn-primary">Enregistrer</button>
                     </div>
                   </div>
                 </div>
