@@ -78,9 +78,7 @@
           success:function(data){
             $("[roomType|= '"+type+"']").find('option').remove();
             data.forEach(room => {
-              
               $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
-              // console.log($(this));
             });
             console.log(data);
           } 

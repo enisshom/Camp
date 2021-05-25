@@ -61,12 +61,9 @@ Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_att
 Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
 Route::post('/check_in', 'PagesController@check_in')->name('check_in');
 Route::post('/saveAttribution', 'PagesController@saveAttribution')->name('saveAttribution');
+Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
 
-/**Planning*/
-Route::get('/planning', function(){
-    $id = session()->get('camp_id');
-    return view('planning.planning',['id'=>$id]);
-})->name('planning');
+
 
 /**Product Route */
 Route::get('/create_product', function() {

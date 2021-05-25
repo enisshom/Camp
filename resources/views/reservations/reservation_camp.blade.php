@@ -2,9 +2,6 @@
 @section('content')
 
 <div class="container">
-    @php
-        // dd($id);
-    @endphp
 	<!--begin::Card-->
     <!--begin::Search Form-->
     <div class="card card-custom">
@@ -125,9 +122,7 @@
 @push('scripts')
     <script>
         var id = {!!$id!!};
-        // console.log(id);
         var numresa = 0;
-        //  var datatable = $('#kt_datatable').KTDatatable(options);
         "use strict";
         
         var KTDatatables = function() {
@@ -202,7 +197,8 @@
                             return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button> '
                         }
                     }]     
-                }), $("#kt_datatable_search_status").on("change", (function() {
+                }), 
+                $("#kt_datatable_search_status").on("change", (function() {
                     t.search($(this).val().toLowerCase(), "Status")
                 })), 
                 t.on("click",".afficher", (function() {
@@ -211,40 +207,40 @@
                     var datedep = $(this).attr('datedep');
                     var datearr = $(this).attr('datearr');
                     // console.log(datedep);
-                $.ajax({ 
-                    type:'POST', 
-                    url:"{{route('resa_attribute')}}", 
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-                    data : { numresa,datedep,datearr},
-                    success:function(data){ 
-                        $(".attribution").html(data);
-                        $("#affichage").modal('toggle');
-                        // KTDatatableJsonRemoteDemo2(numresa);
-                    } 
-                });
+                    $.ajax({ 
+                        type:'POST', 
+                        url:"{{route('resa_attribute')}}", 
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+                        data : { numresa,datedep,datearr},
+                        success:function(data){ 
+                            $(".attribution").html(data);
+                            $("#affichage").modal('toggle');
+                            // KTDatatableJsonRemoteDemo2(numresa);
+                        } 
+                    });
                 })), 
                 t.on("click",".checkbtn", (function() {
                     var numresa = $(this).attr('numresa');
-                //     $.ajax({ 
-                //     type:'POST', 
-                //     url:"{{route('check_in')}}", 
-                //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-                //     data : { numresa },
-                //     success:function(data){ 
-                //         $(".checkin").html(data);
-                //         $("#checkin").modal('toggle');
-                //     } 
-                // });
-                KTDatatableJsonRemoteDemo2(numresa);
-                $("#checkin").modal('toggle');
-
-
+                    //     $.ajax({ 
+                    //     type:'POST', 
+                    //     url:"{{route('check_in')}}", 
+                    //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+                    //     data : { numresa },
+                    //     success:function(data){ 
+                    //         $(".checkin").html(data);
+                    //         $("#checkin").modal('toggle');
+                    //     } 
+                    // });
+                    KTDatatableJsonRemoteDemo2(numresa);
+                    $("#checkin").modal('toggle');
                 })), 
                 $("#kt_datatable_search_type").on("change", (function() {
                     t.search($(this).val().toLowerCase(), "Type")
-                })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
+                })), 
+                $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
                 // }
             };
+
             var KTDatatableJsonRemoteDemo2 = function(numresa) {
                 // init: function() {
                     console.log(numresa);
@@ -260,12 +256,11 @@
                         // footer: !0
                     },
                     sortable: !0,
-                    pagination: !0,
+                    pagination: false,
                     search: {
                         input: $("#kt_datatable_search_query"),
                         key: "generalSearch"
                     },
-                    
                     columns: [{
                         field: "xref",
                         title: "#",
@@ -353,12 +348,14 @@
                 })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
                 // }
             };
+
             return {
                 init : function(){
                     KTDatatableJsonRemoteDemo();
                     KTDatatableJsonRemoteDemo2(numresa);
                 }
             };
+
         }();
 
         jQuery(document).ready((function() {
