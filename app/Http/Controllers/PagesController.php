@@ -17,27 +17,15 @@ class PagesController extends Controller
         $this->url = config('app.url');
     }
     
-
     public function index()
     {
         $page_title = 'Dashboard';
         $page_description = 'Some description for the page';
-
-        // Menu::renderVerMenu($items);
-
         $url = $this->url . '/api/sites'; 
-        // dd($url);
         $response = file_get_contents($url); 
         $sites = json_decode($response);
         return view('camps', compact(['sites', 'page_title', 'page_description']));
-        // return dd($sites);
     }
-
-    // public function camp($ville)
-    // {
-    //     $url = $this->url.'/api/sites/'.$ville; 
-    //     return view('camp',['ville'=>$ville]);
-    // }
 
     public function camp(Request $request, $id)
     {
@@ -48,22 +36,15 @@ class PagesController extends Controller
         session()->put('camp_id',$id);
         session()->save();
         $id = session()->get('camp_id');
-        // dd(session()->get('camp_id'));
         return view('reservations.camp',['site'=>$site,'id'=>$id]);
     }
 
     public function reservations($id)
     {
-        // dd($id);
         $url = $this->url . '/api/sites/'; 
         $response = file_get_contents($url); 
         $sites = json_decode($response);   
-        // $id = session()->get('camp_id');
         session()->put('camp_id',$id);
-        
-        // session()->save();
-        // dd($site);
-        // dd(session()->get('camp_id'));
         return view('reservations.reservation_camp',['id'=>$id]);
     }
 
@@ -122,12 +103,16 @@ class PagesController extends Controller
                'secret' => 'test_secret',
            ]
        ]);
-       echo $res->getStatusCode();
-       // 200
-       echo $res->getHeader('contentType');
-       // 'application/json; charset=utf8'
+    //    echo $res->getStatusCode();
+    //    echo $res->getHeader('contentType');
        echo $res->getBody();
-       // {"type":"User"...'
+    }
+
+    public function planning($id)
+    {
+        $url = $this->url . '/api/planning/';  
+        session()->put('camp_id',$id);
+        return view('planning.planning',compact('id'));
     }
 
     public function check_in(Request $request)

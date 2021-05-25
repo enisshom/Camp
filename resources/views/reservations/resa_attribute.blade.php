@@ -77,14 +77,10 @@
           contentType: "application/json",
           dataType: 'json',
           success:function(data){
-            // $("[roomType|= '"+type+"']").find('option').remove();
-            // data.forEach(room => {
-              
-              // $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
-              $('.selectpicker').selectpicker('val', data);
-              $('.selectpicker').selectpicker('render');
-              console.log($(this));
-            // });
+            $("[roomType|= '"+type+"']").find('option').remove();
+            data.forEach(room => {
+              $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
+            });
             console.log(data);
           } 
       });
