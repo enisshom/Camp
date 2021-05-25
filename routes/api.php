@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use GuzzleHttp\Client;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::post('/post', function () {
+    $response = Http::post('http://jsonplaceholder.typicode.com/posts', [
+        'title' => 'This is test from ItSolutionStuff.com',
+        'body' => 'This is test from ItSolutionStuff.com as body',
+    ]);
+
+    dd($response->successful());
+});
+
+
+
 
 Route::middleware('auth:api','throttle:rate_limit,1')->get('/user', function (Request $request) {
     return $request->user();

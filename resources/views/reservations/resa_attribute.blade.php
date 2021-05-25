@@ -14,7 +14,7 @@
               @if($pax->nper==1)
                 <div class="row room">
                   <div class="form-group">
-                    <select class="form-control roomSelect" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
+                    <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
                       <option>{{$room->number}}</option>
                     </select>
                   </div>
@@ -31,7 +31,7 @@
                     <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
                   </div>
                   <div class="col-4">
-                    <select class="form-control" name="nationalit" >
+                    <select class="form-control selectpicker" name="nationalit" >
                       <option>Maroc</option>
                       <option>USA</option>
                       <option>Germany</option>
@@ -58,6 +58,7 @@
    
   <script>
     
+    $('select').selectpicker();
     /*Click on the room type*/
     $(".type").on('click',function() {
 
@@ -76,12 +77,14 @@
           contentType: "application/json",
           dataType: 'json',
           success:function(data){
-            $("[roomType|= '"+type+"']").find('option').remove();
-            data.forEach(room => {
+            // $("[roomType|= '"+type+"']").find('option').remove();
+            // data.forEach(room => {
               
-              $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
-              // console.log($(this));
-            });
+              // $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
+              $('.selectpicker').selectpicker('val', data);
+              $('.selectpicker').selectpicker('render');
+              console.log($(this));
+            // });
             console.log(data);
           } 
       });
@@ -90,6 +93,7 @@
     /*Change room number*/
     $(".roomSelect").change(function() {
         // Get the selected value
+        console.log('aaaa');
         var selected =[];
         var notSelected =[];
         // Get the ID of this element
