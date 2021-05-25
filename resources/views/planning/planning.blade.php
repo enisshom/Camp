@@ -85,6 +85,14 @@
                         title: "Disp",
                         width: 35,
                     },
+                    {
+                        field: "Actions",
+                        title: "Actions",
+                        width: 35,
+                        templat: function(){
+                            return '<a name="" id="" class="btn btn-primary clik" href="#" role="button"></a>';
+                        }
+                    },
                 ]     
                 }), 
                 $("#kt_datatable_search_status").on("change", (function() {
@@ -92,6 +100,9 @@
                 })), 
                 $("#kt_datatable_search_type").on("change", (function() {
                     t.search($(this).val().toLowerCase(), "Type")
+                })), 
+                $("#btn").on("click", (function() {
+                    consle.log(table.row( this ).data());
                 })), 
                 $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
             }
