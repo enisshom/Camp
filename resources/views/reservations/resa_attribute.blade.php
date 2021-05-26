@@ -1,10 +1,10 @@
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
      
-  @foreach ($reservation->data as $type)
+  {{-- @foreach ($reservation->data as $type)
     @foreach ($type->rooms as $rooms)
       {{$rooms->number}}
     @endforeach
-  @endforeach
+  @endforeach --}}
 
     @php
       
@@ -47,17 +47,16 @@
                       @if($pax->nper==1)
                       
                         <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}">
+                          <option value="{{$room->number}}" selected>{{$room->number}}</option>
                           @if ($resa->freeRooms)
                             @foreach ($resa->freeRooms as $key=>$fr)
-                                @if ($room->number == $fr)
-                                  <option value="{{$fr}}" selected>{{$fr}}</option>
+                              @if ($room->number == $fr)
                                   @php
-                                    // if($key = array_search($fr,$resa->freeRooms) !== false)
-                                    //   {
+                                    if($key = array_search($fr,$resa->freeRooms) !== false)
+                                      {
                                         unset($resa->freeRooms[$key]);
-                                      // }
+                                      }
                                   @endphp
-                                  
                                 @else
                                   <option value="{{$fr}}">{{$fr}}</option>
                                 @endif
