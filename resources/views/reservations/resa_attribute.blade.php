@@ -1,3 +1,8 @@
+@php
+    // dd($reservation->data)
+@endphp
+
+
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
      
   @foreach ($reservation->data as $type)
@@ -18,9 +23,9 @@
       // print_r($reservation->data{1}->freeRooms);
     @endphp
     @foreach ($reservation->data as $resa)
-      {{-- @php
+      @php
         print_r($resa->freeRooms);
-      @endphp --}}
+      @endphp
       
       <div class="card">
           <div class="card-header" id="headingOne6">
@@ -47,19 +52,21 @@
                       @if($pax->nper==1)
                       
                         <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}">
+                          <option value="{{$room->number}}" selected>{{$room->number}}</option>
                           @if ($resa->freeRooms)
                             @foreach ($resa->freeRooms as $key=>$fr)
+                           
                                 @if ($room->number == $fr)
-                                  <option value="{{$fr}}" selected>{{$fr}}</option>
+                                 
                                   @php
-                                    // if($key = array_search($fr,$resa->freeRooms) !== false)
-                                    //   {
-                                        unset($resa->freeRooms[$key]);
-                                      // }
+                                    if($key = array_search($fr,$resa->freeRooms) !== false)
+                                      {
+                                        // unset($resa->freeRooms[$key]);
+                                      }
                                   @endphp
                                   
                                 @else
-                                  <option value="{{$fr}}">{{$fr}}</option>
+                                <option value="{{$fr}}">{{$fr}}</option>
                                 @endif
                             @endforeach
                           @endif
