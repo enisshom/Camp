@@ -77,6 +77,7 @@
     </div>
 </div>   
             <!--Modal attribution-->
+            <!--begin::Modal-->
             <div class="modal fade" id="affichage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centred modal-lg" role="document">
                   <div class="modal-content">
@@ -96,6 +97,8 @@
                   </div>
                 </div>
             </div>
+            <!--end::Modal-->
+            
             <!--Modal check-in-->
             <!--begin::Modal-->
                 <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
@@ -129,279 +132,274 @@
 
 var KTDatatableModal = function () {
 
-    var initDatatable = function () {
-        var el = $('#kt_datatable');
+        var initDatatable = function () {
+            var el = $('#kt_datatable');
 
-        var datatable = el.KTDatatable({
-            // datasource definition
-            
-            data: {
-                type: 'remote',
-                source: "{{config('app.url')}}/api/resa_list/"+id,
-                pageSize: 10, // display 20 records per page
-                serverPaging: true,
-                serverFiltering: false,
-                serverSorting: true,
-                },
-
-                // layout definition
-                layout: {
-                    theme: 'default',
-                    scroll: false,
-                    height: null,
-                    footer: false,
-                },
-
-                // column sorting
-                sortable: true,
-
-                pagination: true,
-
-                search: {
-                    input: el.find('#kt_datatable_search_query'),
-                    key: 'generalSearch'
-                },
-
-                // columns definition
-                columns: [{
-                        field: "numresa",
-                        title: "#",
-                        sortable: !1,
-                        width: 45,
-                        type: "number",
-                        // selector: {
-                        //     class: ""
-                        // },
-                        textAlign: "center"
-                    }, 
-                    {
-                        field: "nom",
-                        title: "Nom",
-                        width: 80
-                    },  
-                    {
-                        field: "prenom",
-                        title: "Prénom",
-                        width: 80
-                    },  
-                    {
-                        field: "datearr",
-                        title: "Arrivée",
-                        width: 75
-                    }, 
-                    {
-                        field: "datedep",
-                        title: "Départ",
-                        width: 75
-                    },
-                    {
-                        field: "nuite",
-                        title: "Nuité",
-                        autoHide : true,
-                        width: 35
-                    },
-                    {
-                        field: "nbrtotpax",
-                        title: "Pax",
-                        width: 30
-                    }, 
-                    {
-                        field: "Actions",
-                        title: "Actions",
-                        width: 50,
-                        overflow: "visible",
-                        template: function(e) {
-                            return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button>';
-                        }
-                    }],
-            });
-
-            var card = datatable.closest('.card');
-
-            $('#kt_datatable_search_status').on('change', function () {
-                datatable.search($(this).val().toLowerCase(), 'Status');
-            });
-
-            $('#kt_datatable_search_type').on('change', function () {
-                datatable.search($(this).val().toLowerCase(), 'Type');
-            });
-
-            $('#kt_datatable_search_status, #kt_datatable_search_type').selectpicker();
-
-            datatable.on("click",".afficher", (function() {
-                var numresa = $(this).attr('id');
-                var datedep = $(this).attr('datedep');
-                var datearr = $(this).attr('datearr');
-                $.ajax({ 
-                    type:'POST', 
-                    url:"{{route('resa_attribute')}}", 
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-                    data : { numresa,datedep,datearr},
-                    success:function(data){ 
-                        $(".attribution").html(data);
-                        $("#affichage").modal('toggle');
-                        // KTDatatableJsonRemoteDemo2(numresa);
-                    } 
-                });
-            })); 
-            datatable.on('click', '.checkbtn', function () {
-               
-                var numresa = $(this).attr('numresa');
-                initSubDatatable(numresa);
-                $('#kt_datatable_modal').modal('show');
-            });
-        };
-
-      // subModal
-
-    var initSubDatatable = function (id) {
-        console.log(id);
-        var el = $('#kt_datatable_sub');
             var datatable = el.KTDatatable({
+                // datasource definition
+                
                 data: {
                     type: 'remote',
-                    source: "{{config('app.url')}}/api/check_in/"+id,
-                    pageSize: 10,
+                    source: "{{config('app.url')}}/api/resa_list/"+id,
+                    pageSize: 10, // display 20 records per page
                     serverPaging: true,
                     serverFiltering: false,
                     serverSorting: true,
-                   
-                },
-
-                pagination: false,
-
-                // layout definition
-                layout: {
-                    theme: 'default',
-                    scroll: false,
-                    height: 800,
-                    footer: false,
-                },
-
-                search: {
-                    input: el.find('#kt_datatable_search_query_2'),
-                    key: 'generalSearch'
-                },
-
-                sortable: true,
-
-                // columns definition
-                columns: [{
-                        field: "xref",
-                        title: "#",
-                        sortable: !1,
-                        width: 25,
-                        // selector: true,
-                        type: "text",
-                        textAlign: "center",
-                        template : function(e){
-                        
-                            if(e.chin=="O") {
-                                return '<label class="checkbox checkbox-single"><input type="checkbox" checked disabled><span></span></label>';
-                            }
-                            return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin" ><span></span></label>';
-                        }
-                    }, 
-                    {
-                        field: "nchambre",
-                        title: "Numéro",
-                        width: 80
-                    },  
-                    {
-                        field: "nom",
-                        title: "Nom",
-                        width: 80
-                    },  
-                    {
-                        field: "nationalit",
-                        title: "Nationalité",
-                        width: 75
                     },
-                    {
-                        field: "prix",
-                        title: "Prix",
-                        width: 30
-                    }, 
-                    {
-                        field: "chin",
-                        title: "Etat",
-                        width: 75,
-                        template : function(e){
-                            var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline">OUT</span>';
-                            if(e.chin=="O") {
-                                span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>'
+
+                    // layout definition
+                    layout: {
+                        theme: 'default',
+                        scroll: false,
+                        height: null,
+                        footer: false,
+                    },
+
+                    // column sorting
+                    sortable: true,
+
+                    pagination: true,
+
+                    search: {
+                        input: el.find('#kt_datatable_search_query'),
+                        key: 'generalSearch'
+                    },
+
+                    // columns definition
+                    columns: [{
+                            field: "numresa",
+                            title: "#",
+                            sortable: !1,
+                            width: 45,
+                            type: "number",
+                            // selector: {
+                            //     class: ""
+                            // },
+                            textAlign: "center"
+                        }, 
+                        {
+                            field: "nom",
+                            title: "Nom",
+                            width: 80
+                        },  
+                        {
+                            field: "prenom",
+                            title: "Prénom",
+                            width: 80
+                        },  
+                        {
+                            field: "datearr",
+                            title: "Arrivée",
+                            width: 75
+                        }, 
+                        {
+                            field: "datedep",
+                            title: "Départ",
+                            width: 75
+                        },
+                        {
+                            field: "nuite",
+                            title: "Nuité",
+                            autoHide : true,
+                            width: 35
+                        },
+                        {
+                            field: "nbrtotpax",
+                            title: "Pax",
+                            width: 30
+                        }, 
+                        {
+                            field: "Actions",
+                            title: "Actions",
+                            width: 50,
+                            overflow: "visible",
+                            template: function(e) {
+                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button>';
                             }
-                            return span
-                        }
-                    }, 
-                    // {
-                    //     field: "nbrper",
-                    //     title: "NombreP",
-                    //     width: 75
-                    // },
-                    // {
-                    //     field: "enf1",
-                    //     title: "E1",
-                    //     width: 35
-                    // },
-                    // {
-                    //     field: "enf2",
-                    //     title: "E2",
-                    //     width: 30
-                    // },
-                    // {
-                    //     field: "enf3",
-                    //     title: "E3",
-                    //     width: 30
-                    // },
-                    // {
-                    //     field: "chin",
-                    //     title: "Check-in",
-                    //     width: 30
-                    // },
-                    // {
-                    //     field: "nper",
-                    //     title: "Check-in",
-                    //     width: 30
-                    // }
-                    ]   ,
+                        }],
+                });
+
+                var card = datatable.closest('.card');
+
+                $('#kt_datatable_search_status').on('change', function () {
+                    datatable.search($(this).val().toLowerCase(), 'Status');
+                });
+
+                $('#kt_datatable_search_type').on('change', function () {
+                    datatable.search($(this).val().toLowerCase(), 'Type');
+                });
+
+                $('#kt_datatable_search_status, #kt_datatable_search_type').selectpicker();
+
+                datatable.on("click",".afficher", (function() {
+                    var numresa = $(this).attr('id');
+                    var datedep = $(this).attr('datedep');
+                    var datearr = $(this).attr('datearr');
+                    $.ajax({ 
+                        type:'POST', 
+                        url:"{{route('resa_attribute')}}", 
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+                        data : { numresa,datedep,datearr},
+                        success:function(data){ 
+                            $(".attribution").html(data);
+                            $("#affichage").modal('toggle');
+                        } 
+                    });
+                })); 
+                datatable.on('click', '.checkbtn', function () {
+                
+                    var numresa = $(this).attr('numresa');
+                    initSubDatatable(numresa);
+                    $('#kt_datatable_modal').modal('show');
+                });
+            };
+
+        // subModal
+        var initSubDatatable = function (id) {
+            console.log(id);
+            var el = $('#kt_datatable_sub');
+                var datatable = el.KTDatatable({
+                    data: {
+                        type: 'remote',
+                        source: "{{config('app.url')}}/api/check_in/"+id,
+                        pageSize: 10,
+                        serverPaging: true,
+                        serverFiltering: false,
+                        serverSorting: true,
+                    
+                    },
+
+                    pagination: false,
+
+                    // layout definition
+                    layout: {
+                        theme: 'default',
+                        scroll: false,
+                        height: 800,
+                        footer: false,
+                    },
+
+                    search: {
+                        input: el.find('#kt_datatable_search_query_2'),
+                        key: 'generalSearch'
+                    },
+
+                    sortable: true,
+
+                    // columns definition
+                    columns: [{
+                            field: "xref",
+                            title: "#",
+                            sortable: !1,
+                            width: 25,
+                            // selector: true,
+                            type: "text",
+                            textAlign: "center",
+                            template : function(e){
+                            
+                                if(e.chin=="O") {
+                                    return '<label class="checkbox checkbox-single"><input type="checkbox" checked disabled><span></span></label>';
+                                }
+                                return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin" ><span></span></label>';
+                            }
+                        }, 
+                        {
+                            field: "nchambre",
+                            title: "Numéro",
+                            width: 80
+                        },  
+                        {
+                            field: "nom",
+                            title: "Nom",
+                            width: 80
+                        },  
+                        {
+                            field: "nationalit",
+                            title: "Nationalité",
+                            width: 75
+                        },
+                        {
+                            field: "prix",
+                            title: "Prix",
+                            width: 30
+                        }, 
+                        {
+                            field: "chin",
+                            title: "Etat",
+                            width: 75,
+                            template : function(e){
+                                var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline">OUT</span>';
+                                if(e.chin=="O") {
+                                    span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>'
+                                }
+                                return span
+                            }
+                        }, 
+                        // {
+                        //     field: "nbrper",
+                        //     title: "NombreP",
+                        //     width: 75
+                        // },
+                        // {
+                        //     field: "enf1",
+                        //     title: "E1",
+                        //     width: 35
+                        // },
+                        // {
+                        //     field: "enf2",
+                        //     title: "E2",
+                        //     width: 30
+                        // },
+                        // {
+                        //     field: "enf3",
+                        //     title: "E3",
+                        //     width: 30
+                        // },
+                        // {
+                        //     field: "chin",
+                        //     title: "Check-in",
+                        //     width: 30
+                        // },
+                        // {
+                        //     field: "nper",
+                        //     title: "Check-in",
+                        //     width: 30
+                        // }
+                        ],
+                });
+
+            var modal = datatable.closest('.modal');
+
+            $('#kt_datatable_search_status_2').on('change', function () {
+                datatable.search($(this).val().toLowerCase(), 'Status');
             });
 
-        var modal = datatable.closest('.modal');
+            $('#kt_datatable_search_type_2').on('change', function () {
+                datatable.search($(this).val().toLowerCase(), 'Type');
+            });
 
-        $('#kt_datatable_search_status_2').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'Status');
-        });
+            $('#kt_datatable_search_status_2, #kt_datatable_search_type_2').selectpicker();
 
-        $('#kt_datatable_search_type_2').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'Type');
-        });
+            // fix datatable layout after modal shown
+            datatable.hide();
+            modal.on('shown.bs.modal', function () {
+                var modalContent = $(this).find('.modal-content');
+                datatable.spinnerCallback(true, modalContent);
+                datatable.spinnerCallback(false, modalContent);
+            }).on('hidden.bs.modal', function () {
+                el.KTDatatable('destroy');
+            });
 
-        $('#kt_datatable_search_status_2, #kt_datatable_search_type_2').selectpicker();
-
-        // fix datatable layout after modal shown
-        datatable.hide();
-        modal.on('shown.bs.modal', function () {
-            var modalContent = $(this).find('.modal-content');
-            datatable.spinnerCallback(true, modalContent);
-            datatable.spinnerCallback(false, modalContent);
-        }).on('hidden.bs.modal', function () {
-            el.KTDatatable('destroy');
-        });
-
-        datatable.on('datatable-on-layout-updated', function () {
-            datatable.show();
-            datatable.redraw();
-        });
-    };
-
+            datatable.on('datatable-on-layout-updated', function () {
+                datatable.show();
+                datatable.redraw();
+            });
+        };
         
         return {
             // public functions
             init: function () {
                 initDatatable();
-                // initDatatableModal2();
-                // initDatatableModal3();
             }
         };
     }();

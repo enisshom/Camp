@@ -1,54 +1,98 @@
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-    @foreach ($reservation->data as $resa)
-    <div class="card">
-        <div class="card-header" id="headingOne6">
-        <div class="card-title collapsed type" data-toggle="collapse" type={{$resa->type}} datedep="{{$datedep}}" datearr="{{$datearr}}" data-target="#{{$resa->type}}">
-          <i class="fas fa-chess-king"></i> {{$resa->type}}
-        </div>
-        </div>
-        <div id="{{$resa->type}}" class="collapse" data-parent="#accordionExample6">
-        <div class="card-body">
-          {{-- @foreach ($resa->rooms as $room) --}}
-          @foreach ($resa->rooms as $room)
-            @foreach ($room->paxs as $pax)
-              @if($pax->nper==1)
-                <div class="row room">
-                  <div class="form-group">
-                    <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}" numresa="{{$numresa}}" datedep="{{$datedep}}" datearr="{{$datearr}}">
-                      <option>{{$room->number}}</option>
-                    </select>
-                  </div>
-                </div>
-              @endif
-              <div class="row pax">
-                <div class="form-group row pers">
-                  <div class="col-4">
-                    <input type="hidden" class="form-control {{$room->room_id}}" name="nchambre"  value="{{$room->number}}"  aria-describedby="helpId">
-                    <input type="hidden" class="form-control {{$pax->xref}}" name="xref" value="{{$pax->xref}}"  aria-describedby="helpId">
-                    <input type="text" class="form-control" name="nom" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}"  aria-describedby="helpId" placeholder="Nom">
-                  </div>
-                  <div class="col-4">
-                    <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
-                  </div>
-                  <div class="col-4">
-                    <select class="form-control selectpicker" name="nationalit" >
-                      <option>Maroc</option>
-                      <option>USA</option>
-                      <option>Germany</option>
-                      <option>Espane</option>
-                      <option>UK</option>
-                      <option>Canada</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-            @endforeach
-          @endforeach
+     
+  @foreach ($reservation->data as $type)
+    @foreach ($type->rooms as $rooms)
+      {{$rooms->number}}
+    @endforeach
+  @endforeach
 
-        </div>
-        </div>
-    </div>
-      @endforeach
+    @php
+      
+      // print_r($reservation->data{1}->freeRooms);
+      // if ($key = array_search('203',$reservation->data{1}->freeRooms) !== false)
+      // {
+      //   echo '<br>'.$key; 
+      //   unset($reservation->data{1}->freeRooms[$key]);
+      // }
+      // echo '<br>'; 
+      // print_r($reservation->data{1}->freeRooms);
+    @endphp
+    @foreach ($reservation->data as $resa)
+      {{-- @php
+        print_r($resa->freeRooms);
+      @endphp --}}
+      
+      <div class="card">
+          <div class="card-header" id="headingOne6">
+          <div class="card-title collapsed type" data-toggle="collapse" type={{$resa->type}} data-target="#{{$resa->type}}">
+            <i class="fas fa-chess-king"></i> {{$resa->type}}
+          </div>
+          </div>
+          <div id="{{$resa->type}}" class="collapse" data-parent="#accordionExample6">
+          <div class="card-body">
+            {{-- @foreach ($resa->rooms as $room) --}}
+            @foreach ($resa->rooms as $room)
+              @foreach ($room->paxs as $pax)
+                {{-- @if($pax->nper==1)
+                  <div class="row room">
+                    
+                  </div>
+                @endif --}}
+                @php
+                  // print_r($resa->freeRooms);
+                @endphp
+                <div class="pax">
+                  <div class="form-group row pers">
+                    <div class="col-3">
+                      @if($pax->nper==1)
+                      
+                        <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}">
+                          @if ($resa->freeRooms)
+                            @foreach ($resa->freeRooms as $key=>$fr)
+                                @if ($room->number == $fr)
+                                  <option value="{{$fr}}" selected>{{$fr}}</option>
+                                  @php
+                                    // if($key = array_search($fr,$resa->freeRooms) !== false)
+                                    //   {
+                                        unset($resa->freeRooms[$key]);
+                                      // }
+                                  @endphp
+                                  
+                                @else
+                                  <option value="{{$fr}}">{{$fr}}</option>
+                                @endif
+                            @endforeach
+                          @endif
+                        </select>
+                      @endif
+                    </div>
+                    <div class="col-3">
+                      <input type="hidden" class="form-control {{$room->room_id}}" name="nchambre"  value="{{$room->number}}"  aria-describedby="helpId">
+                      <input type="hidden" class="form-control {{$pax->xref}}" name="xref" value="{{$pax->xref}}"  aria-describedby="helpId">
+                      <input type="text" class="form-control" name="nom" id="{{$pax->nper}}_{{$pax->nbrper}}" value="{{$pax->Pers}}"  aria-describedby="helpId" placeholder="Nom">
+                    </div>
+                    <div class="col-3">
+                      <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
+                    </div>
+                    <div class="col-3">
+                      <select class="form-control selectpicker" name="nationalit" >
+                        <option>Maroc</option>
+                        <option>USA</option>
+                        <option>Germany</option>
+                        <option>Espane</option>
+                        <option>UK</option>
+                        <option>Canada</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            @endforeach
+
+          </div>
+          </div>
+      </div>
+    @endforeach
   </div>
 
   @push('scripts')
@@ -60,36 +104,35 @@
     
     $('select').selectpicker();
     /*Click on the room type*/
-    $(".type").on('click',function() {
+    // $(".type").on('click',function() {
 
-      var type = $(this).attr('type');
-      var numresa = $(this).attr('numresa');
-      var datedep = $(this).attr('datedep');
-      var datearr = $(this).attr('datearr');
+    //   var type = $(this).attr('type');
+    //   var numresa = $(this).attr('numresa');
+    //   var datedep = $(this).attr('datedep');
+    //   var datearr = $(this).attr('datearr');
       
-      var params = {type,numresa,datedep,datearr};
-      params = JSON.stringify(params);
-      $.ajax({ 
-          type:'POST', 
-          url:"{{route('available_rooms')}}", 
-          headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-          data : params,
-          contentType: "application/json",
-          dataType: 'json',
-          success:function(data){
-            $("[roomType|= '"+type+"']").find('option').remove();
-            data.forEach(room => {
-              $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
-            });
-            console.log(data);
-          } 
-      });
-    });
+    //   var params = {type,numresa,datedep,datearr};
+    //   params = JSON.stringify(params);
+    //   $.ajax({ 
+    //       type:'POST', 
+    //       url:"{{route('available_rooms')}}", 
+    //       headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+    //       data : params,
+    //       contentType: "application/json",
+    //       dataType: 'json',
+    //       success:function(data){
+    //         // $("[roomType|= '"+type+"']").find('option').remove();
+    //         data.forEach(room => {
+    //           $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
+    //         });
+    //         console.log(data);
+    //       } 
+    //   });
+    // });
 
     /*Change room number*/
     $(".roomSelect").change(function() {
         // Get the selected value
-        console.log('aaaa');
         var selected =[];
         var notSelected =[];
         // Get the ID of this element

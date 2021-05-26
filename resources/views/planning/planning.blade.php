@@ -47,7 +47,13 @@
                         field: "libdat",
                         title: "Jour",
                         width: 70,
-                       
+                        template: function(e){
+                            var span = '<span>'+e.libdat+'</span>'
+                            if(e.libdat==""){
+                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">---------</span>';
+                            }
+                            return span;
+                        }
                     },  
                     {
                         field: "typch",
@@ -85,14 +91,14 @@
                         title: "Disp",
                         width: 35,
                     },
-                    {
-                        field: "Actions",
-                        title: "Actions",
-                        width: 35,
-                        templat: function(){
-                            return '<a name="" id="" class="btn btn-primary clik" href="#" role="button"></a>';
-                        }
-                    },
+                    // {
+                    //     field: "Actions",
+                    //     title: "Actions",
+                    //     width: 35,
+                    //     template: function(){
+                    //         return '<a name="" id="" class="btn btn-primary clik" href="#" role="button"></a>';
+                    //     }
+                    // },
                 ]     
                 }), 
                 $("#kt_datatable_search_status").on("change", (function() {

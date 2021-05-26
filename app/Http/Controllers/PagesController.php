@@ -48,17 +48,6 @@ class PagesController extends Controller
         return view('reservations.reservation_camp',['id'=>$id]);
     }
 
-    public function resa_attribute(Request $request)
-    {
-        $numresa = ($request['numresa']);
-        $datedep = ($request['datedep']);
-        $datearr = ($request['datearr']);
-        $url = $this->url . '/api/resa_attribution/' . $numresa;
-        $response = file_get_contents($url);
-        $reservation = json_decode($response);
-        return view('reservations.resa_attribute', compact('reservation','numresa','datedep','datearr'));
-    }
-
     // public function available_rooms(Request $request)
     // {
     //     $type = ($request['type']);
@@ -72,14 +61,14 @@ class PagesController extends Controller
     //     return $reservation;
     // }
 
-    public function available_rooms(Request $request)
+    public function resa_attribute(Request $request)
     {
         $client = new Client();
         $type = ($request['type']);
         $numresa = ($request['numresa']);
         $datedep = ($request['datedep']);
         $datearr = ($request['datearr']);
-        $res = $client->request('POST', $this->url.'/api/available_rooms', [
+        $res = $client->request('POST', $this->url.'/api/resa_attribution', [
            'form_params' => [
                'type' => $type,
                'numresa' => $numresa,
@@ -87,10 +76,9 @@ class PagesController extends Controller
                'datearr' => $datearr
            ]
        ]);
-    //    dd(($res));
-    //    echo $res->getStatusCode();
-    //    echo $res->getHeader('content-type');
-       echo $res->getBody();
+       $reservation = $res->getBody()->getContents();
+       $reservation = json_decode($reservation);
+       return view('reservations.resa_attribute', compact('reservation','numresa'));
     }
 
     public function saveAttribution(Request $request)

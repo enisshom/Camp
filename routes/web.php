@@ -48,6 +48,17 @@ Route::get('/migrate',function(){
 Route::group(['middleware' => ['auth']], function() {
     /**Accueil */
     Route::get('/', 'PagesController@index'); 
+    /**Dashboard */
+    Route::get('/camps','PagesController@index')->name('camps');
+    /** */
+    Route::get('/camp/{ville}','PagesController@camp')->name('camp');
+    /**Réservations*/
+    Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
+    Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_attribute');
+    Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
+    Route::post('/check_in', 'PagesController@check_in')->name('check_in');
+    Route::post('/saveAttribution', 'PagesController@saveAttribution')->name('saveAttribution');
+    Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
     /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
@@ -55,17 +66,7 @@ Route::group(['middleware' => ['auth']], function() {
     /**Logout */
     Route::get('logoutt', function () { auth()->logout(); Session()->flush(); return Redirect::to('/'); })->name('logoutt');
 });
-/**Dashboard */
-Route::get('/camps','PagesController@index')->name('camps');
-/** */
-Route::get('/camp/{ville}','PagesController@camp')->name('camp');
-/**Réservations*/
-Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
-Route::post('/resa_attribute', 'PagesController@resa_attribute')->name('resa_attribute');
-Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
-Route::post('/check_in', 'PagesController@check_in')->name('check_in');
-Route::post('/saveAttribution', 'PagesController@saveAttribution')->name('saveAttribution');
-Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
+
 
 
 
