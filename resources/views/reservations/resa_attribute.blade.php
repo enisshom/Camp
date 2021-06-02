@@ -50,7 +50,8 @@
                   <div class="form-group row pers">
                     <div class="col-3">
                       @if($pax->nper==1)
-                        <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}">
+                      
+                        <select class="form-control  roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}">
                           <option value="{{$room->number}}" selected>{{$room->number}}</option>
                           @if ($resa->freeRooms)
                             @foreach ($resa->freeRooms as $key=>$fr)
@@ -78,7 +79,8 @@
                       <input type="text" class="form-control" name="prenom"  aria-describedby="helpId" placeholder="Prénom">
                     </div>
                     <div class="col-3">
-                      <select class="form-control selectpicker" name="nationalit" >
+                      <select class="form-control " name="nationalit" >
+                        <option value="{{$pax->nationalit}}" >{{$pax->nationalit}}</option>
                         <option>Maroc</option>
                         <option>USA</option>
                         <option>Germany</option>
@@ -105,7 +107,7 @@
    
   <script>
     
-    $('select').selectpicker();
+    // $('select').selectpicker();
     /*Click on the room type*/
     // $(".type").on('click',function() {
 
@@ -147,20 +149,15 @@
             // $(this).show();
           }
         });
-        $(".roomSelect").each(function() {
-          console.log($(this).val());
-            // selected.forEach(sl => {
-            // // if ($(this).val() != sl) {
-            // //     $("option[value='" + sl + "']", $(this)).hide();
-            // // }
-            if(selected.includes($(this).val()))
-            {
+        $('.roomSelect').find('option').each(function(index,element){
+
+            if(selected.includes($(this).val())){
               $(this).hide();
             }else{
-              selected.push($(this).val());
               $(this).show();
             }
-          // });
+        
+
         });
         console.log(selected);
     });
