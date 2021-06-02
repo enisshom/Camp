@@ -58,7 +58,14 @@
                     {
                         field: "typch",
                         title: "Type",
-                        width: 50
+                        width: 50,
+                        template: function(e){
+                            var span = '<span>'+e.typch+'</span>'
+                            if(e.typch==""){
+                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">------</span>';
+                            }
+                            return span;
+                        }
                     },  
                     {
                         field: "libch",

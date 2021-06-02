@@ -50,19 +50,16 @@
                   <div class="form-group row pers">
                     <div class="col-3">
                       @if($pax->nper==1)
-                      
                         <select class="form-control selectpicker roomSelect" title="Chambre" name="nchambre" id="select" roomId="{{$room->room_id}}" roomType="{{$resa->type}}">
                           <option value="{{$room->number}}" selected>{{$room->number}}</option>
                           @if ($resa->freeRooms)
                             @foreach ($resa->freeRooms as $key=>$fr)
-                           
                                 @if ($room->number == $fr)
-                                 
                                   @php
                                     if($key = array_search($fr,$resa->freeRooms) !== false)
-                                      {
-                                        // unset($resa->freeRooms[$key]);
-                                      }
+                                    {
+                                      // unset($resa->freeRooms[$key]);
+                                    }
                                   @endphp
                                 @else
                                 <option value="{{$fr}}">{{$fr}}</option>
@@ -151,16 +148,19 @@
           }
         });
         $(".roomSelect").each(function() {
-          // console.log($(this).val());
-            selected.forEach(sl => {
-            if ($(this).val() != sl) {
-                $("option[value='" + sl + "']", $(this)).hide();
-            }
-            if(selected.includes("100"))
+          console.log($(this).val());
+            // selected.forEach(sl => {
+            // // if ($(this).val() != sl) {
+            // //     $("option[value='" + sl + "']", $(this)).hide();
+            // // }
+            if(selected.includes($(this).val()))
             {
-              console.log('kayna')
+              $(this).hide();
+            }else{
+              selected.push($(this).val());
+              $(this).show();
             }
-          });
+          // });
         });
         console.log(selected);
     });
@@ -191,6 +191,7 @@
       });
     });        
 
+    var tab = [];
     var pax = [];
     var paxs = [];
     document.querySelectorAll(".pax").forEach(f => {
@@ -198,9 +199,11 @@
         /*all informations*/
         // console.log(t.value)
         if(t.value == "") {
-
+          alert("Pas de prénom");
         }
-        pax.push(t.value);
+        tab[''] = 
+        
+        pax.push(tab);
         // console.log(pax)
       });
       // paxs.push(pax);

@@ -113,9 +113,6 @@ class PagesController extends Controller
         // return $checkin;
     }
     
-    /**
-     * Demo methods below
-     */
 
     // Datatables
     public function datatables(Request $request)
