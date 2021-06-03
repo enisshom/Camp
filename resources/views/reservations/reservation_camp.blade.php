@@ -104,15 +104,14 @@
                 <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-xl modal-dialog-centered">
                         <div class="modal-content" style="min-height: 590px;">
-                            <div class="modal-body">
-                         
+                            <div class="modal-body ">
                                 <!--begin: Datatable-->
                                 <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_sub"></div>
                                 <!--end: Datatable-->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary font-weight-bold text-uppercase">Submit</button>
+                                <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -256,7 +255,7 @@ var KTDatatableModal = function () {
 
         // subModal
         var initSubDatatable = function (id) {
-            console.log(id);
+            // console.log(id);
             var el = $('#kt_datatable_sub');
                 var datatable = el.KTDatatable({
                     data: {
@@ -270,7 +269,6 @@ var KTDatatableModal = function () {
                     },
 
                     pagination: false,
-
                     // layout definition
                     layout: {
                         theme: 'default',
@@ -295,18 +293,17 @@ var KTDatatableModal = function () {
                             // selector: true,
                             type: "text",
                             textAlign: "center",
-                            template : function(e){
-                            
+                            template : function(e) {
                                 if(e.chin=="O") {
-                                    return '<label class="checkbox checkbox-single"><input type="checkbox" checked disabled><span></span></label>';
+                                    return '<label class="checkbox checkbox-single checkbox-success"><input class="check" type="checkbox" checked disabled><span></span></label>';
                                 }
-                                return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin" ><span></span></label>';
+                                return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" value="'+e.xref+'"><span></span></label>';
                             }
                         }, 
                         {
                             field: "nchambre",
                             title: "Numéro",
-                            width: 80
+                            width: 25
                         },  
                         {
                             field: "nom",
@@ -328,44 +325,14 @@ var KTDatatableModal = function () {
                             title: "Etat",
                             width: 75,
                             template : function(e){
-                                var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline">OUT</span>';
+                                var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline etat" value="N">OUT</span>';
                                 if(e.chin=="O") {
-                                    span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>'
+                                    span = '<span class="label label-lg font-weight-bold label-light-success label-inline etat" value="O">IN</span>'
                                 }
                                 return span
                             }
                         }, 
-                        // {
-                        //     field: "nbrper",
-                        //     title: "NombreP",
-                        //     width: 75
-                        // },
-                        // {
-                        //     field: "enf1",
-                        //     title: "E1",
-                        //     width: 35
-                        // },
-                        // {
-                        //     field: "enf2",
-                        //     title: "E2",
-                        //     width: 30
-                        // },
-                        // {
-                        //     field: "enf3",
-                        //     title: "E3",
-                        //     width: 30
-                        // },
-                        // {
-                        //     field: "chin",
-                        //     title: "Check-in",
-                        //     width: 30
-                        // },
-                        // {
-                        //     field: "nper",
-                        //     title: "Check-in",
-                        //     width: 30
-                        // }
-                        ],
+                    ],
                 });
 
             var modal = datatable.closest('.modal');
@@ -383,10 +350,10 @@ var KTDatatableModal = function () {
             // fix datatable layout after modal shown
             datatable.hide();
             modal.on('shown.bs.modal', function () {
-                var modalContent = $(this).find('.modal-content');
-                datatable.spinnerCallback(true, modalContent);
-                datatable.spinnerCallback(false, modalContent);
-            }).on('hidden.bs.modal', function () {
+                    var modalContent = $(this).find('.modal-content');
+                    datatable.spinnerCallback(true, modalContent);
+                    datatable.spinnerCallback(false, modalContent);
+                }).on('hidden.bs.modal', function () {
                 el.KTDatatable('destroy');
             });
 
@@ -408,244 +375,33 @@ var KTDatatableModal = function () {
         KTDatatableModal.init();
     });
 
+    /*Save check-in*/
+    var check = [];
+    var all = [];
 
-        // "use strict";
-        
-        // var KTDatatables = function() {
-           
-        //     var KTDatatableJsonRemoteDemo = function() {
-        //         // init: function() {
-        //         var t;
-        //         t = $("#kt_datatable").KTDatatable({
-        //             data: {
-        //                 type: "remote",
-        //                 source: "{{config('app.url')}}/api/resa_list/"+id,
-        //                 pageSize: 10
-        //             },
-        //             layout: {
-        //                 scroll: !1,
-        //                 footer: !1
-        //             },
-        //             sortable: !0,
-        //             pagination: !0,
-        //             search: {
-        //                 input: $("#kt_datatable_search_query"),
-        //                 key: "generalSearch"
-        //             },
-        //             columns: [{
-        //                 field: "numresa",
-        //                 title: "#",
-        //                 sortable: !1,
-        //                 width: 45,
-        //                 type: "number",
-        //                 // selector: {
-        //                 //     class: ""
-        //                 // },
-        //                 textAlign: "center"
-        //             }, 
-        //             {
-        //                 field: "nom",
-        //                 title: "Nom",
-        //                 width: 80
-        //             },  
-        //             {
-        //                 field: "prenom",
-        //                 title: "Prénom",
-        //                 width: 80
-        //             },  
-        //             {
-        //                 field: "datearr",
-        //                 title: "Arrivée",
-        //                 width: 75
-        //             }, 
-        //             {
-        //                 field: "datedep",
-        //                 title: "Départ",
-        //                 width: 75
-        //             },
-        //             {
-        //                 field: "nuite",
-        //                 title: "Nuité",
-        //                 autoHide : true,
-        //                 width: 35
-        //             },
-        //             {
-        //                 field: "nbrtotpax",
-        //                 title: "Pax",
-        //                 width: 30
-        //             }, 
-        //             {
-        //                 field: "Actions",
-        //                 title: "Actions",
-        //                 width: 50,
-        //                 overflow: "visible",
-        //                 template: function(e) {
-        //                     return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button> '
-        //                 }
-        //             }]     
-        //         }), 
-        //         $("#kt_datatable_search_status").on("change", (function() {
-        //             t.search($(this).val().toLowerCase(), "Status")
-        //         })), 
-        //         t.on("click",".afficher", (function() {
-        //             // console.log($(this).attr('id'));
-        //             var numresa = $(this).attr('id');
-        //             var datedep = $(this).attr('datedep');
-        //             var datearr = $(this).attr('datearr');
-        //             // console.log(datedep);
-        //             $.ajax({ 
-        //                 type:'POST', 
-        //                 url:"{{route('resa_attribute')}}", 
-        //                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-        //                 data : { numresa,datedep,datearr},
-        //                 success:function(data){ 
-        //                     $(".attribution").html(data);
-        //                     $("#affichage").modal('toggle');
-        //                     // KTDatatableJsonRemoteDemo2(numresa);
-        //                 } 
-        //             });
-        //         })), 
-        //         t.on("click",".checkbtn", (function() {
-        //             var numresa = $(this).attr('numresa');
-        //             //     $.ajax({ 
-        //             //     type:'POST', 
-        //             //     url:"{{route('check_in')}}", 
-        //             //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-        //             //     data : { numresa },
-        //             //     success:function(data){ 
-        //             //         $(".checkin").html(data);
-        //             //         $("#checkin").modal('toggle');
-        //             //     } 
-        //             // });
-        //             KTDatatableJsonRemoteDemo2(numresa);
-        //             $("#checkin").modal('toggle');
-        //         })), 
-        //         $("#kt_datatable_search_type").on("change", (function() {
-        //             t.search($(this).val().toLowerCase(), "Type")
-        //         })), 
-        //         $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
-        //         // }
-        //     };
-
-        //     var KTDatatableJsonRemoteDemo2 = function(numresa) {
-        //         // init: function() {
-        //             console.log(numresa);
-        //         var t;
-        //         t = $("#checkin_dt").KTDatatable({
-        //             data: {
-        //                 type: "remote",
-        //                 source: "{{config('app.url')}}/api/check_in/"+68594,
-        //                 pageSize: 30
-        //             },
-        //             layout: {
-        //                 scroll: !0,
-        //                 // footer: !0
-        //             },
-        //             sortable: !0,
-        //             pagination: false,
-        //             search: {
-        //                 input: $("#kt_datatable_search_query"),
-        //                 key: "generalSearch"
-        //             },
-        //             columns: [{
-        //                 field: "xref",
-        //                 title: "#",
-        //                 sortable: !1,
-        //                 width: 25,
-        //                 // selector: true,
-        //                 type: "text",
-        //                 textAlign: "center",
-        //                 template : function(e){
-                        
-        //                     if(e.chin=="O") {
-        //                         return '<label class="checkbox checkbox-single"><input type="checkbox" checked disabled><span></span></label>';
-        //                     }
-        //                     return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin" ><span></span></label>';
-        //                 }
-        //             }, 
-        //             {
-        //                 field: "nchambre",
-        //                 title: "Numéro",
-        //                 width: 80
-        //             },  
-        //             {
-        //                 field: "nom",
-        //                 title: "Nom",
-        //                 width: 80
-        //             },  
-        //             {
-        //                 field: "nationalit",
-        //                 title: "Nationalité",
-        //                 width: 75
-        //             },
-        //             {
-        //                 field: "prix",
-        //                 title: "Prix",
-        //                 width: 30
-        //             }, 
-        //             {
-        //                 field: "chin",
-        //                 title: "Etat",
-        //                 width: 75,
-        //                 template : function(e){
-        //                     var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline">OUT</span>';
-        //                     if(e.chin=="O") {
-        //                         span = '<span class="label label-lg font-weight-bold label-light-success label-inline">IN</span>'
-        //                     }
-        //                     return span
-        //                 }
-        //             }, 
-        //             // {
-        //             //     field: "nbrper",
-        //             //     title: "NombreP",
-        //             //     width: 75
-        //             // },
-        //             // {
-        //             //     field: "enf1",
-        //             //     title: "E1",
-        //             //     width: 35
-        //             // },
-        //             // {
-        //             //     field: "enf2",
-        //             //     title: "E2",
-        //             //     width: 30
-        //             // },
-        //             // {
-        //             //     field: "enf3",
-        //             //     title: "E3",
-        //             //     width: 30
-        //             // },
-        //             // {
-        //             //     field: "chin",
-        //             //     title: "Check-in",
-        //             //     width: 30
-        //             // },
-        //             // {
-        //             //     field: "nper",
-        //             //     title: "Check-in",
-        //             //     width: 30
-        //             // }
-        //             ]     
-        //         }), $("#kt_datatable_search_status").on("change", (function() {
-        //             t.search($(this).val().toLowerCase(), "Status")
-        //         })),  
-        //         $("#kt_datatable_search_type").on("change", (function() {
-        //             t.search($(this).val().toLowerCase(), "Type")
-        //         })), $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
-        //         // }
-        //     };
-
-        //     return {
-        //         init : function(){
-        //             KTDatatableJsonRemoteDemo();
-        //             KTDatatableJsonRemoteDemo2(numresa);
-        //         }
-        //     };
-
-        // }();
-
-        // jQuery(document).ready((function() {
-        //     KTDatatables.init();
-        // }));
+    $(".eng").on('click',function() {
+        var etat = $(".etat").attr('value');
+        document.querySelectorAll(".check").forEach(f => {
+            if(($(".check").is(":checked")) && etat=='N') {
+                check['xref'] = f.value;
+                console.log(check);
+                all.push(check);
+                check = [];
+            }
+        });
+        console.log(all);
+    });
+        //   $.ajax({ 
+        //     type:'POST', 
+        //     url:"route()", 
+        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+        //     data : ,
+        //     contentType: "application/json",
+        //     dataType: 'json',
+        //     success:function(data){ 
+        //       console.log(data);
+        //     } 
+        //   });
+       
     </script>
 @endpush

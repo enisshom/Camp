@@ -1,51 +1,15 @@
-@php
-    // dd($reservation->data)
-@endphp
-
-
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
-     
-  {{-- @foreach ($reservation->data as $type)
-    @foreach ($type->rooms as $rooms)
-      {{$rooms->number}}
-    @endforeach
-  @endforeach --}}
-
-    @php
-      
-      // print_r($reservation->data{1}->freeRooms);
-      // if ($key = array_search('203',$reservation->data{1}->freeRooms) !== false)
-      // {
-      //   echo '<br>'.$key; 
-      //   unset($reservation->data{1}->freeRooms[$key]);
-      // }
-      // echo '<br>'; 
-      // print_r($reservation->data{1}->freeRooms);
-    @endphp
     @foreach ($reservation->data as $resa)
-      @php
-        print_r($resa->freeRooms);
-      @endphp
-      
       <div class="card">
           <div class="card-header" id="headingOne6">
-          <div class="card-title collapsed type" data-toggle="collapse" type={{$resa->type}} data-target="#{{$resa->type}}">
-            <i class="fas fa-chess-king"></i> {{$resa->type}}
-          </div>
-          </div>
-          <div id="{{$resa->type}}" class="collapse" data-parent="#accordionExample6">
-          <div class="card-body">
-            {{-- @foreach ($resa->rooms as $room) --}}
+            <div class="card-title collapsed type" data-toggle="collapse" type={{$resa->type}} data-target="#{{$resa->type}}">
+              <i class="fas fa-chess-king"></i> {{$resa->type}}
+              </div>
+              </div>
+            <div id="{{$resa->type}}" class="collapse" data-parent="#accordionExample6">
+            <div class="card-body">
             @foreach ($resa->rooms as $room)
               @foreach ($room->paxs as $pax)
-                {{-- @if($pax->nper==1)
-                  <div class="row room">
-                    
-                  </div>
-                @endif --}}
-                @php
-                  // print_r($resa->freeRooms);
-                @endphp
                 <div class="pax">
                   <div class="form-group row pers">
                     <div class="col-3">
@@ -93,48 +57,18 @@
                 </div>
               @endforeach
             @endforeach
-
           </div>
-          </div>
+        </div>
       </div>
     @endforeach
-  </div>
+</div>
 
-  @push('scripts')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="http://malsup.github.io/jquery.blockUI.js"></script>
-  @endpush
+@push('scripts')
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://malsup.github.io/jquery.blockUI.js"></script>
+@endpush
    
-  <script>
-    
-    // $('select').selectpicker();
-    /*Click on the room type*/
-    // $(".type").on('click',function() {
-
-    //   var type = $(this).attr('type');
-    //   var numresa = $(this).attr('numresa');
-    //   var datedep = $(this).attr('datedep');
-    //   var datearr = $(this).attr('datearr');
-      
-    //   var params = {type,numresa,datedep,datearr};
-    //   params = JSON.stringify(params);
-    //   $.ajax({ 
-    //       type:'POST', 
-    //       url:"{{route('available_rooms')}}", 
-    //       headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-    //       data : params,
-    //       contentType: "application/json",
-    //       dataType: 'json',
-    //       success:function(data){
-    //         // $("[roomType|= '"+type+"']").find('option').remove();
-    //         data.forEach(room => {
-    //           $("[roomType|= '"+type+"']").append('<option> '+room.numero+'</option>');
-    //         });
-    //         console.log(data);
-    //       } 
-    //   });
-    // });
-
+<script>
     /*Change room number*/
     $(".roomSelect").change(function() {
         // Get the selected value
@@ -146,7 +80,6 @@
         $(".roomSelect option:selected").each(function() {
           if($(this).val() != ""){
             selected.push($(this).val());
-            // $(this).show();
           }
         });
         $('.roomSelect').find('option').each(function(index,element){
@@ -171,10 +104,8 @@
     /*Save attribution*/
     $(".save").on('click',function(){
       var paxs = $(".pax :input").serializeArray();
-      
       var paxs = JSON.stringify(paxs);
 
-      // console.log(data)
       $.ajax({ 
         type:'POST', 
         url:"{{route('saveAttribution')}}", 
@@ -188,23 +119,16 @@
       });
     });        
 
-    var tab = [];
+
     var pax = [];
     var paxs = [];
+
     document.querySelectorAll(".pax").forEach(f => {
       f.querySelectorAll(".pers input ,select").forEach(t => {
-        /*all informations*/
-        // console.log(t.value)
-        if(t.value == "") {
-          alert("Pas de prénom");
-        }
-        tab[''] = 
-        
-        pax.push(tab);
-        // console.log(pax)
+        pax[t.name] = t.value;
       });
-      // paxs.push(pax);
-      // console.log('------')
+      paxs.push(pax);
+      pax = [];
     });
-  </script>
-</html>
+    console.log(paxs);
+</script>

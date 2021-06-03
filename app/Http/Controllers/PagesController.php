@@ -48,19 +48,6 @@ class PagesController extends Controller
         return view('reservations.reservation_camp',['id'=>$id]);
     }
 
-    // public function available_rooms(Request $request)
-    // {
-    //     $type = ($request['type']);
-    //     $numresa = ($request['numresa']);
-    //     $datedep = ($request['datedep']);
-    //     $datearr = ($request['datearr']);
-    //     $url = $this->url . '/api/available_rooms/';
-    //     print($url);
-    //     $response = file_get_contents($url);
-    //     $reservation = json_decode($response);
-    //     return $reservation;
-    // }
-
     public function resa_attribute(Request $request)
     {
         $client = new Client();
@@ -103,15 +90,15 @@ class PagesController extends Controller
         return view('planning.planning',compact('id'));
     }
 
-    public function check_in(Request $request)
-    {
-        // $numresa = ($request['numresa']);
-        // $url = $this->url . '/api/check_in/' .$numresa;
-        // $response = file_get_contents($url); 
-        // $checkin = json_decode($response);
-        return view('reservations.check_in');
-        // return $checkin;
-    }
+    // public function check_in(Request $request)
+    // {
+    //     // $numresa = ($request['numresa']);
+    //     // $url = $this->url . '/api/check_in/' .$numresa;
+    //     // $response = file_get_contents($url); 
+    //     // $checkin = json_decode($response);
+    //     return view('reservations.check_in');
+    //     // return $checkin;
+    // }
     
 
     // Datatables
