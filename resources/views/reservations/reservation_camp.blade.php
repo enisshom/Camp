@@ -13,13 +13,13 @@
             <div class="card-toolbar">
                 <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                     <li class="nav-item">
-                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Month</a>
+                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Week</a>
+                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Semaine</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Day</a>
+                        <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
                     </li>
                 </ul>
             </div>
@@ -76,47 +76,48 @@
         </div>
     </div>
 </div>   
-            <!--Modal attribution-->
-            <!--begin::Modal-->
-            <div class="modal fade" id="affichage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centred modal-lg" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Attribution</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body attribution">
-                       
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                      <button type="button" class="btn btn-primary save">Enregistrer</button>
-                    </div>
-                  </div>
+
+    <!--Modal attribution-->
+    <!--begin::Modal-->
+        <div class="modal fade" id="affichage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centred modal-lg" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><span id="numresa"></span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body attribution">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-primary save" data-dismiss="modal">Enregistrer</button>
+                </div>
                 </div>
             </div>
-            <!--end::Modal-->
+        </div>
+    <!--end::Modal-->
             
-            <!--Modal check-in-->
-            <!--begin::Modal-->
-                <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-xl modal-dialog-centered">
-                        <div class="modal-content" style="min-height: 590px;">
-                            <div class="modal-body ">
-                                <!--begin: Datatable-->
-                                <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_sub"></div>
-                                <!--end: Datatable-->
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng">Submit</button>
-                            </div>
-                        </div>
+    <!--Modal check-in-->
+    <!--begin::Modal-->
+        <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content" style="min-height: 590px;">
+                    <div class="modal-body ">
+                        <!--begin: Datatable-->
+                        <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_sub"></div>
+                        <!--end: Datatable-->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Submit</button>
                     </div>
                 </div>
-            <!--end::Modal-->
+            </div>
+        </div>
+    <!--end::Modal-->
            
 @endsection
 
@@ -234,6 +235,7 @@ var KTDatatableModal = function () {
                     var numresa = $(this).attr('id');
                     var datedep = $(this).attr('datedep');
                     var datearr = $(this).attr('datearr');
+                    $(".modal-title").html('<h5>Attribution - Réservation N° <span id="numresa">'+numresa+'</span></h5>')
                     $.ajax({ 
                         type:'POST', 
                         url:"{{route('resa_attribute')}}", 
@@ -265,9 +267,7 @@ var KTDatatableModal = function () {
                         serverPaging: true,
                         serverFiltering: false,
                         serverSorting: true,
-                    
                     },
-
                     pagination: false,
                     // layout definition
                     layout: {
@@ -276,7 +276,6 @@ var KTDatatableModal = function () {
                         height: 800,
                         footer: false,
                     },
-
                     search: {
                         input: el.find('#kt_datatable_search_query_2'),
                         key: 'generalSearch'
@@ -294,16 +293,21 @@ var KTDatatableModal = function () {
                             type: "text",
                             textAlign: "center",
                             template : function(e) {
-                                if(e.chin=="O") {
-                                    return '<label class="checkbox checkbox-single checkbox-success"><input class="check" type="checkbox" checked disabled><span></span></label>';
+                                if(e.chin=="N" && e.nchambre!="") {
+                                    return '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="'+e.xref+'"><span></span></label>';
                                 }
-                                return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" value="'+e.xref+'"><span></span></label>';
+                                else if(e.chin=="O"){
+                                    return '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin check" etat="O" checked disabled><span></span></label>';
+                                }
+                                else if(e.chin=="N" && e.nchambre=="") {
+                                    return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="'+e.xref+'" disabled><span></span></label>';
+                                }
                             }
                         }, 
                         {
                             field: "nchambre",
                             title: "Numéro",
-                            width: 25
+                            width: 75
                         },  
                         {
                             field: "nom",
@@ -376,32 +380,29 @@ var KTDatatableModal = function () {
     });
 
     /*Save check-in*/
-    var check = [];
-    var all = [];
-
+    var check = {};
+    
     $(".eng").on('click',function() {
-        var etat = $(".etat").attr('value');
+        var checkin = [];
         document.querySelectorAll(".check").forEach(f => {
-            if(($(".check").is(":checked")) && etat=='N') {
+            if(f.checked && f.getAttribute('etat')=='N') {
                 check['xref'] = f.value;
-                console.log(check);
-                all.push(check);
+                checkin.push(check);
                 check = [];
             }
         });
-        console.log(all);
+        console.log(checkin);
+        var tab = JSON.stringify(checkin);
+        $.ajax({ 
+            type:'POST', 
+            url:"{{ route('check_in') }}", 
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
+            data : tab,
+            // contentType: "application/json",
+            dataType: 'json',
+            success:function(data){ 
+            } 
+        });
     });
-        //   $.ajax({ 
-        //     type:'POST', 
-        //     url:"route()", 
-        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-        //     data : ,
-        //     contentType: "application/json",
-        //     dataType: 'json',
-        //     success:function(data){ 
-        //       console.log(data);
-        //     } 
-        //   });
-       
     </script>
 @endpush

@@ -70,17 +70,30 @@ class PagesController extends Controller
 
     public function saveAttribution(Request $request)
     {
-        // dd(($request->all()));
-       $client = new Client();
-       $res = $client->request('POST', $this->url.'/api/saveAttrib', [
-           'form_params' => [
-               'client_id' => 'test_id',
-               'secret' => 'test_secret',
-           ]
+        $client = new Client();
+        $attr = $request->all();
+        $res = $client->request('POST', $this->url.'', [
+            'form_params' => [
+                'attr' => $attr,
+            ]
        ]);
-    //    echo $res->getStatusCode();
-    //    echo $res->getHeader('contentType');
-       echo $res->getBody();
+       $result = $res->getBody()->getContents();
+       $result = json_decode($result);
+       return 'ok';
+    }
+
+    public function check_in(Request $request)
+    {
+        $client = new Client();
+        $tab = $request->all();
+        $res = $client->request('POST', $this->url.'', [
+            'form_params' => [
+                'tab' => $tab,
+            ]
+       ]);
+       $result = $res->getBody()->getContents();
+       $result = json_decode($result);
+       return 'ok';
     }
 
     public function planning($id)
@@ -90,16 +103,6 @@ class PagesController extends Controller
         return view('planning.planning',compact('id'));
     }
 
-    // public function check_in(Request $request)
-    // {
-    //     // $numresa = ($request['numresa']);
-    //     // $url = $this->url . '/api/check_in/' .$numresa;
-    //     // $response = file_get_contents($url); 
-    //     // $checkin = json_decode($response);
-    //     return view('reservations.check_in');
-    //     // return $checkin;
-    // }
-    
 
     // Datatables
     public function datatables(Request $request)

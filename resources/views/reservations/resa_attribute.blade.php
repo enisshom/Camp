@@ -103,32 +103,34 @@
 
     /*Save attribution*/
     $(".save").on('click',function(){
-      var paxs = $(".pax :input").serializeArray();
-      var paxs = JSON.stringify(paxs);
+      // var paxs = $(".pax :input").serializeArray();
+      // var paxs = JSON.stringify(paxs);
+    
+    var numresa = $("#numresa").html();
+    var pax = {};
+    var paxs = [];
 
-      $.ajax({ 
+    document.querySelectorAll(".pax").forEach(f => {
+      f.querySelectorAll(".pers input ,select").forEach(t => {
+        pax[t.name] = t.value;
+        pax['numresa'] = numresa;
+      });
+      paxs.push(pax);
+      pax = {};
+    });
+    console.log(paxs);
+
+    var attr = JSON.stringify(paxs);
+    $.ajax({ 
         type:'POST', 
-        url:"{{route('saveAttribution')}}", 
+        url:"{{ route('saveAttribution') }}", 
         headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-        data : paxs,
-        contentType: "application/json",
+        data : attr,
+        // contentType: "application/json",
         dataType: 'json',
         success:function(data){ 
           console.log(data);
         } 
       });
     });        
-
-
-    var pax = [];
-    var paxs = [];
-
-    document.querySelectorAll(".pax").forEach(f => {
-      f.querySelectorAll(".pers input ,select").forEach(t => {
-        pax[t.name] = t.value;
-      });
-      paxs.push(pax);
-      pax = [];
-    });
-    console.log(paxs);
 </script>
