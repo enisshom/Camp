@@ -100,7 +100,6 @@
         "sweetalert2": "^10.14.0",
         "tempusdominus-bootstrap-4": "^5.1.2",
         "tinymce": "^5.6.2",
-        "toastr": "^2.1.4",
         "typeahead.js": "^0.11.1",
         "uppy": "^1.25.0",
         "waypoints": "^4.0.1",
@@ -118,6 +117,7 @@
         "resolve-url-loader": "^3.1.2",
         "sass": "^1.15.2",
         "sass-loader": "^8.0.0",
+        "toastr": "^2.1.4",
         "vue-template-compiler": "^2.6.12"
     }
 }

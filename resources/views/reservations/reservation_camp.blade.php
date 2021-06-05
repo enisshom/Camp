@@ -103,7 +103,7 @@
     <!--Modal check-in-->
     <!--begin::Modal-->
         <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centred modal-lg" style="width:auto">
                 <div class="modal-content" style="min-height: 590px;">
                     <div class="modal-body ">
                         <!--begin: Datatable-->
@@ -288,8 +288,7 @@ var KTDatatableModal = function () {
                             field: "xref",
                             title: "#",
                             sortable: !1,
-                            width: 25,
-                            // selector: true,
+                            width: 15,
                             type: "text",
                             textAlign: "center",
                             template : function(e) {
@@ -307,27 +306,27 @@ var KTDatatableModal = function () {
                         {
                             field: "nchambre",
                             title: "Numéro",
-                            width: 75
+                            // width: 25
                         },  
                         {
                             field: "nom",
                             title: "Nom",
-                            width: 80
+                            // width: 75
                         },  
                         {
                             field: "nationalit",
                             title: "Nationalité",
-                            width: 75
+                            // width: 45
                         },
                         {
                             field: "prix",
                             title: "Prix",
-                            width: 30
+                            // width: 15
                         }, 
                         {
                             field: "chin",
                             title: "Etat",
-                            width: 75,
+                            // width: 35,
                             template : function(e){
                                 var span = '<span class="label label-lg font-weight-bold label-light-danger label-inline etat" value="N">OUT</span>';
                                 if(e.chin=="O") {
@@ -403,6 +402,10 @@ var KTDatatableModal = function () {
             success:function(data){ 
             } 
         });
+    });
+
+    $(".check").change(function() {
+        alert("ok");
     });
     </script>
 @endpush

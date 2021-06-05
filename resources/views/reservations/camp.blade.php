@@ -15,9 +15,71 @@
         }
     </style> 
 @endsection
-@php
-    // dd($site);
-@endphp
+@push('scripts')
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  // Load Charts and the corechart package.
+  google.charts.load('current', {'packages':['corechart']});
+
+  // Draw the pie chart for Sarah's pizza when Charts is loaded.
+  google.charts.setOnLoadCallback(drawSarahChart);
+
+  // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+  google.charts.setOnLoadCallback(drawAnthonyChart);
+
+  // Callback that draws the pie chart for Sarah's pizza.
+  function drawSarahChart() {
+
+    // Create the data table for Sarah's pizza.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+      ['Mushrooms', 1],
+      ['Onions', 1],
+      ['Olives', 2],
+      ['Zucchini', 2],
+      ['Pepperoni', 1]
+    ]);
+
+    // Set options for Sarah's pie chart.
+    var options = {title:'How Much Pizza Sarah Ate Last Night',
+                   width:400,
+                   height:300};
+
+    // Instantiate and draw the chart for Sarah's pizza.
+    var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
+    chart.draw(data, options);
+  }
+
+  // Callback that draws the pie chart for Anthony's pizza.
+  function drawAnthonyChart() {
+
+    // Create the data table for Anthony's pizza.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Topping');
+    data.addColumn('number', 'Slices');
+    data.addRows([
+      ['Mushrooms', 2],
+      ['Onions', 2],
+      ['Olives', 2],
+      ['Zucchini', 0],
+      ['Pepperoni', 3]
+    ]);
+
+    // Set options for Anthony's pie chart.
+    var options = {title:'How Much Pizza Anthony Ate Last Night',
+                   width:400,
+                   height:300};
+
+    // Instantiate and draw the chart for Anthony's pizza.
+    var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+@endpush
+
 @can($site->lib_class)
     <br>
     <div class="row">
@@ -31,18 +93,6 @@
     </div>    
     <h1 style="text-align:center">{{$site->lib_class}}</h1>
     <div class="row">  
-        {{-- @for ($i = 0; $i < 6; $i++)
-        <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
-                <main class="kanban-drag" style="text-align: center">
-                    <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block" style="color: red !important;">4</span>    
-                    <h5 style="color: red; padding-bottom:30px">Arrivals</h5>
-                    <div class="bg-dark"><span style="color: #fff">Arrived : 3</span></div>
-                </main>
-            </div>
-        </div>
-        @endfor --}}
-        
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
@@ -61,9 +111,6 @@
                 </main>
             </div>
         </div>
-        @php
-            // dd($site->lib_class);
-        @endphp
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
@@ -103,12 +150,17 @@
                 {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
-        {{-- @can($ville)
-            <h1>U have permissions</h1>
-        @endcan --}}
     </div>
+    <br><br>
     
+    <!--Table and divs that hold the pie charts-->
+    <table class="columns">
+        <tr>
+          <td><div id="Sarah_chart_div" style="border: 1px solid #ccc;"></div></td>
+          <td><div id="Anthony_chart_div" style="border: 1px solid #ccc;" ></div></td>
+        </tr>
+      </table>
 @else
-    <h1>U don't have permission</h1>
+    <h1>Pas de permission</h1>
 @endcan
 @endsection 

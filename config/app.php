@@ -178,6 +178,7 @@ return [
 
         Spatie\Permission\PermissionServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
+        TJGazel\Toastr\ToastrServiceProvider::class,
     ],
 
     /*
@@ -236,6 +237,8 @@ return [
 
         'Form' => Collective\Html\FormFacade::class,
     	'Html' => Collective\Html\HtmlFacade::class,
+
+        'Toastr' => TJGazel\Toastr\Facades\Toastr::class,
     ],
 
 ];

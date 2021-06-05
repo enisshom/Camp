@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Classes\Theme\Menu;
 use Illuminate\Support\Facades\Session;
 use GuzzleHttp\Client;
+use App\Models\Nation;
 
 class PagesController extends Controller
 {
@@ -63,24 +64,25 @@ class PagesController extends Controller
                'datearr' => $datearr
            ]
        ]);
+       $nations = Nation::get();
        $reservation = $res->getBody()->getContents();
        $reservation = json_decode($reservation);
-       return view('reservations.resa_attribute', compact('reservation','numresa'));
+       return view('reservations.resa_attribute', compact('reservation','numresa','nations'));
     }
 
-    public function saveAttribution(Request $request)
-    {
-        $client = new Client();
-        $attr = $request->all();
-        $res = $client->request('POST', $this->url.'', [
-            'form_params' => [
-                'attr' => $attr,
-            ]
-       ]);
-       $result = $res->getBody()->getContents();
-       $result = json_decode($result);
-       return 'ok';
-    }
+    // public function saveAttribution(Request $request)
+    // {
+    //     $client = new Client();
+    //     $attr = $request->all();
+    //     $res = $client->request('POST', $this->url.'http://81.192.101.191:8000/api/saveAttribution', [
+    //         'form_params' => [
+    //             'attr' => $attr,
+    //         ]
+    //    ]);
+    //    $result = $res->getBody()->getContents();
+    //    $result = json_decode($result);
+    //    return $result;
+    // }
 
     public function check_in(Request $request)
     {

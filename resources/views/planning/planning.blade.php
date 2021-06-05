@@ -50,7 +50,7 @@
                         template: function(e){
                             var span = '<span>'+e.libdat+'</span>'
                             if(e.libdat==""){
-                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">---------</span>';
+                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">Vide</span>';
                             }
                             return span;
                         }
@@ -62,7 +62,7 @@
                         template: function(e){
                             var span = '<span>'+e.typch+'</span>'
                             if(e.typch==""){
-                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">------</span>';
+                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">Vide</span>';
                             }
                             return span;
                         }
