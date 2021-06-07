@@ -18,6 +18,7 @@ class PagesController extends Controller
         $this->url = config('app.url');
     }
     
+    /**Dashboard */
     public function index()
     {
         $page_title = 'Dashboard';
@@ -28,6 +29,7 @@ class PagesController extends Controller
         return view('camps', compact(['sites', 'page_title', 'page_description']));
     }
 
+    /**Camp */
     public function camp(Request $request, $id)
     {
         $url = $this->url . '/api/sites/'; 
@@ -40,6 +42,7 @@ class PagesController extends Controller
         return view('reservations.camp',['site'=>$site,'id'=>$id]);
     }
 
+    /**Réservations list */
     public function reservations($id)
     {
         $url = $this->url . '/api/sites/'; 
@@ -49,6 +52,7 @@ class PagesController extends Controller
         return view('reservations.reservation_camp',['id'=>$id]);
     }
 
+    /**Attribution */
     public function resa_attribute(Request $request)
     {
         $client = new Client();
@@ -70,20 +74,7 @@ class PagesController extends Controller
        return view('reservations.resa_attribute', compact('reservation','numresa'));
     }
 
-    // public function saveAttribution(Request $request)
-    // {
-    //     $client = new Client();
-    //     $attr = $request->all();
-    //     $res = $client->request('POST', $this->url.'http://81.192.101.191:8000/api/saveAttribution', [
-    //         'form_params' => [
-    //             'attr' => $attr,
-    //         ]
-    //    ]);
-    //    $result = $res->getBody()->getContents();
-    //    $result = json_decode($result);
-    //    return $result;
-    // }
-
+    /**Check-in */
     public function check_in(Request $request)
     {
         $client = new Client();
@@ -98,12 +89,21 @@ class PagesController extends Controller
        return 'ok';
     }
 
+    /**Planning */
     public function planning($id)
     {
         $url = $this->url . '/api/planning/';  
         session()->put('camp_id',$id);
         return view('planning.planning',compact('id'));
     }
+
+    /**Rapport d'occupation */
+    public function rapport_occup($id)
+    {  
+        session()->put('camp_id',$id);
+        return view('rapport.clients',['id'=>$id]);
+    }
+
 
 
     // Datatables

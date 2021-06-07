@@ -10,7 +10,7 @@
                 <h2 class="card-label">LISTE DES RESERVATIONS </h2>
             </div>
             <!--Month-Week-Day-->
-            <div class="card-toolbar">
+            {{-- <div class="card-toolbar">
                 <ul class="nav nav-pills nav-pills-sm nav-dark-75">
                     <li class="nav-item">
                         <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
@@ -22,7 +22,7 @@
                         <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
 
         <div class="card-body">
@@ -105,6 +105,12 @@
         <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centred modal-lg" style="width:auto">
                 <div class="modal-content" style="min-height: 590px;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><span id="numresa"></span></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
                     <div class="modal-body ">
                         <!--begin: Datatable-->
                         <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_sub"></div>
@@ -250,6 +256,7 @@ var KTDatatableModal = function () {
                 datatable.on('click', '.checkbtn', function () {
                 
                     var numresa = $(this).attr('numresa');
+                    $(".modal-title").html('<h5>Check-in - Réservation N° <span id="numresa">'+numresa+'</span></h5>')
                     initSubDatatable(numresa);
                     $('#kt_datatable_modal').modal('show');
                 });
@@ -379,9 +386,11 @@ var KTDatatableModal = function () {
     });
 
     /*Save check-in*/
+
     var check = {};
     
     $(".eng").on('click',function() {
+        var numresa = $("#numresa").html();
         var checkin = [];
         document.querySelectorAll(".check").forEach(f => {
             if(f.checked && f.getAttribute('etat')=='N') {
@@ -391,17 +400,22 @@ var KTDatatableModal = function () {
             }
         });
         console.log(checkin);
+
+        var xhr = new XMLHttpRequest();
+        var csrf_token = $('meta[name="csrf_token"]').attr('content');
+        var url = "{{config('app.url')}}/api/check_in/"+numresa;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(checkin);
+            }
+        };
         var tab = JSON.stringify(checkin);
-        $.ajax({ 
-            type:'POST', 
-            url:"{{ route('check_in') }}", 
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-            data : tab,
-            // contentType: "application/json",
-            dataType: 'json',
-            success:function(data){ 
-            } 
-        });
+        xhr.send(tab);
+        
     });
 
     $(".check").change(function() {

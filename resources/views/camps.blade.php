@@ -48,7 +48,7 @@
             -moz-transition: all 0.3s ease-in;
         }
         #camp .card:hover{
-            background: #7371cc;
+            background: #9E9E9E;
             color: #fff;
             border-radius: 5px;
             border: none;
@@ -64,7 +64,7 @@
         <div class="container my-3 py-5 text-center">
             <div class="row mb-5">
                 <div class="col">
-                    <h1>Gestion des Bivouacs</h1>
+                    <h1>Gestion des bivouacs</h1>
                 </div>
             </div>
             <div class="row">
