@@ -58,13 +58,13 @@
                                     <div class="col-3">
                                         <select class="form-control " name="nationalit">
                                             <option value="" selected>Nationalité</option>
-                                          @foreach ($nations as $nat)
+                                          {{-- @foreach ($nations as $nat)
                                           @if($nat->cdnat == $pax->nationalit)
                                             <option value="{{ $nat->cdnat }}" selected>{{ $nat->libnat }}</option>
                                           @else
                                             <option value="{{ $nat->cdnat }}">{{ $nat->libnat }}</option>
                                           @endif
-                                          @endforeach
+                                          @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
