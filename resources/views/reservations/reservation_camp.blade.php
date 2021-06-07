@@ -10,19 +10,19 @@
                 <h2 class="card-label">LISTE DES RESERVATIONS </h2>
             </div>
             <!--Month-Week-Day-->
-            {{-- <div class="card-toolbar">
-                <ul class="nav nav-pills nav-pills-sm nav-dark-75">
-                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Semaine</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
-                    </li>
-                </ul>
-            </div> --}}
+                {{-- <div class="card-toolbar">
+                    <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                        <li class="nav-item">
+                            <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Semaine</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
+                        </li>
+                    </ul>
+                </div> --}}
         </div>
 
         <div class="card-body">
@@ -117,8 +117,8 @@
                         <!--end: Datatable-->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Enregister</button>
                     </div>
                 </div>
             </div>
@@ -220,7 +220,7 @@ var KTDatatableModal = function () {
                             width: 50,
                             overflow: "visible",
                             template: function(e) {
-                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button>';
+                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn afficher"><span class="navi-icon"><i class="flaticon-eye text-primary mr-5"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark text-success mr-5"></i></span></button>';
                             }
                         }],
                 });
@@ -385,10 +385,43 @@ var KTDatatableModal = function () {
         KTDatatableModal.init();
     });
 
-    /*Save check-in*/
+    /*Save attribution*/
+    $(".save").on('click', function() {
+        // var paxs = $(".pax :input").serializeArray();
+        // var paxs = JSON.stringify(paxs);
+        var numresa = $("#numresa").html();
+        var pax = {};
+        var paxs = [];
 
+        document.querySelectorAll(".pax").forEach(f => {
+            f.querySelectorAll(".pers input ,select").forEach(t => {
+                pax[t.name] = t.value;
+                pax['numresa'] = numresa;
+            });
+            paxs.push(pax);
+            pax = {};
+        });
+        // console.log(paxs);
+
+        var xhr = new XMLHttpRequest();
+        var csrf_token = $('meta[name="csrf_token"]').attr('content');
+        var url = "{{config('app.url')}}/api/saveAttribution";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(paxs);
+            }
+        };
+        var attr = JSON.stringify(paxs);
+        xhr.send(attr);
+    });
+
+
+    /*Save check-in*/
     var check = {};
-    
     $(".eng").on('click',function() {
         var numresa = $("#numresa").html();
         var checkin = [];
@@ -418,8 +451,5 @@ var KTDatatableModal = function () {
         
     });
 
-    $(".check").change(function() {
-        alert("ok");
-    });
     </script>
 @endpush

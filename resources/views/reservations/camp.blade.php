@@ -3,6 +3,7 @@
 
 @section('styles')
     <link href="{{asset('css/Kanban.bundle.css')}}" rel="stylesheet" type="text/css" />
+    
     <style>
         .kanban-board .kanban-drag {
             height: 135px !important;
@@ -14,44 +15,39 @@
             margin-bottom: 5px;
         }
     </style> 
+    
     <style>
-    h1 {
-    color: #fff;
-    font-weight: 500;
-    font-style: italic;
-    }
+        h2 {
+            font-size: 25px;
+            color: #fff;
+            font-weight: 500;
+        }
 
-    h2 {
-        font-size: 30px;
-        color: #fff;
-        font-weight: 500;
-    }
+        .card {
+            max-height: 200px;
+            min-height: 200px;
+            max-width: 200px;
+            min-width: 200px;
+        }
 
-    .card {
-        max-height: 200px;
-        min-height: 200px;
-        max-width: 200px;
-        min-width: 200px;
-    }
+        #team .card {
+            border-radius: 5px;
+            border: 0;
+            box-shadow: 5px 5px 10px #9e9e9e;
+            transition: all 0.3s ease-in;
+            -webkit-transition: all 0.3s ease-in;
+            -moz-transition: all 0.3s ease-in;
+        }
 
-    #team .card {
-        border-radius: 5px;
-        border: 0;
-        box-shadow: 5px 5px 10px #9e9e9e;
-        transition: all 0.3s ease-in;
-        -webkit-transition: all 0.3s ease-in;
-        -moz-transition: all 0.3s ease-in;
-    }
+        #team .card:hover {
+            border-radius: 5px;
+            border: none;
+            box-shadow: 5px 5px 10px #9E9E9E;
+        }
 
-    #team .card:hover {
-        border-radius: 5px;
-        border: none;
-        box-shadow: 5px 5px 10px #9E9E9E;
-    }
-
-    #crd ~ #crd {
-        margin-left: 30px;
-    }
+        #crd ~ #crd {
+            margin-left: 30px;
+        }
     </style>
 @endsection
 
@@ -127,7 +123,7 @@
             <div class="pull-left">
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary btn-lg" href="{{ route('camps') }}"> Back</a><br><br>
+                <a class="btn btn-primary" href="{{ route('camps') }}"><i class="fa fas fa-arrow-left"></i></a><br><br>
             </div>
         </div>
     </div>    
@@ -136,11 +132,20 @@
         <div class="my-1 py-6 text-center">
             <div class="row">
                 <div class="col-lg-2 col-md-6" id="crd">
+                    <div class="card col-6 col-md-4 col-sm-4 col-lg-2" style="background-color: #9E9E9E;">
+                        <div class="card-body">
+                            <br><br>
+                            <h2>ARRIVEES</h2>
+                            <h2>4</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 col-md-4 col-sm-4 col-lg-2" id="crd">
                     <div class="card mb-5" style="background-color: #9E9E9E;">
                         <div class="card-body">
                             <br><br>
-                            <h1>Demande</h1>
-                            <h2>0</h2>
+                            <h2>DEPARTS</h2>
+                            <h2>4</h2>
                         </div>
                     </div>
                 </div>
