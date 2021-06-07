@@ -16,11 +16,12 @@
     
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Role Management</h2><br>
+            <br>
+            <h2 style="text-align: center">Gestion des rôles</h2><br>
         </div>
         <div class="pull-right">
         @can('role-create')
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a><br><br>
+            <a class="btn" href="{{ route('roles.create') }}"><i class="fa fas fa-plus text-success mr-5"></i></a><br><br>
         @endcan
         </div>
     </div>
@@ -30,28 +31,32 @@
 
 
 
-<table class="table table-bordered">
+<table class="table">
+<thead class="thead-dark">
   <tr>
-     <th>No</th>
-     <th>Name</th>
+     <th>#</th>
+     <th>Rôle</th>
      <th width="280px">Action</th>
   </tr>
+</thead>
     @foreach ($roles as $key => $role)
+    <tbody>
     <tr>
         <td>{{ $role->id }}</td>
         <td>{{ $role->name }}</td>
         <td>
-            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
+            <a class="btn" href="{{ route('roles.show',$role->id) }}"><i class="fa far fa-eye text-info mr-5"></i></a>
             @can('role-edit')
-                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
+                <a class="btn" href="{{ route('roles.edit',$role->id) }}"><i class="fa fas fa-edit text-primary mr-5"></i></a>
             @endcan
-            @can('role-delete')
+            {{-- @can('role-delete')
                 {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                     {!! Form::submit('x', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
-            @endcan
+            @endcan --}}
         </td>
     </tr>
+    </tbody>
     @endforeach
 </table>
 

@@ -30,9 +30,6 @@ use GuzzleHttp\Client;
 Auth::routes();
 
 /**Optimize route */
-
-
-
 Route::get('/optimize',function(){
     Artisan::call('optimize');
     return 'optimized';
@@ -50,7 +47,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/', 'PagesController@index'); 
     /**Dashboard */
     Route::get('/camps','PagesController@index')->name('camps');
-    /** */
+    /**camp detail */
     Route::get('/camp/{ville}','PagesController@camp')->name('camp');
     /**Réservations*/
     Route::get('/reservations/{id}','PagesController@reservations')->name('reservations');
@@ -59,6 +56,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/check_in', 'PagesController@check_in')->name('check_in');
     Route::post('/saveAttribution', 'PagesController@saveAttribution')->name('saveAttribution');
     Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
+    /**Rapport Occupation */
+    Route::get('/clients/{id}', 'PagesController@rapport_occup')->name('clients');
     /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

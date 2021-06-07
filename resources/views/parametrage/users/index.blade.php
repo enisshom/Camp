@@ -4,34 +4,35 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Users Management</h2><br>
+          <br>
+            <h2 style="text-align: center">Gestion des utilisateurs</h2><br>
         </div>
         <div class="pull-right">
-            <a class="btn btn-success" href="{{ route('users.create') }}"> Create New User</a><br><br>
+          @can('user-create')
+            <a class="btn" href="{{ route('users.create') }}"><i class="fa la-user-plus text-success mr-5"></i></a><br><br>
+          @endcan
         </div>
     </div>
 </div>
 
-
 @if ($message = Session::get('success'))
-<div class="alert alert-success">
-  <p>{{ $message }}</p>
-</div>
+  <div class="alert alert-success">
+    <p>{{ $message }}</p>
+  </div>
 @endif
 
-@php
-  //dd($data);
-@endphp
-
-<table class="table table-bordered">
+<table class="table">
+ <thead class="thead-dark">
  <tr>
-   <th>No</th>
-   <th>Name</th>
-   <th>Email</th>
-   <th>Roles</th>
+   <th>#</th>
+   <th>Nom</th>
+   <th>E-mail</th>
+   <th>Rôle</th>
    <th width="280px">Action</th>
  </tr>
+ </thead>
  @foreach ($data as $key => $user)
+ <tbody>
   <tr>
     <td>{{ $user->id }}</td>
     <td>{{ $user->name }}</td>
@@ -44,13 +45,19 @@
       @endif
     </td>
     <td>
-       <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-       <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-        {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-            {!! Form::submit('x', ['class' => 'btn btn-danger']) !!}
-        {!! Form::close() !!}
+       <a class="btn" href="{{ route('users.show',$user->id) }}"><i class="fa far fa-eye text-info mr-5"></i></a>
+      @can('user-edit')
+        <a class="btn" href="{{ route('users.edit',$user->id) }}"><i class="fa fas fa-edit text-primary mr-5"></i></a>
+      @endcan
+      {{-- @can('user-delete')
+      <a class="btn fa fas fa-trash text-danger mr-5" href="{{ route('delete',$user->id) }}">x</a> --}}
+        {{-- {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
+            {!! Form::submit('X', ['class' => 'btn fa fas fa-trash text-danger mr-5']) !!}
+        {!! Form::close() !!} --}}
+      {{-- @endcan --}}
     </td>
   </tr>
+</tbody>
  @endforeach
 </table>
 

@@ -137,7 +137,7 @@
 
         var xhr = new XMLHttpRequest();
         var csrf_token = $('meta[name="csrf_token"]').attr('content');
-        var url = "http://81.192.101.191:8000/api/saveAttribution";
+        var url = "{{config('app.url')}}/api/saveAttribution";
         xhr.open("POST", url, true);
         xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
         xhr.setRequestHeader("Accept", "application/json");

@@ -27,7 +27,14 @@ class UserController extends Controller
     //      // })->where('title', $permission)->count();
     //      //return false;
     //  }
-
+    function __construct()
+    {
+        // dd(Permission::get());
+         $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:user-create', ['only' => ['create','store']]);
+         $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
     public function index(Request $request)
     {
         // $data = DB::table('users')->get();
