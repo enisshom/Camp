@@ -58,6 +58,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
     /**Rapport Occupation */
     Route::get('/clients/{id}', 'PagesController@rapport_occup')->name('clients');
+    /**Page d'erreur */
+    Route::get('/erreur', function() {
+        $id = session()->get('camp_id');
+        return view('error.error',['id'=>$id]);
+    })->name('erreur');
     /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

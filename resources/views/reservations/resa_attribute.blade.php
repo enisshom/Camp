@@ -1,3 +1,6 @@
+@php
+    // dd($reservation->data);
+@endphp
 @section('styles')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endsection
@@ -25,6 +28,7 @@
                                                 roomType="{{ $resa->type }}">
                                                 <option value="{{ $room->number }}" selected>{{ $room->number }}
                                                 </option>
+                                                
                                                 @if ($resa->freeRooms)
                                                     @foreach ($resa->freeRooms as $key => $fr)
                                                         @if ($room->number == $fr)
@@ -48,12 +52,12 @@
                                         <input type="hidden" class="form-control {{ $pax->xref }}" name="xref"
                                             value="{{ $pax->xref }}" aria-describedby="helpId">
                                         <input type="text" class="form-control" name="nom"
-                                            id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->Pers }}"
+                                            id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->nom }}"
                                             aria-describedby="helpId" placeholder="Nom">
                                     </div>
                                     <div class="col-3">
-                                        <input type="text" class="form-control" name="prenom" aria-describedby="helpId"
-                                            placeholder="Prénom">
+                                        <input type="text" class="form-control" name="prenom" aria-describedby="helpId" 
+                                            value="{{ $pax->prenom }}" placeholder="Prénom">
                                     </div>
                                     <div class="col-3">
                                         <select class="form-control " name="nationalit">

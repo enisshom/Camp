@@ -1,5 +1,5 @@
-{{-- @extends('layouts.app')
-@section('content') --}}
+@extends('layouts.app')
+@section('content')
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -72,17 +72,17 @@
     </div>
   </div>
 </div>
-@section('scripts')
-@parent
+    @section('scripts')
+    @parent
 
-@if($errors->has('email') || $errors->has('password'))
-    <script>
-    $(function() {
-        $('#loginModal').modal({
-            show: true
+    @if($errors->has('email') || $errors->has('password'))
+        <script>
+        $(function() {
+            $('#loginModal').modal({
+                show: true
+            });
         });
-    });
-    </script>
-@endif
+        </script>
+    @endif
+    @endsection
 @endsection
-{{-- @endsection --}}
