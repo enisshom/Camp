@@ -16,7 +16,7 @@
         }
     </style> 
     
-    <style>
+    {{-- <style>
         h2 {
             font-size: 25px;
             color: #fff;
@@ -48,7 +48,7 @@
         #crd ~ #crd {
             margin-left: 30px;
         }
-    </style>
+    </style> --}}
 @endsection
 
 @push('scripts')
@@ -128,7 +128,7 @@
         </div>
     </div>    
     <h1 style="text-align:center">{{$site->lib_class}}</h1>
-    <section id="team">
+    {{-- <section id="team">
         <div class="my-1 py-6 text-center">
             <div class="row">
                 <div class="col-lg-2 col-md-6" id="crd">
@@ -151,7 +151,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <div class="row">  
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
