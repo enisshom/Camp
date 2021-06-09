@@ -48,23 +48,23 @@
                                         <input type="hidden" class="form-control {{ $pax->xref }}" name="xref"
                                             value="{{ $pax->xref }}" aria-describedby="helpId">
                                         <input type="text" class="form-control" name="nom"
-                                            id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->Pers }}"
+                                            id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->nom }}"
                                             aria-describedby="helpId" placeholder="Nom">
                                     </div>
                                     <div class="col-3">
-                                        <input type="text" class="form-control" name="prenom" aria-describedby="helpId"
+                                        <input type="text" class="form-control" name="prenom" value="{{ $pax->prenom }}"
                                             placeholder="Prénom">
                                     </div>
                                     <div class="col-3">
                                         <select class="form-control " name="nationalit">
                                             <option value="" selected>Nationalité</option>
-                                          {{-- @foreach ($nations as $nat)
+                                          @foreach ($nations as $nat)
                                           @if($nat->cdnat == $pax->nationalit)
                                             <option value="{{ $nat->cdnat }}" selected>{{ $nat->libnat }}</option>
                                           @else
                                             <option value="{{ $nat->cdnat }}">{{ $nat->libnat }}</option>
                                           @endif
-                                          @endforeach --}}
+                                          @endforeach
                                         </select>
                                     </div>
                                 </div>
