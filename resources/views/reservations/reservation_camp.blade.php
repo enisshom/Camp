@@ -1,81 +1,81 @@
 @extends('layout.default')
 @section('content')
 
-<div class="container">
-	<!--begin::Card-->
-    <!--begin::Search Form-->
-    <div class="card card-custom">
-        <div class="card-header flex-wrap border-0 pt-6 pb-0">
-            <div class="card-title">
-                <h2 class="card-label">LISTE DES RESERVATIONS </h2>
+    <div class="container">
+        <!--begin::Card-->
+        <!--begin::Search Form-->
+        <div class="card card-custom">
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <div class="card-title">
+                    <h2 class="card-label">LISTE DES RESERVATIONS </h2>
+                </div>
+                <!--Month-Week-Day-->
+                    {{-- <div class="card-toolbar">
+                        <ul class="nav nav-pills nav-pills-sm nav-dark-75">
+                            <li class="nav-item">
+                                <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Semaine</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
+                            </li>
+                        </ul>
+                    </div> --}}
             </div>
-            <!--Month-Week-Day-->
-            {{-- <div class="card-toolbar">
-                <ul class="nav nav-pills nav-pills-sm nav-dark-75">
-                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Semaine</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
-                    </li>
-                </ul>
-            </div> --}}
-        </div>
 
-        <div class="card-body">
-            <!--begin::Search Form-->
-            <div class="mt-2 mb-5 mt-lg-5 mb-lg-10">
-                <div class="row align-items-center">
-                    <div class="col-lg-9 col-xl-8">
-                        <div class="row align-items-center">
-                            <div class="col-md-4 my-2 my-md-0">
-                                <div class="input-icon">
-                                    <input type="text" class="form-control" placeholder="Chercher..." id="kt_datatable_search_query"/>
-                                    <span><i class="flaticon2-search-1 text-muted"></i></span>
+            <div class="card-body">
+                <!--begin::Search Form-->
+                <div class="mt-2 mb-5 mt-lg-5 mb-lg-10">
+                    <div class="row align-items-center">
+                        <div class="col-lg-9 col-xl-8">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 my-2 my-md-0">
+                                    <div class="input-icon">
+                                        <input type="text" class="form-control" placeholder="Chercher..." id="kt_datatable_search_query"/>
+                                        <span><i class="flaticon2-search-1 text-muted"></i></span>
+                                    </div>
                                 </div>
+                                <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                    <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
+                                        Chercher
+                                    </a>
+                                </div>
+                                {{-- <div class="col-md-4 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                        <select class="form-control" id="kt_datatable_search_status">
+                                            <option value="">All</option>
+                                            <option value="1">Pending</option>
+                                            <option value="2">Delivered</option>
+                                            <option value="3">Canceled</option>
+                                            <option value="4">Success</option>
+                                            <option value="5">Info</option>
+                                            <option value="6">Danger</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                {{-- <div class="col-md-4 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                        <select class="form-control" id="kt_datatable_search_type">
+                                            <option value="">All</option>
+                                            <option value="1">Online</option>
+                                            <option value="2">Retail</option>
+                                            <option value="3">Direct</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
                             </div>
-                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
-                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                                    Chercher
-                                </a>
-                            </div>
-                            {{-- <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
-                                    <select class="form-control" id="kt_datatable_search_status">
-                                        <option value="">All</option>
-                                        <option value="1">Pending</option>
-                                        <option value="2">Delivered</option>
-                                        <option value="3">Canceled</option>
-                                        <option value="4">Success</option>
-                                        <option value="5">Info</option>
-                                        <option value="6">Danger</option>
-                                    </select>
-                                </div>
-                            </div> --}}
-                            {{-- <div class="col-md-4 my-2 my-md-0">
-                                <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
-                                    <select class="form-control" id="kt_datatable_search_type">
-                                        <option value="">All</option>
-                                        <option value="1">Online</option>
-                                        <option value="2">Retail</option>
-                                        <option value="3">Direct</option>
-                                    </select>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </div>
+                <!--end::Search Form-->
+                <div class="my_table" id="kt_datatable"></div>
             </div>
-            <!--end::Search Form-->
-            <div class="my_table" id="kt_datatable"></div>
         </div>
-    </div>
-</div>   
+    </div>   
 
     <!--Modal attribution-->
     <!--begin::Modal-->
@@ -117,8 +117,8 @@
                         <!--end: Datatable-->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Enregister</button>
                     </div>
                 </div>
             </div>
@@ -132,11 +132,12 @@
     <script>
         var id = {!!$id!!};
         var numresa = 0;
-        
+        var datedep;
+        var datearr;
         'use strict';
-// Class definition
+    // Class definition
 
-var KTDatatableModal = function () {
+    var KTDatatableModal = function () {
 
         var initDatatable = function () {
             var el = $('#kt_datatable');
@@ -220,7 +221,7 @@ var KTDatatableModal = function () {
                             width: 50,
                             overflow: "visible",
                             template: function(e) {
-                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn btn-light-primary afficher"><span class="navi-icon"><i class="flaticon-eye"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn btn-light-success checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark"></i></span></button>';
+                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn afficher"><span class="navi-icon"><i class="flaticon-eye text-primary mr-5"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark text-success mr-5"></i></span></button>';
                             }
                         }],
                 });
@@ -239,8 +240,8 @@ var KTDatatableModal = function () {
 
                 datatable.on("click",".afficher", (function() {
                     var numresa = $(this).attr('id');
-                    var datedep = $(this).attr('datedep');
-                    var datearr = $(this).attr('datearr');
+                    datedep = $(this).attr('datedep');
+                    datearr = $(this).attr('datearr');
                     $(".modal-title").html('<h5>Attribution - Réservation N° <span id="numresa">'+numresa+'</span></h5>')
                     $.ajax({ 
                         type:'POST', 
@@ -299,15 +300,15 @@ var KTDatatableModal = function () {
                             type: "text",
                             textAlign: "center",
                             template : function(e) {
-                                if(e.chin=="N" && e.nchambre!="") {
-                                    return '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="'+e.xref+'"><span></span></label>';
+                                var checkbox = '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="'+e.xref+'"><span></span></label>';
+
+                                if(e.chin=="O"){
+                                    checkbox = '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin check" etat="O" checked disabled><span></span></label>';
                                 }
-                                else if(e.chin=="O"){
-                                    return '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin check" etat="O" checked disabled><span></span></label>';
+                                else if(e.nchambre=="" ||  e.nationalit=="") {
+                                    checkbox = '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="'+e.xref+'" disabled><span></span></label>';
                                 }
-                                else if(e.chin=="N" && e.nchambre=="") {
-                                    return '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="'+e.xref+'" disabled><span></span></label>';
-                                }
+                                return checkbox;
                             }
                         }, 
                         {
@@ -379,16 +380,52 @@ var KTDatatableModal = function () {
                 initDatatable();
             }
         };
+
     }();
 
     jQuery(document).ready(function () {
         KTDatatableModal.init();
     });
 
-    /*Save check-in*/
+    /*Save attribution*/
+    $(".save").on('click', function() {
+        // var paxs = $(".pax :input").serializeArray();
+        // var paxs = JSON.stringify(paxs);
+        var numresa = $("#numresa").html();
+        
+        var pax = {};
+        var paxs = [];
+        
+        document.querySelectorAll(".pax").forEach(f => {
+            f.querySelectorAll(".pers input ,select").forEach(t => {
+                pax[t.name] = t.value;
+                pax['numresa'] = numresa;
+                pax['du'] = datearr;
+                pax['au'] = datedep;
+            });
+            paxs.push(pax);
+            pax = {};
+        });
 
+        var xhr = new XMLHttpRequest();
+        var csrf_token = $('meta[name="csrf_token"]').attr('content');
+        var url = "{{config('app.url')}}/api/saveAttribution";
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(paxs);
+            }
+        };
+        var attr = JSON.stringify(paxs);
+        xhr.send(attr);
+    });
+
+
+    /*Save check-in*/
     var check = {};
-    
     $(".eng").on('click',function() {
         var numresa = $("#numresa").html();
         var checkin = [];
@@ -399,7 +436,6 @@ var KTDatatableModal = function () {
                 check = [];
             }
         });
-        console.log(checkin);
 
         var xhr = new XMLHttpRequest();
         var csrf_token = $('meta[name="csrf_token"]').attr('content');
@@ -413,13 +449,9 @@ var KTDatatableModal = function () {
                 console.log(checkin);
             }
         };
-        var tab = JSON.stringify(checkin);
-        xhr.send(tab);
-        
+        var pax = JSON.stringify(checkin);
+        xhr.send(pax);
     });
 
-    $(".check").change(function() {
-        alert("ok");
-    });
     </script>
 @endpush

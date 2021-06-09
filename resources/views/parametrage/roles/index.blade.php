@@ -27,10 +27,6 @@
     </div>
 </div>
 
-
-
-
-
 <table class="table">
 <thead class="thead-dark">
   <tr>

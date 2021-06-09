@@ -3534,7 +3534,7 @@
 							select: 'Select page size',
 							all: 'all',
 						},
-						info: 'Showing {{start}} - {{end}} of {{total}}',
+						info: 'Afficher {{start}} - {{end}} of {{total}}',
 					},
 				},
 			},

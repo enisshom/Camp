@@ -1,3 +1,6 @@
+@php
+    // dd($reservation->data);
+@endphp
 @section('styles')
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 @endsection
@@ -25,6 +28,7 @@
                                                 roomType="{{ $resa->type }}">
                                                 <option value="{{ $room->number }}" selected>{{ $room->number }}
                                                 </option>
+                                                
                                                 @if ($resa->freeRooms)
                                                     @foreach ($resa->freeRooms as $key => $fr)
                                                         @if ($room->number == $fr)
@@ -52,8 +56,8 @@
                                             aria-describedby="helpId" placeholder="Nom">
                                     </div>
                                     <div class="col-3">
-                                        <input type="text" class="form-control" name="prenom" value="{{ $pax->prenom }}"
-                                            placeholder="Prénom">
+                                        <input type="text" class="form-control" name="prenom" aria-describedby="helpId" 
+                                            value="{{ $pax->prenom }}" placeholder="Prénom">
                                     </div>
                                     <div class="col-3">
                                         <select class="form-control " name="nationalit">
@@ -116,52 +120,6 @@
         $("." + room).val($(this).val());
     });
 
-    /*Save attribution*/
-    $(".save").on('click', function() {
-        // var paxs = $(".pax :input").serializeArray();
-        // var paxs = JSON.stringify(paxs);
-
-        var numresa = $("#numresa").html();
-        var pax = {};
-        var paxs = [];
-
-        document.querySelectorAll(".pax").forEach(f => {
-            f.querySelectorAll(".pers input ,select").forEach(t => {
-                pax[t.name] = t.value;
-                pax['numresa'] = numresa;
-            });
-            paxs.push(pax);
-            pax = {};
-        });
-        // console.log(paxs);
-
-        var xhr = new XMLHttpRequest();
-        var csrf_token = $('meta[name="csrf_token"]').attr('content');
-        var url = "{{config('app.url')}}/api/saveAttribution";
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(paxs);
-            }
-        };
-        var attr = JSON.stringify(paxs);
-        xhr.send(attr);
-
-        // $.ajax({ 
-        //     type:'POST', 
-        //     url:"{{ route('saveAttribution') }}", 
-        //     headers: {'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')}, 
-        //     data : attr,
-        //     // contentType: "application/json",
-        //     dataType: 'json',
-        //     success:function(data){ 
-        //       toastr.success("Done!");
-        //       console.log('response : '+data);
-        //     } 
-        // });
-    });
+    
 
 </script>
