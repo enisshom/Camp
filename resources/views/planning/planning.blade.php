@@ -1,128 +1,48 @@
-@extends('layout.default')
-@section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.2/main.min.css">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+        #calendar {
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+    </style>
+</head>
+<body>
+    <div id='calendar'></div>
+</body>
+{{-- <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@5.7.2/main.min.js"></script> --}}
+<script src="{{ asset('js/calendar.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            timeZone: 'UTC',
+            initialView: 'resourceTimelineDay',
+            aspectRatio: 1.5,
+            headerToolbar: {
+            left: 'prev,next',
+            center: 'title',
+            right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+            },
+            editable: true,
+            resourceAreaHeaderContent: 'Rooms',
+            resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
+            events: 'https://fullcalendar.io/demo-events.json?single-day&for-resource-timeline'
+        });
 
-<div class="container">
-    <div class="card card-custom">
-        <div class="card-body">
-            <div class="datatable datatable-bordered datatable-head-custom" id="Mdatatable"></div>
-        </div>
-    </div>
-</div>
-
-@endsection
-
-@push('scripts')
-    <script>
-        var MyTable = {
-            init: function() {
-                var t;
-                t = $("#Mdatatable").KTDatatable({
-                    data: {
-                        type: "remote",
-                        source: "{{config('app.url')}}/api/planning",
-                        pageSize: 100,
-                    },
-                    layout: {
-                        scroll: !1,
-                        footer: !1
-                    },
-                    sortable: !0,
-                    pagination: !0,
-                    search: {
-                        input: $("#kt_datatable_search_query"),
-                        key: "generalSearch"
-                    },
-                    columns: [{
-                        field: "dat",
-                        title: "Date",
-                        // sortable: !1,
-                        width: 75,
-                        type: "number",
-                        // selector: {
-                        //     class: ""
-                        // },
-                        textAlign: "center"
-                    }, 
-                    {
-                        field: "libdat",
-                        title: "Jour",
-                        width: 70,
-                        template: function(e){
-                            var span = '<span>'+e.libdat+'</span>'
-                            if(e.libdat==""){
-                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">Vide</span>';
-                            }
-                            return span;
-                        }
-                    },  
-                    {
-                        field: "typch",
-                        title: "Type",
-                        width: 50,
-                        template: function(e){
-                            var span = '<span>'+e.typch+'</span>'
-                            if(e.typch==""){
-                                return '<span class="datatable-row datatable-row-even" style="background-color:yellow">Vide</span>';
-                            }
-                            return span;
-                        }
-                    },  
-                    {
-                        field: "libch",
-                        title: "Libellé",
-                        width: 70
-                    }, 
-                    {
-                        field: "cap",
-                        title: "Cap",
-                        width: 35
-                    },
-                    {
-                        field: "allo",
-                        title: "Allo",
-                        autoHide : false,
-                        width: 35
-                    },
-                    {
-                        field: "occup",
-                        title: "Occ",
-                        width: 35
-                    }, 
-                    {
-                        field: "bloq",
-                        title: "Blo",
-                        width: 35,
-                    },
-                    {
-                        field: "disp",
-                        title: "Disp",
-                        width: 35,
-                    },
-                    // {
-                    //     field: "Actions",
-                    //     title: "Actions",
-                    //     width: 35,
-                    //     template: function(){
-                    //         return '<a name="" id="" class="btn btn-primary clik" href="#" role="button"></a>';
-                    //     }
-                    // },
-                ]     
-                }), 
-                $("#kt_datatable_search_status").on("change", (function() {
-                    t.search($(this).val().toLowerCase(), "Status")
-                })), 
-                $("#kt_datatable_search_type").on("change", (function() {
-                    t.search($(this).val().toLowerCase(), "Type")
-                })), 
-                $("#btn").on("click", (function() {
-                    consle.log(table.row( this ).data());
-                })), 
-                $("#kt_datatable_search_status, #kt_datatable_search_type").selectpicker()
-            }
-        };
-
-        jQuery(document).ready((function() {
-            MyTable.init();
-        }));
-    </script>
-@endpush
+        calendar.render();
+    });
+</script>
+</html>
