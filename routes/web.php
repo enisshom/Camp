@@ -55,9 +55,19 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/available_rooms', 'PagesController@available_rooms')->name('available_rooms');
     Route::post('/check_in', 'PagesController@check_in')->name('check_in');
     Route::post('/saveAttribution', 'PagesController@saveAttribution')->name('saveAttribution');
-    Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
+    // Route::get('/planning/{id}', 'PagesController@planning')->name('planning');
     /**Rapport Occupation */
     Route::get('/clients/{id}', 'PagesController@rapport_occup')->name('clients');
+    /**Page d'erreur */
+    Route::get('/erreur', function() {
+        $id = session()->get('camp_id');
+        return view('errors.error',['id'=>$id]);
+    })->name('erreur');
+    /**Planning */
+    Route::get('/planning', function() {
+        $id = session()->get('camp_id');
+        return view('planner.planning',['id'=>$id]);
+    })->name('planning');
     /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);

@@ -128,11 +128,12 @@
         </div>
     </div>    
     <h1 style="text-align:center">{{$site->lib_class}}</h1>
+    
     {{-- <section id="team">
         <div class="my-1 py-6 text-center">
             <div class="row">
                 <div class="col-lg-2 col-md-6" id="crd">
-                    <div class="card col-6 col-md-4 col-sm-4 col-lg-2" style="background-color: #9E9E9E;">
+                    <div class="card mb-5" style="background-color: #9E9E9E;">
                         <div class="card-body">
                             <br><br>
                             <h2>ARRIVEES</h2>
@@ -152,6 +153,7 @@
             </div>
         </div>
     </section> --}}
+
     <div class="row">  
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
             <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
@@ -215,20 +217,21 @@
     
     <!--Table and divs that hold the pie charts-->
     <div class="row">
-        <table class="columns">
+        <div class="col-6">
+            <div id="Sarah_chart_div" style="width: auto;"></div>
+        </div>
+        <div class="col-6">
+            <div id="Anthony_chart_div"></div>
+        </div>
+        {{-- <table class="columns">
                 <tr>
-                    <div class="col-6">
+                   
                         <td>
-                            <div id="Sarah_chart_div" style="border: 1px solid #ccc;"></div>
                         </td>
-                    </div>
-                    <div class="col-6">
                         <td>
-                            <div id="Anthony_chart_div" style="border: 1px solid #ccc;" ></div>
                         </td>
-                    </div>
                 </tr>
-        </table>
+        </table> --}}
     </div>
     
 @else
