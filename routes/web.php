@@ -63,11 +63,6 @@ Route::group(['middleware' => ['auth']], function() {
         $id = session()->get('camp_id');
         return view('errors.error',['id'=>$id]);
     })->name('erreur');
-    // /**Planning */
-    // Route::get('/planning', function() {
-    //     $id = session()->get('camp_id');
-    //     return view('planner.planning',['id'=>$id]);
-    // })->name('planning');
     /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
