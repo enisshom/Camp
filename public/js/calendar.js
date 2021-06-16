@@ -19,6 +19,7 @@ var FullCalendar = function (e) {
         }
         t(e, n), e.prototype = null === n ? Object.create(n) : (r.prototype = n.prototype, new r)
     }
+
     var r = function () {
         return (r = Object.assign || function (e) {
             for (var t, n = 1, r = arguments.length; n < r; n++)
@@ -31,9 +32,10 @@ var FullCalendar = function (e) {
         for (var n = 0, r = t.length, o = e.length; n < r; n++, o++) e[o] = t[n];
         return e
     }
+
     var i, a, s, l, u, c = {},
-        d = [],
-        p = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
+    d = [],
+    p = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
 
     function f(e, t) {
         for (var n in t) e[n] = t[n];
@@ -300,6 +302,7 @@ var FullCalendar = function (e) {
         var r, o, a;
         i.__ && i.__(e, t), o = (r = "function" == typeof n) ? null : n && n.__k || t.__k, a = [], P(t, e = (!r && n || t).__k = v(m, null, [e]), o || c, c, void 0 !== t.ownerSVGElement, !r && n ? [n] : o ? null : t.firstChild ? d.slice.call(t.childNodes) : null, a, !r && n ? n : o ? o.__e : t.firstChild, r), I(a, e)
     }
+    
     i = {
         __e: function (e, t) {
             for (var n, r, o; t = t.__;)
@@ -877,7 +880,7 @@ var FullCalendar = function (e) {
         if (!n) throw new Error("needs fc-scrollgrid-shrink-cushion className");
         return e.getBoundingClientRect().width - t.getBoundingClientRect().width + n.getBoundingClientRect().width
     }
-    var Xe = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+    var Xe = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
 
     function Ke(e, t) {
         var n = ut(e);
@@ -12079,6 +12082,7 @@ var FullCalendar = function (e) {
     }(Lo);
 
     function sc(e) {
+        // console.log(e.text);
         return e.text
     }
 

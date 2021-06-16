@@ -15,40 +15,6 @@
             margin-bottom: 5px;
         }
     </style> 
-    
-    {{-- <style>
-        h2 {
-            font-size: 25px;
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .card {
-            max-height: 200px;
-            min-height: 200px;
-            max-width: 200px;
-            min-width: 200px;
-        }
-
-        #team .card {
-            border-radius: 5px;
-            border: 0;
-            box-shadow: 5px 5px 10px #9e9e9e;
-            transition: all 0.3s ease-in;
-            -webkit-transition: all 0.3s ease-in;
-            -moz-transition: all 0.3s ease-in;
-        }
-
-        #team .card:hover {
-            border-radius: 5px;
-            border: none;
-            box-shadow: 5px 5px 10px #9E9E9E;
-        }
-
-        #crd ~ #crd {
-            margin-left: 30px;
-        }
-    </style> --}}
 @endsection
 
 @push('scripts')
@@ -123,97 +89,71 @@
             <div class="pull-left">
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('camps') }}"><i class="fa fas fa-arrow-left"></i></a><br><br>
+                <a class="btn btn-primary" href="{{ route('camps') }}"><i class="fa fas fa-arrow-left"></i></a><br>
             </div>
         </div>
     </div>    
     <h1 style="text-align:center">{{$site->lib_class}}</h1>
-    
-    {{-- <section id="team">
-        <div class="my-1 py-6 text-center">
-            <div class="row">
-                <div class="col-lg-2 col-md-6" id="crd">
-                    <div class="card mb-5" style="background-color: #9E9E9E;">
-                        <div class="card-body">
-                            <br><br>
-                            <h2>ARRIVEES</h2>
-                            <h2>4</h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-6 col-md-4 col-sm-4 col-lg-2" id="crd">
-                    <div class="card mb-5" style="background-color: #9E9E9E;">
-                        <div class="card-body">
-                            <br><br>
-                            <h2>DEPARTS</h2>
-                            <h2>4</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <div class="row">  
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 5px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
                     <h5 style="padding-bottom:35px">ARRIVEES</h5>
-                    <div class="bg-dark"><span style="color: #fff">Arrivées prévues : 3</span></div>
+                    <div class="bg-dark" style="border-radius: 5px;"><span style="color: #fff;">Arrivées prévues : 3</span></div>
                 </main>
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 5px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
                     <h5 style="padding-bottom:35px">DEPARTS</h5>
-                    <div class="bg-dark"><span style="color: #fff">Départs prévus : 3</span></div>
+                    <div class="bg-dark" style="border-radius: 5px;"><span style="color: #fff">Départs prévus : 3</span></div>
                 </main>
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 5px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">{{$site->site_occuped}}</span>    
                     <h5 style="padding-bottom:35px">IN HOUSE</h5>
-                    <div class="bg-dark"><span style="color: #fff">-</span></div>
+                    <div class="bg-dark" style="border-radius: 5px;"><span style="color: #fff">-</span></div>
                 </main>
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 5px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">{{$site->site_available}}</span>    
                     <h5 style="padding-bottom:35px">DISPONIBLES</h5>
-                    <div class="bg-dark"><span style="color: #fff">Capacité : {{$site->site_cap}}</span></div>
+                    <div class="bg-dark" style="border-radius: 5px;"><span style="color: #fff">Capacité : {{$site->site_cap}}</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 5px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">{{$site->site_blocked}}</span>    
-                    <h5 style="padding-bottom:35px">BLOQUEES</h5>
-                    <div class="bg-dark"><span style="color: #fff">Bloqués : 3</span></div>
+                    <h5 style="padding-bottom:35px">BLOQUES</h5>
+                    <div class="bg-dark" style="border-radius: 5px;"><span style="color: #fff">Bloqués : 3</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
         <div class="col-6 col-md-4 col-sm-4 col-lg-2">
-            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 0px; height: calc(100% - 50px); width: 100%; margin-top:10px">
+            <div data-id="_backlog" data-order="1" class="kanban-board shadow-lg bg-white " style="border-radius: 5px; height: calc(100% - 50px); width: 100%; margin-top:10px">
                 <main class="kanban-drag" style="text-align: center">
                     <span class="card-title font-weight text-dark font-size-h1 mb-0 mt-6 d-block">4</span>    
                     <h5 style="padding-bottom:35px">DELOGEMENT</h5>
-                    <div class="bg-dark"><span style="color: #fff">Déplacés : 3</span></div>
+                    <div class="bg-dark" style="border-radius: 5px;"><span style="color: #fff">Déplacés : 3</span></div>
                 </main>
                 {{-- <footer>Arrived : 3</footer> --}}
             </div>
         </div>
     </div>
-    <br><br>
+    <br><br><br>
     
     <!--Table and divs that hold the pie charts-->
     <div class="row">

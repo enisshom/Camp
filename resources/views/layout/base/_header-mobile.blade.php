@@ -1,6 +1,6 @@
 {{-- Header Mobile --}}
 <div id="kt_header_mobile" class="header-mobile {{ Metronic::printClasses('header-mobile', false) }}" {{ Metronic::printAttrs('header-mobile') }}>
-    <div class="mobile-logo">
+    {{-- <div class="mobile-logo">
         <a href="{{ url('/') }}">
 
             @php
@@ -26,10 +26,10 @@
             @endif
 
             <img alt="{{ config('app.name') }}" 
-            {{-- src="{{ asset('media/logos/logooo.png') }}" --}}
+            src="{{ asset('media/logos/bivouacs.png') }}"
             />
         </a>
-    </div>
+    </div> --}}
     <div class="d-flex align-items-center">
 
         @if (config('layout.aside.self.display'))

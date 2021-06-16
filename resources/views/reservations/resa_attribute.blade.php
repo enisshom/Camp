@@ -1,10 +1,7 @@
 @php
     // dd($reservation->data);
 @endphp
-@section('styles')
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-@endsection
-{!! Toastr::render() !!}
+
 <div class="accordion accordion-solid accordion-toggle-plus" id="accordionExample6">
     @foreach ($reservation->data as $resa)
         <div class="card">
@@ -84,7 +81,6 @@
 @push('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://malsup.github.io/jquery.blockUI.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 @endpush
 
 <script>

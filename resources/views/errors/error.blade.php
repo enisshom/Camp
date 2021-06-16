@@ -94,7 +94,7 @@
                 <h1>404</h1>
             </div>
             <h2>Oops! Page introuvable !</h2>
-            <p>Désolé, vous n'avez pas de permissions pour y accéder à cette page !</p>
+            <p>Désolé, vous n'avez pas de permissions pour accéder à cette page !</p>
             <a href="{{ route('camps') }}">Accueil</a>
         </div>
     </div>

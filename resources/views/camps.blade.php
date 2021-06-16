@@ -64,13 +64,10 @@
         <div class="container my-3 py-5 text-center">
             <div class="row mb-5">
                 <div class="col">
-                    <h1>Gestion des bivouacs</h1>
+                    <h1>BIVOUACS</h1>
                 </div>
             </div>
             <div class="row">
-                {{-- @php
-                    dd(sites);
-                @endphp --}}
                 @foreach ($sites as $site)
                 <div class="col-lg-3 col-md-6" style="margin-bottom: 50px">
                     <div class="card" style="cursor:pointer;">

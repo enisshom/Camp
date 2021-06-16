@@ -71,9 +71,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('logoutt', function () { auth()->logout(); Session()->flush(); return Redirect::to('/'); })->name('logoutt');
 });
 
-
-
-
 /**Product Route */
 Route::get('/create_product', function() {
     $id = session()->get('camp_id');

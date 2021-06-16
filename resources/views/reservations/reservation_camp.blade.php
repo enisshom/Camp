@@ -1,6 +1,17 @@
 @extends('layout.default')
 @section('content')
 
+@section('styles')
+    <style>
+        .control-label {
+            position: absolute;
+            left: 1em;
+            bottom: 51px;
+            color: red;
+        }
+    </style>
+@endsection
+
     <div class="container">
         <!--begin::Card-->
         <!--begin::Search Form-->
@@ -33,8 +44,10 @@
                             <div class="row align-items-center">
                                 <div class="col-md-4 my-2 my-md-0">
                                     <div class="input-icon">
-                                        <input type="text" class="form-control" placeholder="Chercher..." id="kt_datatable_search_query"/>
-                                        <span><i class="flaticon2-search-1 text-muted"></i></span>
+                                        <input type="text" class="form-control" placeholder="Chercher..." id="kt_datatable_search_query">
+                                            <span>
+                                                <i class="flaticon2-search-1 text-muted"></i>
+                                            </span>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
@@ -99,12 +112,12 @@
             </div>
         </div>
     <!--end::Modal-->
-            
+
     <!--Modal check-in-->
     <!--begin::Modal-->
-        <div id="kt_datatable_modal" class="modal fade" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centred modal-lg" style="width:auto">
-                <div class="modal-content" style="min-height: 590px;">
+        <div id="kt_datatable_modal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centred modal-lg">
+                <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel"><span id="numresa"></span></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -117,8 +130,12 @@
                         <!--end: Datatable-->
                     </div>
                     <div class="modal-footer">
+                        <label class="checkbox checkbox-single" style="position: absolute; left: 2.75em;top:14%"><input type="checkbox" class="checkin check select-all" etat="O"><span></span></label>
+                        <div class="control-group">
+                            <label class="control-label">N.B : Tous les champs doivent être remplis!</label>
+                        </div>
                         <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Fermer</button>
-                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Enregister</button>
+                        <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Check In</button>
                     </div>
                 </div>
             </div>
@@ -179,9 +196,6 @@
                             sortable: !1,
                             width: 45,
                             type: "number",
-                            // selector: {
-                            //     class: ""
-                            // },
                             textAlign: "center"
                         }, 
                         {
@@ -192,7 +206,7 @@
                         {
                             field: "prenom",
                             title: "Prénom",
-                            width: 80
+                            width: 75
                         },  
                         {
                             field: "datearr",
@@ -218,10 +232,10 @@
                         {
                             field: "Actions",
                             title: "Actions",
-                            width: 50,
+                            width: 145,
                             overflow: "visible",
                             template: function(e) {
-                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn afficher"><span class="navi-icon"><i class="flaticon-eye text-primary mr-5"></i></span></button> <button type="button" numresa="'+e.numresa+'" class="btn checkbtn"><span class="navi-icon"><i class="flaticon2-check-mark text-success mr-5"></i></span></button>';
+                                return '<button type="button" id="'+e.numresa+'" datedep="'+e.datedep+'" datearr="'+e.datearr+'" class="btn afficher" data-toggle="dropdown><span class="navi-icon"><i class="fas fa-bed text-primary mr-5"></i></span></button>  <button type="button" numresa="'+e.numresa+'" class="btn checkbtn"><span class="navi-icon"><i class="fas fa-user-check text-success mr-5"></i></span></button>';                                
                             }
                         }],
                 });
@@ -270,7 +284,7 @@
                 var datatable = el.KTDatatable({
                     data: {
                         type: 'remote',
-                        source: "{{config('app.url')}}/api/check_in/"+id,
+                        source: "{{config('app.url')}}/api/check_in_list/"+id,
                         pageSize: 10,
                         serverPaging: true,
                         serverFiltering: false,
@@ -281,12 +295,7 @@
                     layout: {
                         theme: 'default',
                         scroll: false,
-                        height: 800,
                         footer: false,
-                    },
-                    search: {
-                        input: el.find('#kt_datatable_search_query_2'),
-                        key: 'generalSearch'
                     },
 
                     sortable: true,
@@ -296,25 +305,24 @@
                             field: "xref",
                             title: "#",
                             sortable: !1,
-                            width: 15,
+                            width: 45,
                             type: "text",
                             textAlign: "center",
                             template : function(e) {
-                                var checkbox = '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="'+e.xref+'"><span></span></label>';
-
-                                if(e.chin=="O"){
+                                var checkbox = '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="'+e.xref+'" nchambre="'+e.nchambre+'" nationalit="'+e.nationalit+'"><span></span></label>';
+                                if(e.chin=="O") {
                                     checkbox = '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin check" etat="O" checked disabled><span></span></label>';
                                 }
                                 else if(e.nchambre=="" ||  e.nationalit=="") {
-                                    checkbox = '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="'+e.xref+'" disabled><span></span></label>';
+                                    checkbox = '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="'+e.xref+'" nchambre="'+e.nchambre+'" nationalit="'+e.nationalit+'" disabled><span></span></label>';
                                 }
                                 return checkbox;
                             }
                         }, 
                         {
                             field: "nchambre",
-                            title: "Numéro",
-                            // width: 25
+                            title: "Chambre",
+                            width: 75
                         },  
                         {
                             field: "nom",
@@ -426,14 +434,15 @@
 
     /*Save check-in*/
     var check = {};
+    var pax = [];
     $(".eng").on('click',function() {
         var numresa = $("#numresa").html();
         var checkin = [];
         document.querySelectorAll(".check").forEach(f => {
             if(f.checked && f.getAttribute('etat')=='N') {
                 check['xref'] = f.value;
-                checkin.push(check);
-                check = [];
+                pax.push(check);
+                check = {};
             }
         });
 
@@ -443,15 +452,42 @@
         xhr.open("POST", url, true);
         xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
         xhr.setRequestHeader("Accept", "application/json");
+        // xhr.responseType ='json';
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log(checkin);
+                console.log(JSON.parse(this.responseText));
+                var msg = JSON.parse(this.responseText);
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "1000",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                };
+                toastr.info(msg.message);
             }
         };
-        var pax = JSON.stringify(checkin);
-        xhr.send(pax);
+       
+        checkin.push({"numresa":numresa},{"paxs":pax});
+        pax = [];
+        var paxs = JSON.stringify(checkin);
+        xhr.send(paxs);
     });
-
+   
+    /*Event check-box select-all*/
+    $(".select-all").on('click',function() {
+        $("input[type=checkbox][etat=N][nchambre!=''][nationalit!='']").prop('checked',$(this).prop('checked'));
+    });
     </script>
 @endpush

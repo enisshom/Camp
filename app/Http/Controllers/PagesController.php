@@ -45,11 +45,15 @@ class PagesController extends Controller
     /**Réservations list */
     public function reservations($id)
     {
-        $url = $this->url . '/api/sites/'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);   
-        session()->put('camp_id',$id);
-        return view('reservations.reservation_camp',['id'=>$id]);
+        try {
+            $url = $this->url . '/api/sites/'; 
+            $response = file_get_contents($url); 
+            $sites = json_decode($response);   
+            session()->put('camp_id',$id);
+            return view('reservations.reservation_camp',['id'=>$id]);
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
     }
 
     /**Attribution */
