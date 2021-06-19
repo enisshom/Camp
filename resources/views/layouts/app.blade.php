@@ -51,7 +51,7 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Veuillez s'authentifier!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Veuillez s'authentifier!</h1><br>
                                     </div>
                                     <form class="user" method="POST" action="{{ route('login') }}">
                                         @csrf
@@ -88,10 +88,11 @@
                 background: url('https://www.bivouacsouslesetoiles.org/fichiers_site/a5833has/produits/20181231_190637.jpg');
                 background-position: center;
                 background-size: cover;
+                border-radius: 5px;
             }
             form.user .btn-user {
                 font-size: .8rem;
-                border-radius: 10rem;
+                border-radius: -2rem;
                 padding: .75rem 1rem;
             }      
         </style>

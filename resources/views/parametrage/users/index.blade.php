@@ -47,7 +47,7 @@
     <td>
        <a class="btn" href="{{ route('users.show',$user->id) }}"><i class="fa far fa-eye text-info mr-5"></i></a>
       @can('user-edit')
-        <a class="btn" href="{{ route('users.edit',$user->id) }}"><i class="fa fas fa-edit text-primary mr-5"></i></a>
+        <a class="btn" href="{{ route('users.edit',$user->id) }}"><i class="fas fa-user-edit text-primary mr-5"></i></a>
       @endcan
       {{-- @can('user-delete')
       <a class="btn fa fas fa-trash text-danger mr-5" href="{{ route('delete',$user->id) }}">x</a> --}}
@@ -61,5 +61,4 @@
  @endforeach
 </table>
 
-{{-- {!! $data->render() !!} --}}
 @endsection
