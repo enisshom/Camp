@@ -14,69 +14,68 @@
             <div id="{{ $resa->type }}" class="collapse" data-parent="#accordionExample6">
                 <div class="card-body">
                     @foreach ($resa->rooms as $room)
-                    
                         @foreach ($room->paxs as $pax)
-                        @php
-                            $enabled = "";
-                            if($pax->chin=='O') {
-                                $enabled = 'disabled';
-                            }
-                        @endphp
-                            <div class="pax" checkin="{{$pax->chin}}">
-                                <div class="form-group row pers">
-                                    <div class="col-3">
-                                        @if ($pax->nper == 1)
+                            @php
+                                $enabled = "";
+                                if($pax->chin=='O') {
+                                    $enabled = 'disabled';
+                                }
+                            @endphp
+                                <div class="pax" checkin="{{$pax->chin}}">
+                                    <div class="form-group row pers">
+                                        <div class="col-3">
+                                            @if ($pax->nper == 1)
 
-                                            <select class="form-control  roomSelect" title="Chambre" name="nchambre"
-                                                id="select" roomId="{{ $room->room_id }}"
-                                                roomType="{{ $resa->type }}"  {{$enabled}}>
-                                                <option value="{{ $room->number }}" selected>{{ $room->number }}
-                                                </option>
-                                                
-                                                @if ($resa->freeRooms)
-                                                    @foreach ($resa->freeRooms as $key => $fr)
-                                                        @if ($room->number == $fr)
-                                                            @php
-                                                                if ($key = array_search($fr, $resa->freeRooms) !== false) {
-                                                                    // unset($resa->freeRooms[$key]);
-                                                                }
-                                                            @endphp
-                                                        @else
-                                                            <option value="{{ $fr }}">{{ $fr }}
-                                                            </option>
-                                                        @endif
-                                                    @endforeach
+                                                <select class="form-control  roomSelect" title="Chambre" name="nchambre"
+                                                    id="select" roomId="{{ $room->room_id }}"
+                                                    roomType="{{ $resa->type }}"  {{$enabled}}>
+                                                    <option value="{{ $room->number }}" selected>{{ $room->number }}
+                                                    </option>
+                                                    
+                                                    @if ($resa->freeRooms)
+                                                        @foreach ($resa->freeRooms as $key => $fr)
+                                                            @if ($room->number == $fr)
+                                                                @php
+                                                                    if ($key = array_search($fr, $resa->freeRooms) !== false) {
+                                                                        // unset($resa->freeRooms[$key]);
+                                                                    }
+                                                                @endphp
+                                                            @else
+                                                                <option value="{{ $fr }}">{{ $fr }}
+                                                                </option>
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                            @endif
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="hidden" class="form-control {{ $room->room_id }}" name="nchambre"
+                                                value="{{ $room->number }}" aria-describedby="helpId">
+                                            <input type="hidden" class="form-control {{ $pax->xref }}" name="xref"
+                                                value="{{ $pax->xref }}" aria-describedby="helpId">
+                                            <input type="text" class="form-control" name="nom"
+                                                id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->nom }}"
+                                                aria-describedby="helpId" placeholder="Nom" {{$enabled}}>
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="text" class="form-control" name="prenom" aria-describedby="helpId" 
+                                                value="{{ $pax->prenom }}" placeholder="Prénom" {{$enabled}}>
+                                        </div>
+                                        <div class="col-3">
+                                            <select class="form-control " name="nationalit" {{$enabled}}>
+                                                <option value="" selected>Nationalité</option>
+                                            @foreach ($nations as $nat)
+                                                @if($nat->cdnat == $pax->nationalit)
+                                                    <option value="{{ $nat->cdnat }}" selected>{{ $nat->libnat }}</option>
+                                                @else
+                                                    <option value="{{ $nat->cdnat }}">{{ $nat->libnat }}</option>
                                                 @endif
+                                            @endforeach
                                             </select>
-                                        @endif
-                                    </div>
-                                    <div class="col-3">
-                                        <input type="hidden" class="form-control {{ $room->room_id }}" name="nchambre"
-                                            value="{{ $room->number }}" aria-describedby="helpId">
-                                        <input type="hidden" class="form-control {{ $pax->xref }}" name="xref"
-                                            value="{{ $pax->xref }}" aria-describedby="helpId">
-                                        <input type="text" class="form-control" name="nom"
-                                            id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->nom }}"
-                                            aria-describedby="helpId" placeholder="Nom" {{$enabled}}>
-                                    </div>
-                                    <div class="col-3">
-                                        <input type="text" class="form-control" name="prenom" aria-describedby="helpId" 
-                                            value="{{ $pax->prenom }}" placeholder="Prénom" {{$enabled}}>
-                                    </div>
-                                    <div class="col-3">
-                                        <select class="form-control " name="nationalit" {{$enabled}}>
-                                            <option value="" selected>Nationalité</option>
-                                          @foreach ($nations as $nat)
-                                          @if($nat->cdnat == $pax->nationalit)
-                                            <option value="{{ $nat->cdnat }}" selected>{{ $nat->libnat }}</option>
-                                          @else
-                                            <option value="{{ $nat->cdnat }}">{{ $nat->libnat }}</option>
-                                          @endif
-                                          @endforeach
-                                        </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         @endforeach
                     @endforeach
                 </div>
