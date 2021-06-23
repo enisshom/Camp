@@ -12,7 +12,6 @@
 
     </style>
 @endsection
-
 <br><br><br>
 <div class="container">
     <!--begin::Card-->
@@ -44,6 +43,31 @@
                                     Chercher
                                 </a>
                             </div>
+                            {{-- <div class="col-md-4 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                        <select class="form-control" id="kt_datatable_search_status">
+                                            <option value="">All</option>
+                                            <option value="1">Pending</option>
+                                            <option value="2">Delivered</option>
+                                            <option value="3">Canceled</option>
+                                            <option value="4">Success</option>
+                                            <option value="5">Info</option>
+                                            <option value="6">Danger</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
+                            {{-- <div class="col-md-4 my-2 my-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <label class="mr-3 mb-0 d-none d-md-block">Type:</label>
+                                        <select class="form-control" id="kt_datatable_search_type">
+                                            <option value="">All</option>
+                                            <option value="1">Online</option>
+                                            <option value="2">Retail</option>
+                                            <option value="3">Direct</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
                         </div>
                     </div>
                 </div>
@@ -66,7 +90,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body attribution"></div>
+            <div class="modal-body attribution">
+
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                 <button type="button" class="btn btn-primary save" data-dismiss="modal">Enregistrer</button>
@@ -78,8 +104,7 @@
 
 <!--Modal check-in-->
 <!--begin::Modal-->
-<div id="kt_datatable_modal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog"
-    aria-hidden="true">
+<div id="kt_datatable_modal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: auto">
         <div class="modal-content">
             <div class="modal-header">
@@ -93,28 +118,24 @@
                 <div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable_sub"></div>
                 <!--end: Datatable-->
             </div>
-            <div class="modal-footer">
-                <div class="alert alert-custom alert-light-danger fade show mb-5" role="alert"
-                    style="height: 10px; width: 100%;">
+            <div class="modal-footer">  
+                <div class="alert alert-custom alert-light-danger fade show mb-5" role="alert" style="height: 10px; width: 100%;">
                     <div class="alert-icon"><i class="flaticon-warning"></i></div>
-                    <div class="alert-text">N.B : Le numéro de chambre et nationalité sont obligatoires pour effectuer
-                        le check In!</div>
+                    <div class="alert-text">N.B : Le numéro de chambre et nationalité sont obligatoires pour effectuer le check In!</div>
                 </div>
                 <div class="form-group row compte">
                     <label class="col-16 col-form-label">Compte d'arrangement</label>
                     <div class="col-3 col-form-label">
                         <div class="checkbox-inline">
                             <label class="checkbox checkbox-outline checkbox-primary">
-                                <input class="cpt" type="checkbox" name="Checkboxes15" />
+                                <input class="cpt" type="checkbox" name="Checkboxes15"/>
                                 <span></span>
                             </label>
                         </div>
                     </div>
                 </div>
-                <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase"
-                    data-dismiss="modal">Fermer</button>
-                <button id="ch-btn" type="button" class="btn btn-primary font-weight-bold text-uppercase eng"
-                    data-dismiss="modal" disabled>Check In</button>
+                <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Fermer</button>
+                <button id="ch-btn" type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal" disabled>Check In</button>
             </div>
         </div>
     </div>
@@ -173,7 +194,7 @@
                         field: "numresa",
                         title: "#",
                         sortable: !1,
-                        width: 45,
+                        // width: 45,
                         type: "number",
                         textAlign: "center"
                     },
@@ -200,25 +221,21 @@
                     {
                         field: "nuite",
                         title: "Nuité",
-                        autoHide: true,
-                        // width: 35
+                        width: 35
                     },
                     {
                         field: "nbrtotpax",
                         title: "Pax",
-                        // width: 30
+                        autoHide: true,
+                        width: 30
                     },
                     {
                         field: "Actions",
                         title: "Actions",
-                        // width: 145,
+                        width: 145,
                         overflow: "visible",
                         template: function(e) {
-                            return '<button type="button" id="' + e.numresa + '" datedep="' + e
-                                .datedep + '" datearr="' + e.datearr +
-                                '" class="btn afficher" data-toggle="dropdown><span class="navi-icon"><i class="far fa-edit text-primary mr-5"></i></span></button><button type="button" numresa="' +
-                                e.numresa +
-                                '" class="btn checkbtn"><span class="navi-icon"><i class="fas fa-user-check text-success mr-5"></i></span></button>';
+                            return '<button type="button" id="' + e.numresa + '" datedep="' + e.datedep + '" datearr="' + e.datearr +'" class="btn afficher" data-toggle="dropdown><span class="navi-icon"><i class="far fa-edit text-primary mr-5"></i></span></button><button type="button" numresa="' +e.numresa +'" class="btn checkbtn"><span class="navi-icon"><i class="fas fa-user-check text-success mr-5"></i></span></button>';
                         }
                     }
                 ],
@@ -261,9 +278,8 @@
             }));
             datatable.on('click', '.checkbtn', (function() {
 
-                var numresa = $(this).attr('numresa');
-                $(".modal-title").html('<h5>Check In - Réservation N° <span id="numresa">' +
-                    numresa + '</span></h5>')
+                var numresa = $(this).attr('numresa');                
+                $(".modal-title").html('<h5>Check In - Réservation N° <span id="numresa">' + numresa +'</span></h5>')
                 initSubDatatable(numresa);
                 $('#kt_datatable_modal').modal('show');
 
@@ -279,17 +295,17 @@
                     if (xhr.readyState === 4 && xhr.status === 200) {
                         var resa = JSON.parse(this.responseText);
                         console.log(resa.data.resa[0].agence);
-                        if (resa.data.resa[0].agence == "") {
-                            $(".cpt").prop('checked', false);
+                        if(resa.data.resa[0].agence == "") {
+                            $(".cpt").prop('checked', false); 
                             $(".compte").hide();
-                        } else {
+                        }else {
                             $(".compte").show();
                         }
                     }
                 };
                 xhr.send('here');
             }));
-
+        
         };
         // subModal
         var initSubDatatable = function(numresa) {
@@ -312,7 +328,7 @@
                     footer: false,
                 },
 
-                sortable: true,
+                sortable: false,
 
                 // columns definition
                 columns: [{
@@ -323,18 +339,11 @@
                         type: "text",
                         textAlign: "center",
                         template: function(e) {
-                            var checkbox =
-                                '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="' +
-                                e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e
-                                .nationalit + '"><span></span></label>';
+                            var checkbox = '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="' + e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e.nationalit + '"><span></span></label>';
                             if (e.chin == "O") {
-                                checkbox =
-                                    '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin" etat="O" checked disabled><span></span></label>';
+                                checkbox = '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin" etat="O" checked disabled><span></span></label>';
                             } else if (e.nchambre == "" || e.nationalit == "") {
-                                checkbox =
-                                    '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="' +
-                                    e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e
-                                    .nationalit + '" disabled><span></span></label>';
+                                checkbox =  '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="' +e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e.nationalit + '" disabled><span></span></label>';
                             }
                             return checkbox;
                         }
@@ -380,15 +389,14 @@
 
             /*SELECT-ALL CHECKBOXS EVENT*/
             $('.select-all').on('click', function() {
-                $("input[type=checkbox][etat=N][nchambre!=''][nationalit!='']").prop('checked', $(this)
-                    .prop('checked'));
+                $("input[type=checkbox][etat=N][nchambre!=''][nationalit!='']").prop('checked', $(this).prop('checked'));
             });
 
             // $('#kt_datatable_search_status_2, #kt_datatable_search_type_2').selectpicker();
 
             // fix datatable layout after modal shown
             datatable.hide();
-
+            
             modal.on('shown.bs.modal', function() {
                 var modalContent = $(this).find('.modal-content');
                 datatable.spinnerCallback(true, modalContent);
@@ -396,17 +404,17 @@
 
                 /**ENABLE OR DISABLE BUTTON*/
                 var tab = 0;
-                $('.check').change(function() {
-                    console.log('ok');
+                $('.check').on('click',function() {
                     if ($('.check').is(':checked')) {
                         console.log('done');
                         tab++;
                         $("#ch-btn").attr("disabled", false);
-                    } else {
-                        $("#ch-btn").attr("disabled", true);
                     }
+                    else { 
+                        $("#ch-btn").attr("disabled", true);
+                    }                         
                 });
-
+                
             }).on('hidden.bs.modal', function() {
                 el.KTDatatable('destroy');
             });
@@ -433,22 +441,23 @@
     /*Save attribution*/
     $(".save").on('click', function() {
         var numresa = $("#numresa").html();
+
         var pax = {};
         var paxs = [];
 
         document.querySelectorAll(".pax").forEach(f => {
             // console.log(f.attr);
-            if (f.getAttribute('checkin') == 'N') {
+            if(f.getAttribute('checkin')=='N') {
                 f.querySelectorAll(".pers input ,select").forEach(t => {
-                    pax[t.name] = t.value;
-                    pax['numresa'] = numresa;
-                    pax['du'] = datearr;
-                    pax['au'] = datedep;
-                });
-                paxs.push(pax);
-                pax = {};
+                pax[t.name] = t.value;
+                pax['numresa'] = numresa;
+                pax['du'] = datearr;
+                pax['au'] = datedep;
+            });
+            paxs.push(pax);
+            pax = {};
             }
-
+            
         });
 
         var xhr = new XMLHttpRequest();
@@ -467,6 +476,7 @@
         xhr.send(attr);
     });
 
+
     /*Save check-in*/
     var check = {};
     var pax = [];
@@ -483,13 +493,15 @@
         });
 
         /**TEST IF COMPTE D'ARRANGEMENT IS CHECKED**/
-        if ($(".cpt").is(':checked')) {
+        if($(".cpt").is(':checked')) {
             var compteDest = true;
             console.log('checked');
-        } else {
+        }
+        else {
             compteDest = false;
             console.log('not checked');
         }
+
         var xhr = new XMLHttpRequest();
         var csrf_token = $('meta[name="csrf_token"]').attr('content');
         var url = "{{ config('app.url') }}/api/check_in/" + numresa;
@@ -525,22 +537,15 @@
 
         $("td[data-field=nchambre]").each(function(f) {
             if ($(this).closest('tr').find('[data-field="chin"]').text() == "IN") {
-                in_rooms.push($(this).text())
+                in_rooms.push($(this).text())    
             }
         });
         console.log(in_rooms);
-        checkin.push({
-            "numresa": numresa
-        }, {
-            "paxs": pax
-        }, {
-            "compteDest": compteDest
-        }, {
-            "in_rooms": in_rooms
-        });
+        checkin.push({ "numresa": numresa }, { "paxs": pax }, {"compteDest": compteDest},{"in_rooms": in_rooms});
         pax = [];
         var paxs = JSON.stringify(checkin);
         xhr.send(paxs);
     });
+
 </script>
 @endpush
