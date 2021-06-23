@@ -21,25 +21,34 @@ class PagesController extends Controller
     /**Dashboard */
     public function index()
     {
-        $page_title = 'Dashboard';
-        $page_description = 'Some description for the page';
-        $url = $this->url . '/api/sites'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);
-        return view('camps', compact(['sites', 'page_title', 'page_description']));
+        try {
+            $page_title = 'Dashboard';
+            $page_description = 'Some description for the page';
+            $url = $this->url . '/api/sites'; 
+            $response = file_get_contents($url); 
+            $sites = json_decode($response);
+            return view('camps', compact(['sites', 'page_title', 'page_description']));
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
+        
     }
 
     /**Camp */
     public function camp(Request $request, $id)
     {
-        $url = $this->url . '/api/sites/'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);
-        $site = $sites[$id - 1];
-        session()->put('camp_id',$id);
-        session()->save();
-        $id = session()->get('camp_id');
-        return view('reservations.camp',['site'=>$site,'id'=>$id]);
+        try {
+            $url = $this->url . '/api/sites/'; 
+            $response = file_get_contents($url); 
+            $sites = json_decode($response);
+            $site = $sites[$id - 1];
+            session()->put('camp_id',$id);
+            session()->save();
+            $id = session()->get('camp_id');
+            return view('reservations.camp',['site'=>$site,'id'=>$id]);
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
     }
 
     /**Réservations list */
@@ -96,16 +105,25 @@ class PagesController extends Controller
     /**Planning */
     public function planning($id)
     {
-        $url = $this->url . '/api/planning/';  
-        session()->put('camp_id',$id);
-        return view('planning.planning',compact('id'));
+        try {
+            $url = $this->url . '/api/planning/';  
+            session()->put('camp_id',$id);
+            return view('planning.planning',compact('id'));
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
+        
     }
 
     /**Rapport d'occupation */
     public function rapport_occup($id)
     {  
-        session()->put('camp_id',$id);
-        return view('rapport.clients',['id'=>$id]);
+        try {
+            session()->put('camp_id',$id);
+            return view('rapport.clients',['id'=>$id]);
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
     }
 
 

@@ -37,10 +37,6 @@ class UserController extends Controller
     }
     public function index(Request $request)
     {
-        // $data = DB::table('users')->get();
-        // $data =  $data->toJson();
-        // $data =  json_decode($data);
-        // return view('users.index',['data'=> $data]);
         $data = User::orderBy('id', 'DESC')->paginate(5);
         $id = session()->get('camp_id');
         return view('parametrage.users.index', compact('data', 'id'))
@@ -70,7 +66,7 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+                        ->with('success','Utilisateur créé avec succès');
     }
 
     public function show($id)
@@ -112,13 +108,13 @@ class UserController extends Controller
         $user->assignRole($request->input('roles'));
     
         return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+                        ->with('success','Utilisateur modifié avec succès');
     }
 
     public function destroy($id)
     {
         User::find($id)->delete();
         return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+                        ->with('success','Utilisateur supprimé avec succès');
     }
 }

@@ -14,15 +14,22 @@
             <div id="{{ $resa->type }}" class="collapse" data-parent="#accordionExample6">
                 <div class="card-body">
                     @foreach ($resa->rooms as $room)
+                    
                         @foreach ($room->paxs as $pax)
-                            <div class="pax">
+                        @php
+                            $enabled = "";
+                            if($pax->chin=='O') {
+                                $enabled = 'disabled';
+                            }
+                        @endphp
+                            <div class="pax" checkin="{{$pax->chin}}">
                                 <div class="form-group row pers">
                                     <div class="col-3">
                                         @if ($pax->nper == 1)
 
                                             <select class="form-control  roomSelect" title="Chambre" name="nchambre"
                                                 id="select" roomId="{{ $room->room_id }}"
-                                                roomType="{{ $resa->type }}">
+                                                roomType="{{ $resa->type }}"  {{$enabled}}>
                                                 <option value="{{ $room->number }}" selected>{{ $room->number }}
                                                 </option>
                                                 
@@ -50,14 +57,14 @@
                                             value="{{ $pax->xref }}" aria-describedby="helpId">
                                         <input type="text" class="form-control" name="nom"
                                             id="{{ $pax->nper }}_{{ $pax->nbrper }}" value="{{ $pax->nom }}"
-                                            aria-describedby="helpId" placeholder="Nom">
+                                            aria-describedby="helpId" placeholder="Nom" {{$enabled}}>
                                     </div>
                                     <div class="col-3">
                                         <input type="text" class="form-control" name="prenom" aria-describedby="helpId" 
-                                            value="{{ $pax->prenom }}" placeholder="Prénom">
+                                            value="{{ $pax->prenom }}" placeholder="Prénom" {{$enabled}}>
                                     </div>
                                     <div class="col-3">
-                                        <select class="form-control " name="nationalit">
+                                        <select class="form-control " name="nationalit" {{$enabled}}>
                                             <option value="" selected>Nationalité</option>
                                           @foreach ($nations as $nat)
                                           @if($nat->cdnat == $pax->nationalit)

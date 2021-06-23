@@ -21,20 +21,6 @@
             <div class="card-title">
                 <h2 class="card-label">LISTE DES RESERVATIONS </h2>
             </div>
-            <!--Month-Week-Day-->
-            {{-- <div class="card-toolbar">
-                        <ul class="nav nav-pills nav-pills-sm nav-dark-75">
-                            <li class="nav-item">
-                                <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_1">Mois</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link py-2 px-4" data-toggle="tab" href="#kt_tab_pane_1_2">Semaine</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link py-2 px-4 active" data-toggle="tab" href="#kt_tab_pane_1_3">Aujourd'hui</a>
-                            </li>
-                        </ul>
-            </div> --}}
         </div>
 
         <div class="card-body">
@@ -118,8 +104,7 @@
 
 <!--Modal check-in-->
 <!--begin::Modal-->
-<div id="kt_datatable_modal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog"
-    aria-hidden="true">
+<div id="kt_datatable_modal" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" style="width: auto">
         <div class="modal-content">
             <div class="modal-header">
@@ -138,19 +123,19 @@
                     <div class="alert-icon"><i class="flaticon-warning"></i></div>
                     <div class="alert-text">N.B : Le numéro de chambre et nationalité sont obligatoires pour effectuer le check In!</div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row compte">
                     <label class="col-16 col-form-label">Compte d'arrangement</label>
                     <div class="col-3 col-form-label">
                         <div class="checkbox-inline">
                             <label class="checkbox checkbox-outline checkbox-primary">
-                                <input type="checkbox" name="Checkboxes15"/>
+                                <input class="cpt" type="checkbox" name="Checkboxes15"/>
                                 <span></span>
                             </label>
                         </div>
                     </div>
                 </div>
                 <button type="button" class="btn btn-light-primary font-weight-bold text-uppercase" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal">Check In</button>
+                <button id="ch-btn" type="button" class="btn btn-primary font-weight-bold text-uppercase eng" data-dismiss="modal" disabled>Check In</button>
             </div>
         </div>
     </div>
@@ -291,24 +276,45 @@
                     }
                 });
             }));
-            datatable.on('click', '.checkbtn', function() {
+            datatable.on('click', '.checkbtn', (function() {
 
-                var numresa = $(this).attr('numresa');
-                $(".modal-title").html('<h5>Check In - Réservation N° <span id="numresa">' + numresa +
-                    '</span></h5>')
+                var numresa = $(this).attr('numresa');                
+                $(".modal-title").html('<h5>Check In - Réservation N° <span id="numresa">' + numresa +'</span></h5>')
                 initSubDatatable(numresa);
                 $('#kt_datatable_modal').modal('show');
-            });
-        };
 
+                var xhr = new XMLHttpRequest();
+                var csrf_token = $('meta[name="csrf_token"]').attr('content');
+                var url = "{{ config('app.url') }}/api/check_in_list/" + numresa;
+                xhr.open("POST", url, true);
+                // xhr.responseType ='json';
+                xhr.setRequestHeader('X-CSRF-TOKEN', csrf_token);
+                xhr.setRequestHeader("Accept", "application/json");
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var resa = JSON.parse(this.responseText);
+                        console.log(resa.data.resa[0].agence);
+                        if(resa.data.resa[0].agence == "") {
+                            $(".cpt").prop('checked', false); 
+                            $(".compte").hide();
+                        }else {
+                            $(".compte").show();
+                        }
+                    }
+                };
+                xhr.send('here');
+            }));
+        
+        };
         // subModal
-        var initSubDatatable = function(id) {
-            // console.log(id);
+        var initSubDatatable = function(numresa) {
+            console.log(numresa);
             var el = $('#kt_datatable_sub');
             var datatable = el.KTDatatable({
                 data: {
                     type: 'remote',
-                    source: "{{ config('app.url') }}/api/check_in_list/" + id,
+                    source: "{{ config('app.url') }}/api/check_in_list/" + numresa,
                     pageSize: 10,
                     serverPaging: true,
                     serverFiltering: false,
@@ -335,10 +341,9 @@
                         template: function(e) {
                             var checkbox = '<label class="checkbox checkbox-single"><input class="check" type="checkbox" etat="N" value="' + e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e.nationalit + '"><span></span></label>';
                             if (e.chin == "O") {
-                                checkbox = '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin check" etat="O" checked disabled><span></span></label>';
+                                checkbox = '<label class="checkbox checkbox-single checkbox-success"><input type="checkbox" class="checkin" etat="O" checked disabled><span></span></label>';
                             } else if (e.nchambre == "" || e.nationalit == "") {
-                                checkbox =  '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="' +
-                                            e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e.nationalit + '" disabled><span></span></label>';
+                                checkbox =  '<label class="checkbox checkbox-single"><input type="checkbox" class="checkin check" etat="N" value="' +e.xref + '" nchambre="' + e.nchambre + '" nationalit="' + e.nationalit + '" disabled><span></span></label>';
                             }
                             return checkbox;
                         }
@@ -384,8 +389,7 @@
 
             /*SELECT-ALL CHECKBOXS EVENT*/
             $('.select-all').on('click', function() {
-                $("input[type=checkbox][etat=N][nchambre!=''][nationalit!='']").prop('checked', $(this)
-                .prop('checked'));
+                $("input[type=checkbox][etat=N][nchambre!=''][nationalit!='']").prop('checked', $(this).prop('checked'));
             });
 
             $('#kt_datatable_search_status_2, #kt_datatable_search_type_2').selectpicker();
@@ -396,6 +400,20 @@
                 var modalContent = $(this).find('.modal-content');
                 datatable.spinnerCallback(true, modalContent);
                 datatable.spinnerCallback(false, modalContent);
+
+                /**ENABLE OR DISABLE BUTTON*/
+                var tab = 0;
+                $('.check').on('click',function() {
+                        if ($('.check').is(':checked')) {
+                            tab++;
+                            $("#ch-btn").attr("disabled", false);
+                        }
+                        else { 
+                            $("#ch-btn").attr("disabled", true);
+                        }   
+                                           
+                });
+                
             }).on('hidden.bs.modal', function() {
                 el.KTDatatable('destroy');
             });
@@ -429,7 +447,9 @@
         var paxs = [];
 
         document.querySelectorAll(".pax").forEach(f => {
-            f.querySelectorAll(".pers input ,select").forEach(t => {
+            // console.log(f.attr);
+            if(f.getAttribute('checkin')=='N') {
+                f.querySelectorAll(".pers input ,select").forEach(t => {
                 pax[t.name] = t.value;
                 pax['numresa'] = numresa;
                 pax['du'] = datearr;
@@ -437,6 +457,8 @@
             });
             paxs.push(pax);
             pax = {};
+            }
+            
         });
 
         var xhr = new XMLHttpRequest();
@@ -455,12 +477,15 @@
         xhr.send(attr);
     });
 
+
     /*Save check-in*/
     var check = {};
     var pax = [];
+
     $(".eng").on('click', function() {
         var numresa = $("#numresa").html();
         var checkin = [];
+        var in_rooms = [];
         document.querySelectorAll(".check").forEach(f => {
             if (f.checked && f.getAttribute('etat') == 'N') {
                 check['xref'] = f.value;
@@ -468,6 +493,16 @@
                 check = {};
             }
         });
+
+        /**TEST IF COMPTE D'ARRANGEMENT IS CHECKED**/
+        if($(".cpt").is(':checked')) {
+            var compteDest = true;
+            console.log('checked');
+        }
+        else {
+            compteDest = false;
+            console.log('not checked');
+        }
 
         var xhr = new XMLHttpRequest();
         var csrf_token = $('meta[name="csrf_token"]').attr('content');
@@ -502,42 +537,16 @@
             }
         };
 
-        checkin.push({
-            "numresa": numresa
-        }, {
-            "paxs": pax
+        $("td[data-field=nchambre]").each(function(f) {
+            if ($(this).closest('tr').find('[data-field="chin"]').text() == "IN") {
+                in_rooms.push($(this).text())    
+            }
         });
+        console.log(in_rooms);
+        checkin.push({ "numresa": numresa }, { "paxs": pax }, {"compteDest": compteDest},{"in_rooms": in_rooms});
         pax = [];
         var paxs = JSON.stringify(checkin);
         xhr.send(paxs);
-
-        Swal.fire({
-            title: "Voulez vous créer un compte d'arrangement?",
-            text: "",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Oui",
-            cancelButtonText: "Non",
-            reverseButtons: true
-        }).then(function(result) {
-            if (result.isConfirmed) {
-                console.log(result);
-                Swal.fire(
-                    "Deleted!",
-                    "Your file has been deleted.",
-                    "success"
-                )
-                // result.dismiss can be "cancel", "overlay",
-                // "close", and "timer"
-            } else {
-                console.log(result);
-                Swal.fire(
-                    "Cancelled",
-                    "Your imaginary file is safe.",
-                    "error"
-                )
-            }
-        });
     });
 
 </script>

@@ -163,20 +163,11 @@
         <div class="col-6">
             <div id="Anthony_chart_div"></div>
         </div>
-        {{-- <table class="columns">
-                <tr>
-                   
-                        <td>
-                        </td>
-                        <td>
-                        </td>
-                </tr>
-        </table> --}}
     </div>
 
 @else
     <script>
-        window.location = "{{ route('erreur') }}";;
+        window.location = "{{ route('permission') }}";;
     </script>
 @endcan
 @endsection
