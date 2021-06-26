@@ -270,7 +270,7 @@
                 var datatable = el.KTDatatable({
                     data: {
                         type: 'remote',
-                        source: "{{config('app.url')}}/api/check_in/"+id,
+                        source: "{{config('app.url')}}/api/check_in_list/"+id,
                         pageSize: 10,
                         serverPaging: true,
                         serverFiltering: false,
@@ -281,7 +281,6 @@
                     layout: {
                         theme: 'default',
                         scroll: false,
-                        height: 800,
                         footer: false,
                     },
                     search: {
@@ -296,7 +295,7 @@
                             field: "xref",
                             title: "#",
                             sortable: !1,
-                            width: 15,
+                            width: 30,
                             type: "text",
                             textAlign: "center",
                             template : function(e) {
@@ -425,10 +424,10 @@
 
 
     /*Save check-in*/
-    var check = {};
+    var check = [];
     $(".eng").on('click',function() {
         var numresa = $("#numresa").html();
-        var checkin = [];
+        var checkin = {};
         document.querySelectorAll(".check").forEach(f => {
             if(f.checked && f.getAttribute('etat')=='N') {
                 check['xref'] = f.value;
@@ -449,6 +448,7 @@
                 console.log(checkin);
             }
         };
+        checkin['numresa']=numresa;
         var pax = JSON.stringify(checkin);
         xhr.send(pax);
     });
