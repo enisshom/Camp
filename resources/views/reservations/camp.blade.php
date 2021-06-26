@@ -40,10 +40,10 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
-            data.addRows([ ['Mushrooms', 1], ['Onions', 1], ['Olives', 2], ['Zucchini', 2], ['Pepperoni', 1] ]);
+            data.addRows([ ['Occupées', 1], ['Disponibles', 1], ['Bloquées', 2], ['Zucchini', 2], ['Pepperoni', 1] ]);
 
             // Set options for Sarah's pie chart.
-            var options = { title: 'How Much Pizza Sarah Ate Last Night', width: 400, height: 300 };
+            var options = { title: 'Statistiques des réservations', width: 400, height: 300 };
 
             // Instantiate and draw the chart for Sarah's pizza.
             var chart = new google.visualization.PieChart(document.getElementById('Sarah_chart_div'));
