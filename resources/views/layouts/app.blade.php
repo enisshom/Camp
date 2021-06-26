@@ -64,12 +64,12 @@
                                             <input name="password" type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Mot de passe">
                                         </div>
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">Se souvenir de moi</label>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <br>
                                         <hr>
                                         <br>

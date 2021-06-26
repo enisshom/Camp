@@ -12096,184 +12096,186 @@ var FullCalendar = function (e) {
         }
     }
     var uc = function (e) {
-            function t() {
-                var t = null !== e && e.apply(this, arguments) || this;
-                return t.refineHookProps = Yt(lc), t.normalizeClassNames = Jo(), t
-            }
-            return n(t, e), t.prototype.render = function () {
-                var e = this.props,
-                    t = this.context,
-                    n = t.dateEnv,
-                    r = t.options,
-                    o = e.cell,
-                    i = e.dateProfile,
-                    a = e.tDateProfile,
-                    s = oo(o.date, e.todayRange, e.nowDate, i),
-                    l = ["fc-timeline-slot", "fc-timeline-slot-label"].concat("time" === o.rowUnit ? ao(s, t.theme) : io(s, t.theme));
-                o.isWeekStart && l.push("fc-timeline-slot-em");
-                var u = r.navLinks && o.rowUnit && "time" !== o.rowUnit ? so(o.date, o.rowUnit) : null,
-                    c = this.refineHookProps({
-                        level: e.rowLevel,
-                        dateMarker: o.date,
-                        text: o.text,
-                        dateEnv: t.dateEnv,
-                        viewApi: t.viewApi
+        function t() {
+            var t = null !== e && e.apply(this, arguments) || this;
+            return t.refineHookProps = Yt(lc), t.normalizeClassNames = Jo(), t
+        }
+        return n(t, e), t.prototype.render = function () {
+            var e = this.props,
+                t = this.context,
+                n = t.dateEnv,
+                r = t.options,
+                o = e.cell,
+                i = e.dateProfile,
+                a = e.tDateProfile,
+                s = oo(o.date, e.todayRange, e.nowDate, i),
+                l = ["fc-timeline-slot", "fc-timeline-slot-label"].concat("time" === o.rowUnit ? ao(s, t.theme) : io(s, t.theme));
+            o.isWeekStart && l.push("fc-timeline-slot-em");
+            var u = r.navLinks && o.rowUnit && "time" !== o.rowUnit ? so(o.date, o.rowUnit) : null,
+                c = this.refineHookProps({
+                    level: e.rowLevel,
+                    dateMarker: o.date,
+                    text: o.text,
+                    dateEnv: t.dateEnv,
+                    viewApi: t.viewApi
+                }),
+                d = this.normalizeClassNames(r.slotLabelClassNames, c);
+            return To($o, {
+                hookProps: c,
+                didMount: r.slotLabelDidMount,
+                willUnmount: r.slotLabelWillUnmount
+            }, (function (t) {
+                return To("th", {
+                    ref: t,
+                    className: l.concat(d).join(" "),
+                    "data-date": n.formatIso(o.date, {
+                        omitTime: !a.isTimeScale,
+                        omitTimeZoneOffset: !0
                     }),
-                    d = this.normalizeClassNames(r.slotLabelClassNames, c);
-                return To($o, {
+                    colSpan: o.colspan
+                }, 
+                To("div", {
+                    className: "fc-timeline-slot-frame",
+                    style: {
+                        height: e.rowInnerHeight
+                    }
+                }, 
+                To(ac, {
                     hookProps: c,
-                    didMount: r.slotLabelDidMount,
-                    willUnmount: r.slotLabelWillUnmount
-                }, (function (t) {
-                    return To("th", {
-                        ref: t,
-                        className: l.concat(d).join(" "),
-                        "data-date": n.formatIso(o.date, {
-                            omitTime: !a.isTimeScale,
-                            omitTimeZoneOffset: !0
-                        }),
-                        colSpan: o.colspan
-                    }, To("div", {
-                        className: "fc-timeline-slot-frame",
-                        style: {
-                            height: e.rowInnerHeight
-                        }
-                    }, To(ac, {
-                        hookProps: c,
-                        isSticky: e.isSticky,
-                        navLinkData: u
-                    })))
-                }))
-            }, t
-        }(Lo),
-        cc = function (e) {
-            function t() {
-                return null !== e && e.apply(this, arguments) || this
-            }
-            return n(t, e), t.prototype.render = function () {
-                var e = this.props,
-                    t = e.dateProfile,
-                    n = e.tDateProfile,
-                    r = e.rowInnerHeights,
-                    o = e.todayRange,
-                    i = e.nowDate,
-                    a = n.cellRows;
-                return To(ko, null, a.map((function (e, s) {
-                    var l = s === a.length - 1,
-                        u = n.isTimeScale && l;
-                    return To("tr", {
-                        key: s,
-                        className: ["fc-timeline-header-row", u ? "fc-timeline-header-row-chrono" : ""].join(" ")
-                    }, e.map((function (e) {
-                        return To(uc, {
-                            key: e.date.toISOString(),
-                            cell: e,
-                            rowLevel: s,
-                            dateProfile: t,
-                            tDateProfile: n,
-                            todayRange: o,
-                            nowDate: i,
-                            rowInnerHeight: r && r[s],
-                            isSticky: !l
-                        })
-                    })))
+                    isSticky: e.isSticky,
+                    navLinkData: u
                 })))
-            }, t
-        }(Lo),
-        dc = function (e) {
-            function t() {
-                var t = null !== e && e.apply(this, arguments) || this;
-                return t.rootElRef = xo(), t
-            }
-            return n(t, e), t.prototype.render = function () {
-                var e = this,
-                    t = this.props,
-                    n = this.context,
-                    r = Ut(t.tDateProfile.slotDuration).unit,
-                    o = t.slatCoords && t.slatCoords.dateProfile === t.dateProfile ? t.slatCoords : null;
-                return To(ba, {
-                    unit: r
-                }, (function (r, i) {
+            }))
+        }, t
+    }(Lo),
+    cc = function (e) {
+        function t() {
+            return null !== e && e.apply(this, arguments) || this
+        }
+        return n(t, e), t.prototype.render = function () {
+            var e = this.props,
+                t = e.dateProfile,
+                n = e.tDateProfile,
+                r = e.rowInnerHeights,
+                o = e.todayRange,
+                i = e.nowDate,
+                a = n.cellRows;
+            return To(ko, null, a.map((function (e, s) {
+                var l = s === a.length - 1,
+                    u = n.isTimeScale && l;
+                return To("tr", {
+                    key: s,
+                    className: ["fc-timeline-header-row", u ? "fc-timeline-header-row-chrono" : ""].join(" ")
+                }, e.map((function (e) {
+                    return To(uc, {
+                        key: e.date.toISOString(),
+                        cell: e,
+                        rowLevel: s,
+                        dateProfile: t,
+                        tDateProfile: n,
+                        todayRange: o,
+                        nowDate: i,
+                        rowInnerHeight: r && r[s],
+                        isSticky: !l
+                    })
+                })))
+            })))
+        }, t
+    }(Lo),
+    dc = function (e) {
+        function t() {
+            var t = null !== e && e.apply(this, arguments) || this;
+            return t.rootElRef = xo(), t
+        }
+        return n(t, e), t.prototype.render = function () {
+            var e = this,
+                t = this.props,
+                n = this.context,
+                r = Ut(t.tDateProfile.slotDuration).unit,
+                o = t.slatCoords && t.slatCoords.dateProfile === t.dateProfile ? t.slatCoords : null;
+            return To(ba, {
+                unit: r
+            }, (function (r, i) {
+                return To("div", {
+                    className: "fc-timeline-header",
+                    ref: e.rootElRef
+                }, To("table", {
+                    className: "fc-scrollgrid-sync-table",
+                    style: {
+                        minWidth: t.tableMinWidth,
+                        width: t.clientWidth
+                    }
+                }, t.tableColGroupNode, To("tbody", null, To(cc, {
+                    dateProfile: t.dateProfile,
+                    tDateProfile: t.tDateProfile,
+                    nowDate: r,
+                    todayRange: i,
+                    rowInnerHeights: t.rowInnerHeights
+                }))), n.options.nowIndicator && To("div", {
+                    className: "fc-timeline-now-indicator-container"
+                }, o && o.isDateInRange(r) && To(rs, {
+                    isAxis: !0,
+                    date: r
+                }, (function (e, t, n, i) {
                     return To("div", {
-                        className: "fc-timeline-header",
-                        ref: e.rootElRef
-                    }, To("table", {
-                        className: "fc-scrollgrid-sync-table",
+                        ref: e,
+                        className: ["fc-timeline-now-indicator-arrow"].concat(t).join(" "),
                         style: {
-                            minWidth: t.tableMinWidth,
-                            width: t.clientWidth
+                            left: o.dateToCoord(r)
                         }
-                    }, t.tableColGroupNode, To("tbody", null, To(cc, {
-                        dateProfile: t.dateProfile,
-                        tDateProfile: t.tDateProfile,
-                        nowDate: r,
-                        todayRange: i,
-                        rowInnerHeights: t.rowInnerHeights
-                    }))), n.options.nowIndicator && To("div", {
-                        className: "fc-timeline-now-indicator-container"
-                    }, o && o.isDateInRange(r) && To(rs, {
-                        isAxis: !0,
-                        date: r
-                    }, (function (e, t, n, i) {
-                        return To("div", {
-                            ref: e,
-                            className: ["fc-timeline-now-indicator-arrow"].concat(t).join(" "),
-                            style: {
-                                left: o.dateToCoord(r)
-                            }
-                        }, i)
-                    }))))
-                }))
-            }, t.prototype.componentDidMount = function () {
-                this.updateSize()
-            }, t.prototype.componentDidUpdate = function () {
-                this.updateSize()
-            }, t.prototype.updateSize = function () {
-                this.props.onMaxCushionWidth && this.props.onMaxCushionWidth(this.computeMaxCushionWidth())
-            }, t.prototype.computeMaxCushionWidth = function () {
-                return Math.max.apply(Math, Ce(this.rootElRef.current, ".fc-timeline-header-row:last-child .fc-timeline-slot-cushion").map((function (e) {
-                    return e.getBoundingClientRect().width
-                })))
-            }, t
-        }(Lo),
-        pc = function () {
-            function e(e, t, n, r, o, i) {
-                this.slatRootEl = e, this.dateProfile = n, this.tDateProfile = r, this.dateEnv = o, this.isRtl = i, this.outerCoordCache = new Eo(e, t, !0, !1), this.innerCoordCache = new Eo(e, De(t, "div"), !0, !1)
+                    }, i)
+                }))))
+            }))
+        }, t.prototype.componentDidMount = function () {
+            this.updateSize()
+        }, t.prototype.componentDidUpdate = function () {
+            this.updateSize()
+        }, t.prototype.updateSize = function () {
+            this.props.onMaxCushionWidth && this.props.onMaxCushionWidth(this.computeMaxCushionWidth())
+        }, t.prototype.computeMaxCushionWidth = function () {
+            return Math.max.apply(Math, Ce(this.rootElRef.current, ".fc-timeline-header-row:last-child .fc-timeline-slot-cushion").map((function (e) {
+                return e.getBoundingClientRect().width
+            })))
+        }, t
+    }(Lo),
+    pc = function () {
+        function e(e, t, n, r, o, i) {
+            this.slatRootEl = e, this.dateProfile = n, this.tDateProfile = r, this.dateEnv = o, this.isRtl = i, this.outerCoordCache = new Eo(e, t, !0, !1), this.innerCoordCache = new Eo(e, De(t, "div"), !0, !1)
+        }
+        return e.prototype.rangeToCoords = function (e) {
+            return this.isRtl ? {
+                right: this.dateToCoord(e.start),
+                left: this.dateToCoord(e.end)
+            } : {
+                left: this.dateToCoord(e.start),
+                right: this.dateToCoord(e.end)
             }
-            return e.prototype.rangeToCoords = function (e) {
-                return this.isRtl ? {
-                    right: this.dateToCoord(e.start),
-                    left: this.dateToCoord(e.end)
-                } : {
-                    left: this.dateToCoord(e.start),
-                    right: this.dateToCoord(e.end)
-                }
-            }, e.prototype.isDateInRange = function (e) {
-                return Kn(this.dateProfile.currentRange, e)
-            }, e.prototype.dateToCoord = function (e) {
-                var t = this.tDateProfile,
-                    n = this.computeDateSnapCoverage(e) / t.snapsPerSlot,
-                    r = Math.floor(n),
-                    o = n - (r = Math.min(r, t.slotCnt - 1)),
-                    i = this.innerCoordCache,
-                    a = this.outerCoordCache;
-                return this.isRtl ? a.rights[r] - i.getWidth(r) * o - a.originClientRect.width : a.lefts[r] + i.getWidth(r) * o
-            }, e.prototype.computeDateSnapCoverage = function (e) {
-                return fc(e, this.tDateProfile, this.dateEnv)
-            }, e.prototype.computeDurationLeft = function (e) {
-                var t = this,
-                    n = t.dateProfile,
-                    r = t.tDateProfile,
-                    o = t.dateEnv,
-                    i = t.isRtl,
-                    a = 0;
-                if (n) {
-                    var s = o.add(n.activeRange.start, e);
-                    r.isTimeScale || (s = ot(s)), a = this.dateToCoord(s), !i && a && (a += 1)
-                }
-                return a
-            }, e
-        }();
+        }, e.prototype.isDateInRange = function (e) {
+            return Kn(this.dateProfile.currentRange, e)
+        }, e.prototype.dateToCoord = function (e) {
+            var t = this.tDateProfile,
+                n = this.computeDateSnapCoverage(e) / t.snapsPerSlot,
+                r = Math.floor(n),
+                o = n - (r = Math.min(r, t.slotCnt - 1)),
+                i = this.innerCoordCache,
+                a = this.outerCoordCache;
+            return this.isRtl ? a.rights[r] - i.getWidth(r) * o - a.originClientRect.width : a.lefts[r] + i.getWidth(r) * o
+        }, e.prototype.computeDateSnapCoverage = function (e) {
+            return fc(e, this.tDateProfile, this.dateEnv)
+        }, e.prototype.computeDurationLeft = function (e) {
+            var t = this,
+                n = t.dateProfile,
+                r = t.tDateProfile,
+                o = t.dateEnv,
+                i = t.isRtl,
+                a = 0;
+            if (n) {
+                var s = o.add(n.activeRange.start, e);
+                r.isTimeScale || (s = ot(s)), a = this.dateToCoord(s), !i && a && (a += 1)
+            }
+            return a
+        }, e
+    }();
 
     function fc(e, t, n) {
         var r = n.countDurationsBetween(t.normalizedRange.start, e, t.snapDuration);

@@ -121,7 +121,4 @@
         var room = ($(this).attr('roomid'));
         $("." + room).val($(this).val());
     });
-
-    
-
 </script>

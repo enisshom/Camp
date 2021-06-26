@@ -37,35 +37,85 @@
                 // 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors'
                 [
                     {
-                        "id": "a",
-                        "title": " Room A",
-                        "eventColor": "pink"
-                    },
-                    {
                         "id": "b",
-                        "title": "Room B",
-                        "eventColor": "green"
+                        "title": "MARRAKECH",
+                        "children": [
+                            {
+                                "id": "b1",
+                                "title": "KING MAR",
+                                "eventColor": "green"
+                            },
+                            {
+                                "id": "b2",
+                                "title": "LUXE MAR",
+                                "eventColor": "red"
+                            },
+                            {
+                                "id": "b3",
+                                "title": "STANDARD MAR",
+                                "eventColor": "black"
+                            }
+                        ]
                     },
                     {
                         "id": "c",
-                        "title": "Room C",
-                        "eventColor": "orange"
+                        "title": "ZAGOURA",
+                        // "eventColor": "orange"
+                        "children": [
+                            {
+                                "id": "c1",
+                                "title": "KING ZAG",
+                                "eventColor": "orange"
+                            },
+                            {
+                                "id": "c2",
+                                "title": "LUXE ZAG",
+                                "eventColor": "pink"
+                            },
+                            {
+                                "id": "c3",
+                                "title": "STANDARD ZAG",
+                                "eventColor": "gray"
+                            }
+                        ]
                     },
                     {
                         "id": "d",
-                        "title": "Room D",
+                        "title": "MERZOUGA",
                         "children": [
                             {
                                 "id": "d1",
-                                "title": "KING"
+                                "title": "KING MER",
+                                "eventColor": "purple"
                             },
                             {
                                 "id": "d2",
-                                "title": "LUXE"
+                                "title": "LUXE MER",
+                                "eventColor": "yellow"
                             },
                             {
                                 "id": "d3",
-                                "title": "STANDARD"
+                                "title": "STANDARD MER",
+                                "eventColor": "aqua"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "d",
+                        "title": "AGADIR",
+                        "eventColor": "aqua",
+                        "children": [
+                            {
+                                "id": "d1",
+                                "title": "KING AGD"
+                            },
+                            {
+                                "id": "d2",
+                                "title": "LUXE AGD"
+                            },
+                            {
+                                "id": "d3",
+                                "title": "STANDARD AGD"
                             }
                         ]
                     },
