@@ -40,7 +40,7 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
-            data.addRows([ ['Occupées', 1], ['Disponibles', 1], ['Bloquées', 2], ['Zucchini', 2], ['Pepperoni', 1] ]);
+            data.addRows([ ['Occupée', 1], ['Disponible', 2], ['Bloquée', 3] ]);
 
             // Set options for Sarah's pie chart.
             var options = { title: 'Statistiques des réservations', width: 400, height: 300 };
@@ -57,10 +57,10 @@
             var data = new google.visualization.DataTable();
             data.addColumn('string', 'Topping');
             data.addColumn('number', 'Slices');
-            data.addRows([ ['Mushrooms', 2], ['Onions', 2], ['Olives', 2], ['Zucchini', 0], ['Pepperoni', 3] ]);
+            data.addRows([ ['Propre', 2], ['Fermée', 1] ]);
 
             // Set options for Anthony's pie chart.
-            var options = { title: 'How Much Pizza Anthony Ate Last Night', width: 400, height: 300 };
+            var options = { title: 'Etat de tentes', width: 400, height: 300 };
 
             // Instantiate and draw the chart for Anthony's pizza.
             var chart = new google.visualization.PieChart(document.getElementById('Anthony_chart_div'));
