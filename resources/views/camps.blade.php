@@ -64,13 +64,10 @@
         <div class="container my-3 py-5 text-center">
             <div class="row mb-5">
                 <div class="col">
-                    <h1>Gestion des bivouacs</h1>
+                    <h1>BIVOUACS</h1>
                 </div>
             </div>
             <div class="row">
-                {{-- @php
-                    dd(sites);
-                @endphp --}}
                 @foreach ($sites as $site)
                 <div class="col-lg-3 col-md-6" style="margin-bottom: 50px">
                     <div class="card" style="cursor:pointer;">
@@ -78,7 +75,7 @@
                             <img src="https://www.bivouacsouslesetoiles.org/fichiers_site/a5833has/produits/20170102_173729.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
                             {{-- <h3>Marrakech</h3> --}}
                             <h3 class="ville" id="{{$site->id}}">{{$site->lib_class}}</h3>
-                            <p>Rooms
+                            <p>Chambres
                                 {{$site->site_occuped}}/{{$site->site_cap}}
                             </p>
                             <div class="d-flex flex-row justify-content-center">

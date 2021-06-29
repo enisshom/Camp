@@ -16,13 +16,7 @@ use GuzzleHttp\Client;
 |
 */
 
-// Route::get('/update/{id}','ProductController@update')->name('update');
-// Route::get('/index_product','ProductController@index')->name('index_product');
-// Route::get('/show_product','ProductController@index')->name('index_product');
-// Route::resource('reservations',ReservationsController::class);
-// Route::get('/tst','ReservationsController@index')->name('tst');
-
-// cach optiizer
+// cach optimizer
 
 /**Authentification */
 
@@ -63,28 +57,17 @@ Route::group(['middleware' => ['auth']], function() {
         $id = session()->get('camp_id');
         return view('errors.error',['id'=>$id]);
     })->name('erreur');
+    /**Page d'erreur pas de permissions */
+    Route::get('/permission', function() {
+        $id = session()->get('camp_id');
+        return view('errors.permission',['id'=>$id]);
+    })->name('permission');
     /**Paramétrage */
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
-    Route::resource('product', ProductController::class);
     /**Logout */
     Route::get('logoutt', function () { auth()->logout(); Session()->flush(); return Redirect::to('/'); })->name('logoutt');
 });
-
-
-
-
-/**Product Route */
-Route::get('/create_product', function() {
-    $id = session()->get('camp_id');
-    return view('parametrage.products.create',['id'=>$id]);
-})->name('create_product');
-
-Route::get('/edit_product', function() {
-    return view('edit');
-})->name('edit_product');
-
-Route::get('/delete/{id}','ProductController@destroy')->name('delete');
 
 // Demo routes
 Route::get('/datatables', 'PagesController@datatables');

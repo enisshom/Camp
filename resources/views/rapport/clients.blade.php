@@ -4,10 +4,11 @@
 <div class="container">
 	<!--begin::Card-->
     <!--begin::Search Form-->
+    <br><br>
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
-                <h2 class="card-label">RAPPORT D'OCCUPATION </h2>
+                <h2 class="card-label">RAPPORT D'OCCUPATION</h2>
             </div>
         </div>
         <div class="card-body">
@@ -56,7 +57,7 @@ var KTDatatableModal = function () {
                 data: {
                     type: 'remote',
                     source: "{{config('app.url')}}/api/rapport_occup/"+id,
-                    pageSize: 10, // display 20 records per page
+                    pageSize: 10, 
                     serverPaging: true,
                     serverFiltering: false,
                     serverSorting: true,
@@ -75,7 +76,7 @@ var KTDatatableModal = function () {
                     pagination: true,
 
                     search: {
-                        input: el.find('#kt_datatable_search_query'),
+                        input: $('#kt_datatable_search_query'),
                         key: 'generalSearch'
                     },
 
@@ -84,7 +85,7 @@ var KTDatatableModal = function () {
                             field: "nochb",
                             title: "#",
                             sortable: !1,
-                            width: 25,
+                            width: 45,
                             type: "number",
                             // selector: {
                             //     class: ""
@@ -94,26 +95,27 @@ var KTDatatableModal = function () {
                         {
                             field: "ncompte",
                             title: "N° compte",
-                            width: 75
+                            width: 70
                         },  
                         {
                             field: "nom",
                             title: "Nom",
-                            width: 85
+                            width: 75
                         },  
                         {
                             field: "prenom",
                             title: "Prénom",
-                            width: 80
+                            width: 75
                         },  
                         {
                             field: "log",
                             title: "Logement",
-                            width: 80
+                            width: 75
                         },  
                         {
                             field: "datarr",
                             title: "Arrivée",
+                            autoHide: true,
                             width: 75
                         }, 
                         {
@@ -126,9 +128,9 @@ var KTDatatableModal = function () {
                             title: "Actions",
                             width: 50,
                             overflow: "visible",
-                            // template: function(e) {
-                            //     return ;
-                            // }
+                            template: function(e) {
+                                return '<button type="button" class="btn out" data-toggle="dropdown><span class="navi-icon"><i class="fas fa-suitcase-rolling text-primary mr-5"></i></span></button>';                                
+                            }
                         }],
                 });
 

@@ -19,6 +19,7 @@ var FullCalendar = function(e) {
         }
         t(e, n), e.prototype = null === n ? Object.create(n) : (r.prototype = n.prototype, new r)
     }
+
     var r = function() {
         return (r = Object.assign || function(e) {
             for (var t, n = 1, r = arguments.length; n < r; n++)
@@ -31,6 +32,7 @@ var FullCalendar = function(e) {
         for (var n = 0, r = t.length, o = e.length; n < r; n++, o++) e[o] = t[n];
         return e
     }
+
     var i, a, s, l, u, c = {},
         d = [],
         p = /acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;
@@ -300,6 +302,7 @@ var FullCalendar = function(e) {
         var r, o, a;
         i.__ && i.__(e, t), o = (r = "function" == typeof n) ? null : n && n.__k || t.__k, a = [], P(t, e = (!r && n || t).__k = v(m, null, [e]), o || c, c, void 0 !== t.ownerSVGElement, !r && n ? [n] : o ? null : t.firstChild ? d.slice.call(t.childNodes) : null, a, !r && n ? n : o ? o.__e : t.firstChild, r), I(a, e)
     }
+
     i = {
         __e: function(e, t) {
             for (var n, r, o; t = t.__;)
@@ -7492,6 +7495,7 @@ var FullCalendar = function(e) {
                 var e = this;
                 this.isEnabled = !0, this.scrollQuery = [window, ".fc-scroller"], this.edgeThreshold = 50, this.maxVelocity = 300, this.pointerScreenX = null, this.pointerScreenY = null, this.isAnimating = !1, this.scrollCaches = null, this.everMovedUp = !1, this.everMovedDown = !1, this.everMovedLeft = !1, this.everMovedRight = !1, this.animate = function() {
                     if (e.isAnimating) {
+                        console.log(e.isAnimating);
                         var t = e.computeBestEdge(e.pointerScreenX + window.pageXOffset, e.pointerScreenY + window.pageYOffset);
                         if (t) {
                             var n = Ps();
@@ -12081,6 +12085,7 @@ var FullCalendar = function(e) {
     }(Lo);
 
     function sc(e) {
+        // console.log(e.text);
         return e.text
     }
 
@@ -12123,23 +12128,25 @@ var FullCalendar = function(e) {
                     willUnmount: r.slotLabelWillUnmount
                 }, (function(t) {
                     return To("th", {
-                        ref: t,
-                        className: l.concat(d).join(" "),
-                        "data-date": n.formatIso(o.date, {
-                            omitTime: !a.isTimeScale,
-                            omitTimeZoneOffset: !0
-                        }),
-                        colSpan: o.colspan
-                    }, To("div", {
-                        className: "fc-timeline-slot-frame",
-                        style: {
-                            height: e.rowInnerHeight
-                        }
-                    }, To(ac, {
-                        hookProps: c,
-                        isSticky: e.isSticky,
-                        navLinkData: u
-                    })))
+                            ref: t,
+                            className: l.concat(d).join(" "),
+                            "data-date": n.formatIso(o.date, {
+                                omitTime: !a.isTimeScale,
+                                omitTimeZoneOffset: !0
+                            }),
+                            colSpan: o.colspan
+                        },
+                        To("div", {
+                                className: "fc-timeline-slot-frame",
+                                style: {
+                                    height: e.rowInnerHeight
+                                }
+                            },
+                            To(ac, {
+                                hookProps: c,
+                                isSticky: e.isSticky,
+                                navLinkData: u
+                            })))
                 }))
             }, t
         }(Lo),

@@ -21,35 +21,48 @@ class PagesController extends Controller
     /**Dashboard */
     public function index()
     {
-        $page_title = 'Dashboard';
-        $page_description = 'Some description for the page';
-        $url = $this->url . '/api/sites'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);
-        return view('camps', compact(['sites', 'page_title', 'page_description']));
+        try {
+            $page_title = 'Dashboard';
+            $page_description = 'Some description for the page';
+            $url = $this->url . '/api/sites'; 
+            $response = file_get_contents($url); 
+            $sites = json_decode($response);
+            return view('camps', compact(['sites', 'page_title', 'page_description']));
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
+        
     }
 
     /**Camp */
     public function camp(Request $request, $id)
     {
-        $url = $this->url . '/api/sites/'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);
-        $site = $sites[$id - 1];
-        session()->put('camp_id',$id);
-        session()->save();
-        $id = session()->get('camp_id');
-        return view('reservations.camp',['site'=>$site,'id'=>$id]);
+        try {
+            $url = $this->url . '/api/sites/'; 
+            $response = file_get_contents($url); 
+            $sites = json_decode($response);
+            $site = $sites[$id - 1];
+            session()->put('camp_id',$id);
+            session()->save();
+            $id = session()->get('camp_id');
+            return view('reservations.camp',['site'=>$site,'id'=>$id]);
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
     }
 
     /**Réservations list */
     public function reservations($id)
     {
-        $url = $this->url . '/api/sites/'; 
-        $response = file_get_contents($url); 
-        $sites = json_decode($response);   
-        session()->put('camp_id',$id);
-        return view('reservations.reservation_camp',['id'=>$id]);
+        try {
+            $url = $this->url . '/api/sites/'; 
+            $response = file_get_contents($url); 
+            $sites = json_decode($response);   
+            session()->put('camp_id',$id);
+            return view('reservations.reservation_camp',['id'=>$id]);
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
     }
 
     /**Attribution */
@@ -92,113 +105,122 @@ class PagesController extends Controller
     /**Planning */
     public function planning($id)
     {
-        $url = $this->url . '/api/planning/';  
-        session()->put('camp_id',$id);
-        return view('planning.planning',compact('id'));
+        try {
+            $url = $this->url . '/api/planning/';  
+            session()->put('camp_id',$id);
+            return view('planning.planning',compact('id'));
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
+        
     }
 
     /**Rapport d'occupation */
     public function rapport_occup($id)
     {  
-        session()->put('camp_id',$id);
-        return view('rapport.clients',['id'=>$id]);
+        try {
+            session()->put('camp_id',$id);
+            return view('rapport.clients',['id'=>$id]);
+        } catch (\Throwable $th) {
+            return redirect('erreur');
+        }
     }
 
 
 
     // Datatables
-    public function datatables(Request $request)
-    {
-        $page_title = 'Datatables';
-        $page_description = 'This is datatables test page';
-        // dd($request->session()->all());
-        return view('pages.datatables', compact('page_title', 'page_description'));
-    }
+    // public function datatables(Request $request)
+    // {
+    //     $page_title = 'Datatables';
+    //     $page_description = 'This is datatables test page';
+    //     // dd($request->session()->all());
+    //     return view('pages.datatables', compact('page_title', 'page_description'));
+    // }
 
     // KTDatatables
-    public function ktDatatables()
-    {
-        $page_title = 'KTDatatables';
-        $page_description = 'This is KTdatatables test page';
+    // public function ktDatatables()
+    // {
+    //     $page_title = 'KTDatatables';
+    //     $page_description = 'This is KTdatatables test page';
 
-        return view('pages.ktdatatables', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.ktdatatables', compact('page_title', 'page_description'));
+    // }
 
     // Select2
-    public function select2()
-    {
-        $page_title = 'Select 2';
-        $page_description = 'This is Select2 test page';
-        // return session('camp_id');
-        return view('pages.select2', compact('page_title', 'page_description'));
-    }
+    // public function select2()
+    // {
+    //     $page_title = 'Select 2';
+    //     $page_description = 'This is Select2 test page';
+    //     // return session('camp_id');
+    //     return view('pages.select2', compact('page_title', 'page_description'));
+    // }
 
     // jQuery-mask
-    public function jQueryMask()
-    {
-        $page_title = 'jquery-mask';
-        $page_description = 'This is jquery masks test page';
+    // public function jQueryMask()
+    // {
+    //     $page_title = 'jquery-mask';
+    //     $page_description = 'This is jquery masks test page';
 
-        return view('pages.jquery-mask', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.jquery-mask', compact('page_title', 'page_description'));
+    // }
 
     // custom-icons
-    public function customIcons()
-    {
-        $page_title = 'customIcons';
-        $page_description = 'This is customIcons test page';
+    // public function customIcons()
+    // {
+    //     $page_title = 'customIcons';
+    //     $page_description = 'This is customIcons test page';
 
-        return view('pages.icons.custom-icons', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.icons.custom-icons', compact('page_title', 'page_description'));
+    // }
 
     // flaticon
-    public function flaticon()
-    {
-        $page_title = 'flaticon';
-        $page_description = 'This is flaticon test page';
+    // public function flaticon()
+    // {
+    //     $page_title = 'flaticon';
+    //     $page_description = 'This is flaticon test page';
 
-        return view('pages.icons.flaticon', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.icons.flaticon', compact('page_title', 'page_description'));
+    // }
 
     // fontawesome
-    public function fontawesome()
-    {
-        $page_title = 'fontawesome';
-        $page_description = 'This is fontawesome test page';
+    // public function fontawesome()
+    // {
+    //     $page_title = 'fontawesome';
+    //     $page_description = 'This is fontawesome test page';
 
-        return view('pages.icons.fontawesome', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.icons.fontawesome', compact('page_title', 'page_description'));
+    // }
 
     // lineawesome
-    public function lineawesome()
-    {
-        $page_title = 'lineawesome';
-        $page_description = 'This is lineawesome test page';
+    // public function lineawesome()
+    // {
+    //     $page_title = 'lineawesome';
+    //     $page_description = 'This is lineawesome test page';
 
-        return view('pages.icons.lineawesome', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.icons.lineawesome', compact('page_title', 'page_description'));
+    // }
 
     // socicons
-    public function socicons()
-    {
-        $page_title = 'socicons';
-        $page_description = 'This is socicons test page';
+    // public function socicons()
+    // {
+    //     $page_title = 'socicons';
+    //     $page_description = 'This is socicons test page';
 
-        return view('pages.icons.socicons', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.icons.socicons', compact('page_title', 'page_description'));
+    // }
 
     // svg
-    public function svg()
-    {
-        $page_title = 'svg';
-        $page_description = 'This is svg test page';
+    // public function svg()
+    // {
+    //     $page_title = 'svg';
+    //     $page_description = 'This is svg test page';
 
-        return view('pages.icons.svg', compact('page_title', 'page_description'));
-    }
+    //     return view('pages.icons.svg', compact('page_title', 'page_description'));
+    // }
 
     // Quicksearch Result
-    public function quickSearch()
-    {
-        return view('layout.partials.extras._quick_search_result');
-    }
+    // public function quickSearch()
+    // {
+    //     return view('layout.partials.extras._quick_search_result');
+    // }
 }

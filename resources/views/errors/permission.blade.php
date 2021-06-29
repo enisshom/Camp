@@ -20,10 +20,10 @@
     <br>
     <div class="container">
         <div class="jumbotron text-center">
-            <img src="media/error/debranche.png">
+            <img src="media/error/no_permission.png">
             <h1>Oops!</h1>
-            <h3>Page inaccessible! Connexion à la base de données a échoué!</h3><br><br>
-            <a href="{{ route('camps') }}" class="btn btn-primary">
+            <h3>Vous n'avez pas de permission pour accéder!</h3><br><br>
+            <a href="{{ route('camps') }}" class="btn btn-danger">
                <span class="glyphicon glyphicon-chevron-left"></span> ACCUEIL</a>
         </div>
     </div>
